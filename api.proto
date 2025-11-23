@@ -112,13 +112,13 @@ message GetRecommendLetterRequest {
 }
 // 推荐信列表响应
 message GetRecommendLetterResponse {
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"];// 结果
   message Result {
     repeated RecommendationLetter data = 3 [json_name = "data"]; // 推荐信列表数据
     int32 total = 4 [json_name = "total"]; // 总数
   }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"];// 结果
 }
 
 // 生成申请材料请求
@@ -130,14 +130,14 @@ message GenerateApplicationMaterialsRequest {
 }
 // 生成申请材料响应
 message GenerateApplicationMaterialsResponse {
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"];// 结果
   message Result {
     string personal_statement = 3 [json_name = "personalStatement"]; // 个人陈述
     string us_plan = 4 [json_name = "usPlan"]; // 赴美计划
     repeated FileInfo file_directory = 5 [json_name = "fileDirectory"]; // 文件目录
   }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"];// 结果
 }
 
 // 案件评测请求
@@ -149,12 +149,12 @@ message EvaluateCaseRequest {
 
 // 案件评测响应
 message EvaluateCaseResponse {
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"];// 结果
   message Result {
     string evaluation_report = 3 [json_name = "evaluationReport"]; // 评测报告
   }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"];// 结果
 }
 
 // 获取申请人背景信息请求
@@ -165,11 +165,14 @@ message GetBackgroundInfoRequest {
 
 // 获取申请人背景信息响应
 message GetBackgroundInfoResponse {
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
   message Result {
     BackgroundInfo background_info = 3 [json_name = "backgroundInfo"]; // 申请人背景信息
   }
+
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"];
+
 }
 
 
@@ -188,12 +191,12 @@ message SubmitTaskRequest {
 
 // 异步任务响应
 message SubmitTaskResponse {
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 10 [json_name = "result"];// 结果
   message Result {
     string task_id = 1 [json_name = "taskId"]; // 任务ID
   }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 10 [json_name = "result"];// 结果
 }
 // 异步任务响应
 message Task {
@@ -218,12 +221,12 @@ message TaskQueryRequest {
 
 // 任务查询响应
 message TaskQueryResponse {
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 10 [json_name = "result"];// 结果
   message Result {
     Task task = 1 [json_name = "task"];// 任务
   }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 10 [json_name = "result"];// 结果
 }
 
 // 任务取消请求
