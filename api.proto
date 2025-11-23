@@ -1,0 +1,320 @@
+syntax = "proto3";
+
+// 引入 Google API 注解包，用于定义 HTTP 映射
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+// 基本信息
+message BasicInfo {
+  int64 id = 1 [json_name = "id"]; // 主键ID
+  string code = 2 [json_name = "code"]; // 案件编码
+  string name = 3 [json_name = "name"]; // 申请人姓名
+  bool name_to_ai = 4 [json_name = "nameToAi"]; // 姓名是否传送给AI分析
+  string birth_date = 5 [json_name = "birthDate"]; // 出生日期
+  bool birth_date_to_ai = 6 [json_name = "birthDateToAi"]; // 出生日期是否传送给AI分析
+  string work_unit = 7 [json_name = "workUnit"]; // 工作单位
+  bool work_unit_to_ai = 8 [json_name = "workUnitToAi"]; // 工作单位是否传送给AI分析
+  string position = 9 [json_name = "position"]; // 职位
+  bool position_to_ai = 10 [json_name = "positionToAi"]; // 职位是否传送给AI分析
+  string industry = 11 [json_name = "industry"]; // 行业
+  bool industry_to_ai = 12 [json_name = "industryToAi"]; // 行业是否传送给AI分析
+  string immigration_type = 13 [json_name = "immigrationType"]; // 移民类型
+  bool immigration_type_to_ai = 14 [json_name = "immigrationTypeToAi"]; // 移民类型是否传送给AI分析
+  string field = 15 [json_name = "field"]; // 专业领域
+  bool field_to_ai = 16 [json_name = "fieldToAi"]; // 专业领域是否传送给AI分析
+  string education = 17 [json_name = "education"]; // 教育背景
+  bool education_to_ai = 18 [json_name = "educationToAi"]; // 教育背景是否传送给AI分析
+  string major = 19 [json_name = "major"]; // 专业
+  bool major_to_ai = 20 [json_name = "majorToAi"]; // 专业是否传送给AI分析
+  google.protobuf.Timestamp created_at = 21 [json_name = "createdAt"]; // 创建时间
+  google.protobuf.Timestamp updated_at = 22 [json_name = "updatedAt"]; // 更新时间
+}
+
+// 文件信息
+message FileInfo {
+  string id = 1 [json_name = "id"]; // 主键ID (BIGINT AUTO_INCREMENT)
+  string parent_id = 2 [json_name = "parentId"]; // 父节点ID,根目录为NULL (BIGINT)
+  string case_code = 3 [json_name = "caseCode"]; // 案件编号 (VARCHAR NOT NULL)
+  string name = 4 [json_name = "name"]; // 文件或文件夹名称 (VARCHAR NOT NULL)
+  bool is_dir = 5 [json_name = "isDir"]; // 是否为文件夹 1=文件夹 0=文件 (TINYINT NOT NULL)
+  string size = 6 [json_name = "size"]; // 文件大小 (BIGINT DEFAULT 0)
+  string type = 7 [json_name = "type"]; // 文件类型/扩展名，如jpg (VARCHAR)
+  string url = 8 [json_name = "url"]; // MinIO中的路径(文件夹可为空) (VARCHAR)
+  string url2 = 9 [json_name = "url2"]; // Word文档用作预览，当url是docx或doc格式时，无法用于前端浏览，需要转换为pdf，这是转换后的pdf文件路径 (VARCHAR)
+  int32 order_by = 10 [json_name = "orderBy"]; // 排序序号 (INT DEFAULT 1)
+  google.protobuf.Timestamp upload_time = 11 [json_name = "uploadTime"]; // 上传时间 (DATETIME DEFAULT CURRENT_TIMESTAMP)
+  google.protobuf.Timestamp update_time = 12 [json_name = "updateTime"]; // 修改时间 (DATETIME DEFAULT CURRENT_TIMESTAMP)
+  string file_label = 13 [json_name = "fileLabel"]; // 文件标签：NORMAL(普通)、BACKGROUND_INFO(背景信息)、RECOMMENDATIONS(推荐信)、PLAN_USA(赴美计划)、PERSONAL_STATEMENTS(个人陈述)、DIRECTORY(文件目录) (VARCHAR)
+  string ai_text = 14 [json_name = "aiText"]; // AI生成的文本，上传基本信息后由AI生成的文本 (LONGTEXT)
+}
+
+// 背景信息
+message BackgroundInfo {
+  repeated string awards = 1 [json_name = "awards"]; // 奖项
+  repeated string memberships = 2 [json_name = "memberships"]; // 会员
+  repeated string reviews = 3 [json_name = "reviews"]; // 评审
+  repeated string media_reports = 4 [json_name = "mediaReports"]; // 媒体报道
+  repeated string original_contributions = 5 [json_name = "originalContributions"]; // 原创性贡献
+  repeated string papers = 6 [json_name = "papers"]; // 论文
+  repeated string exhibitions = 7 [json_name = "exhibitions"]; // 展览展示
+  repeated string leadership = 8 [json_name = "leadership"]; // 领导力
+  repeated string business_value = 9 [json_name = "businessValue"]; // 商业价值
+  repeated string high_income = 10 [json_name = "highIncome"]; // 高收入
+}
+
+// 推荐人信息
+message RecommenderInfo {
+  string recommender_name = 1 [json_name = "recommenderName"]; // 推荐人姓名
+  string birth_date = 2 [json_name = "birthDate"]; // 推荐人生日
+  string work_unit = 3 [json_name = "workUnit"]; // 推荐人工作单位
+  string position = 4 [json_name = "position"]; // 推荐人职位
+  string online_introduction = 5 [json_name = "onlineIntroduction"]; // 在线介绍链接
+  string field = 6 [json_name = "field"]; // 推荐人专业领域
+  string industry = 7 [json_name = "industry"]; // 推荐人所在行业
+  string relationship = 8 [json_name = "relationship"]; // 与申请人关系
+  string shared_experience = 9 [json_name = "sharedExperience"]; // 共同经历
+  string recommendation_style = 10 [json_name = "recommendationStyle"]; // 推荐信风格
+}
+
+// 推荐信
+message RecommendationLetter {
+  int64 id = 1 [json_name = "id"]; // 主键ID
+  string recommender_name = 2 [json_name = "recommenderName"]; // 推荐人姓名
+  string birth_date = 3 [json_name = "birthDate"]; // 推荐人生日
+  string work_unit = 4 [json_name = "workUnit"]; // 推荐人工作单位
+  string position = 5 [json_name = "position"]; // 推荐人职位
+  string online_introduction = 6 [json_name = "onlineIntroduction"]; // 在线介绍链接
+  string field = 7 [json_name = "field"]; // 推荐人专业领域
+  string industry = 8 [json_name = "industry"]; // 推荐人所在行业
+  string relationship = 9 [json_name = "relationship"]; // 与申请人关系
+  string shared_experience = 10 [json_name = "sharedExperience"]; // 共同经历
+  string recommendation_style = 11 [json_name = "recommendationStyle"]; // 推荐信风格
+  string letter_content = 12 [json_name = "letterContent"]; // 推荐信内容
+  google.protobuf.Timestamp create_time = 13 [json_name = "createTime"]; // 创建时间
+  google.protobuf.Timestamp update_time = 14 [json_name = "updateTime"]; // 更新时间
+}
+
+// 简化版推荐信（用于生成申请材料请求）
+message RecommendationLetterSimple {
+  string recommender_name = 1 [json_name = "recommenderName"]; // 推荐人姓名
+  string work_unit = 2 [json_name = "workUnit"]; // 推荐人工作单位
+  string position = 3 [json_name = "position"]; // 推荐人职位
+  string field = 4 [json_name = "field"]; // 推荐人专业领域
+  string relationship = 5 [json_name = "relationship"]; // 与申请人关系
+  string letter_content = 6 [json_name = "letterContent"]; // 推荐信内容
+}
+
+// 获取推荐信列表请求
+message GetRecommendLetterRequest {
+  BasicInfo basic_info = 1 [json_name = "basicInfo"]; // 基本信息
+  BackgroundInfo background_info = 2 [json_name = "backgroundInfo"]; // 背景信息
+  repeated RecommenderInfo recommender_infos = 3 [json_name = "recommenderInfos"]; // 推荐人信息
+}
+// 推荐信列表响应
+message GetRecommendLetterResponse {
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"];// 结果
+  message Result {
+    repeated RecommendationLetter data = 3 [json_name = "data"]; // 推荐信列表数据
+    int32 total = 4 [json_name = "total"]; // 总数
+  }
+}
+
+// 生成申请材料请求
+message GenerateApplicationMaterialsRequest {
+  BasicInfo basic_info = 1 [json_name = "basicInfo"]; // 基本信息
+  BackgroundInfo background_info = 2 [json_name = "backgroundInfo"]; // 背景信息
+  repeated RecommendationLetterSimple recommendation_letters = 3 [json_name = "recommendationLetters"]; // 推荐信列表
+  repeated FileInfo file_list = 4 [json_name = "fileList"]; // 文件列表
+}
+// 生成申请材料响应
+message GenerateApplicationMaterialsResponse {
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"];// 结果
+  message Result {
+    string personal_statement = 3 [json_name = "personalStatement"]; // 个人陈述
+    string us_plan = 4 [json_name = "usPlan"]; // 赴美计划
+    repeated FileInfo file_directory = 5 [json_name = "fileDirectory"]; // 文件目录
+  }
+}
+
+// 案件评测请求
+message EvaluateCaseRequest {
+  string personal_statement = 1 [json_name = "personalStatement"]; // 个人陈述
+  string us_plan = 2 [json_name = "usPlan"]; // 赴美计划
+  repeated FileInfo file_list = 3 [json_name = "fileList"]; // 文件列表
+}
+
+// 案件评测响应
+message EvaluateCaseResponse {
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"];// 结果
+  message Result {
+    string evaluation_report = 3 [json_name = "evaluationReport"]; // 评测报告
+  }
+}
+
+// 获取申请人背景信息请求
+message GetBackgroundInfoRequest {
+  BasicInfo basic_info = 1 [json_name = "basicInfo"]; // 基本信息
+  repeated FileInfo file_list = 2 [json_name = "fileList"]; // 文件列表
+}
+
+// 获取申请人背景信息响应
+message GetBackgroundInfoResponse {
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  message Result {
+    BackgroundInfo background_info = 3 [json_name = "backgroundInfo"]; // 申请人背景信息
+  }
+}
+
+
+
+
+// 异步任务请求
+message SubmitTaskRequest {
+  oneof task_request {
+    GetBackgroundInfoRequest get_background_info_request = 1; // 获取申请人背景信息
+    GetRecommendLetterRequest get_recommend_letter_request = 2; // 获取推荐信列表
+    GenerateApplicationMaterialsRequest generate_application_materials_request = 3; // 生成申请材料
+    EvaluateCaseRequest evaluate_case_request = 4; // 案件评测
+  }
+  string callback_url = 5 [json_name = "callbackUrl"]; // 回调地址
+}
+
+// 异步任务响应
+message SubmitTaskResponse {
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 10 [json_name = "result"];// 结果
+  message Result {
+    string task_id = 1 [json_name = "taskId"]; // 任务ID
+  }
+}
+// 异步任务响应
+message Task {
+  string task_id = 1 [json_name = "taskId"]; // 任务ID
+  string status = 2 [json_name = "status"]; // 任务状态: PENDING, RUNNING, COMPLETED, FAILED
+  google.protobuf.Timestamp created_at = 7 [json_name = "createdAt"]; // 创建时间
+  google.protobuf.Timestamp updated_at = 8 [json_name = "updatedAt"]; // 更新时间
+  string error_message = 9 [json_name = "errorMessage"]; // 错误信息
+  double progress = 10 [json_name = "progress"]; // 任务进度 0-100
+  oneof result {
+    GetBackgroundInfoResponse get_background_info_response = 30;
+    GetRecommendLetterResponse get_recommend_letter_response = 40;
+    GenerateApplicationMaterialsResponse generate_application_materials_response = 50;
+    EvaluateCaseResponse evaluate_case_response = 60;
+  }
+}
+
+// 任务查询请求
+message TaskQueryRequest {
+  string task_id = 1 [json_name = "taskId"]; // 任务ID
+}
+
+// 任务查询响应
+message TaskQueryResponse {
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 10 [json_name = "result"];// 结果
+  message Result {
+    Task task = 1 [json_name = "task"];// 任务
+  }
+}
+
+// 任务取消请求
+message TaskCancelRequest {
+  string task_id = 1 [json_name = "taskId"]; // 任务ID
+}
+
+// 任务取消响应
+message TaskCancelResponse {
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+}
+
+// 数据源搜索任务定义
+message DataSourceSearchTask {
+  string search_query = 1 [json_name = "searchQuery"]; // 搜索查询
+  string data_source = 2 [json_name = "dataSource"]; // 数据源类型: GOOGLE, LINKEDIN, ACADEMIC_DB等
+  string parent_task_id = 4 [json_name = "parentTaskId"]; // 父任务ID
+}
+
+// 搜索结果
+message SearchResult {
+  string source = 1 [json_name = "source"]; // 数据来源
+  string title = 2 [json_name = "title"]; // 标题
+  string url = 3 [json_name = "url"]; // 链接
+  string content = 4 [json_name = "content"]; // 内容
+  float relevance_score = 5 [json_name = "relevanceScore"]; // 相关性得分
+}
+
+// 并行搜索结果
+message ParallelSearchResult {
+  repeated SearchResult results = 1 [json_name = "results"]; // 搜索结果列表
+  string merged_result = 2 [json_name = "mergedResult"]; // 合并后的结果
+  google.protobuf.Timestamp completed_at = 3 [json_name = "completedAt"]; // 完成时间
+}
+
+// 移民AI代理服务
+service ImmigrantAIAgent {
+  // 获取申请人背景信息:使用agent实现全网搜索
+  rpc GetBackgroundInfo(GetBackgroundInfoRequest) returns (GetBackgroundInfoResponse) {
+    option (google.api.http) = {
+      post: "/api/pre-review/getBackgroundInfo"
+      body: "*"
+    };
+  }
+
+  // 获取推荐信列表:使用ai生成推荐信
+  rpc GetRecommendLetter(GetRecommendLetterRequest) returns (GetRecommendLetterResponse) {
+    option (google.api.http) = {
+      post: "/api/pre-review/getRecommondLetter"
+      body: "*"
+    };
+  }
+
+  // 生成申请材料（个人陈述、赴美计划、文件目录）-使用ai生成
+  rpc GenerateApplicationMaterials(GenerateApplicationMaterialsRequest) returns (GenerateApplicationMaterialsResponse) {
+    option (google.api.http) = {
+      post: "/api/pre-review/generateApplicationMaterials"
+      body: "*"
+    };
+  }
+
+  // 案件评测-使用ai分析
+  rpc EvaluateCase(EvaluateCaseRequest) returns (EvaluateCaseResponse) {
+    option (google.api.http) = {
+      post: "/api/pre-review/evaluateCase"
+      body: "*"
+    };
+  }
+  
+  // 提交异步任务
+  rpc SubmitTask(SubmitTaskRequest) returns (SubmitTaskResponse) {
+    option (google.api.http) = {
+      post: "/api/task/submit"
+      body: "*"
+    };
+  }
+
+  // 查询任务状态
+  rpc TaskQuery(TaskQueryRequest) returns (TaskQueryResponse) {
+    option (google.api.http) = {
+      post: "/api/task/query"
+      body: "*"
+    };
+  }
+
+  // 取消任务
+  rpc CancelTask(TaskCancelRequest) returns (TaskCancelResponse) {
+    option (google.api.http) = {
+      post: "/api/task/cancel"
+      body: "*"
+    };
+  }
+}
