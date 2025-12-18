@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package tool;
+option go_package = "github.com/agent-sapient/immigrant_ai_agent_go/tool;tool";
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "openapi/v3/annotations.proto";
+
+
+option (openapi.v3.document) = {
+  info: {
+    title: "Title from annotation";
+    version: "Version from annotation";
+    description: "Description from annotation";
+    contact: {
+      name: "Contact Name";
+      url: "https://github.com/google/gnostic";
+      email: "gnostic@google.com";
+    }
+    license: {
+      name: "Apache License";
+      url: "https://github.com/google/gnostic/blob/master/LICENSE";
+    }
+  }
+  servers: [
+    {
+      url: "https://api.example.com/v1";
+      description: "Production server";
+    }
+  ];
+  tags: []
+  external_docs: {
+    description: "API Documentation";
+    url: "https://github.com/google/gnostic/tree/master/examples/openapi";
+  }
+  components: {
+    security_schemes: {
+      additional_properties: [
+        {
+          name: "BasicAuth";
+          value: {
+            security_scheme: {
+              type: "http";
+              scheme: "basic";
+            }
+          }
+        }
+      ]
+    }
+  }
+};
+
+
+message UseAIAgentRequest {
+  string prompt = 1 [json_name = "prompt", (google.api.field_behavior) = REQUIRED];
+}
+
+message UseAIAgentResponse {
+  string result = 1 [json_name = "result"];
+}
+
+service BrowserUseAIAgent {
+  rpc UseAIAgent(UseAIAgentRequest) returns (UseAIAgentResponse) {
+    option (google.api.http) = {
+      post: "/api/use_ai_agent"
+      body: "*"
+    };
+
+  }
+}

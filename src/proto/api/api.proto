@@ -1,5 +1,9 @@
 syntax = "proto3";
 
+package api;
+// 添加go_package选项
+option go_package = "github.com/agent-sapient/immigrant_ai_agent_go/api;api";
+
 // 引入 Google API 注解包，用于定义 HTTP 映射
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
