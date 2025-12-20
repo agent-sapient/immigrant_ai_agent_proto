@@ -297,6 +297,45 @@ message ParallelSearchResult {
   google.protobuf.Timestamp completed_at = 3 [json_name = "completedAt"]; // 完成时间
 }
 
+// 文件信息
+message OutputFileInfo {
+  string name = 1 [json_name = "name"]; // 文件名或文件夹名
+  string path = 2 [json_name = "path"]; // 相对路径（相对于output目录）
+  bool is_directory = 3 [json_name = "isDirectory"]; // 是否为目录
+  int64 size = 4 [json_name = "size"]; // 文件大小（字节），目录为0
+  google.protobuf.Timestamp modified_time = 5 [json_name = "modifiedTime"]; // 修改时间
+}
+
+// 列出输出文件请求
+message ListOutputFilesRequest {
+  string path = 1 [json_name = "path"]; // 可选：指定子路径，空字符串表示列出output根目录
+}
+
+// 列出输出文件响应
+message ListOutputFilesResponse {
+  message Result {
+    repeated OutputFileInfo files = 1 [json_name = "files"]; // 文件列表
+    string current_path = 2 [json_name = "currentPath"]; // 当前路径
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
+// 下载输出文件请求
+message DownloadOutputFileRequest {
+  string file_path = 1 [json_name = "filePath"]; // 文件路径（相对于output目录），例如: "automate_ceac_status_check_xxx/screenshot.png"
+  bool as_zip = 2 [json_name = "asZip"]; // 如果是目录，是否打包成zip下载
+}
+
+// 下载输出文件响应（仅用于gRPC，FastAPI直接返回文件流）
+message DownloadOutputFileResponse {
+  string file_name = 1 [json_name = "fileName"]; // 文件名
+  string content_type = 2 [json_name = "contentType"]; // 内容类型
+  bytes file_content = 3 [json_name = "fileContent"]; // 文件内容（base64编码或直接字节）
+  int64 file_size = 4 [json_name = "fileSize"]; // 文件大小
+}
+
 // 移民AI代理服务
 service ImmigrantAIAgent {
   // 获取申请人背景信息:使用agent实现全网搜索
@@ -359,6 +398,22 @@ service ImmigrantAIAgent {
   rpc PassportStatusQuery(PassportStatusQueryRequest) returns (PassportStatusQueryResponse) {
     option (google.api.http) = {
       post: "/api/passport/statusQuery"
+      body: "*"
+    };
+  }
+
+  // 列出输出文件:列出output文件夹下的所有文件和文件夹
+  rpc ListOutputFiles(ListOutputFilesRequest) returns (ListOutputFilesResponse) {
+    option (google.api.http) = {
+      post: "/api/output/listFiles"
+      body: "*"
+    };
+  }
+
+  // 下载输出文件:下载output文件夹下的指定文件或文件夹
+  rpc DownloadOutputFile(DownloadOutputFileRequest) returns (DownloadOutputFileResponse) {
+    option (google.api.http) = {
+      post: "/api/output/download"
       body: "*"
     };
   }
