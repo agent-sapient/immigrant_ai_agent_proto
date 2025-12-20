@@ -244,6 +244,36 @@ message TaskCancelResponse {
   string message = 2 [json_name = "message"]; // 响应消息
 }
 
+// 护照状态查询请求
+message PassportStatusQueryRequest {
+  string visa_case_number = 1 [json_name = "visaCaseNumber"]; // 签证案例号，例如: GUZ2023510073
+  string passport_number = 2 [json_name = "passportNumber"]; // 护照号，例如: EE8258725
+  string surname = 3 [json_name = "surname"]; // 姓氏，例如: XU
+  string visa_type = 4 [json_name = "visaType"]; // 签证类型，默认为 IV
+  bool show_browser = 5 [json_name = "showBrowser"]; // 是否显示浏览器界面，默认隐藏
+}
+
+// 护照状态查询响应
+message PassportStatusQueryResponse {
+  message Result {
+    bool success = 1 [json_name = "success"]; // 是否成功
+    string message = 2 [json_name = "message"]; // 响应消息
+    string captcha_recognized = 3 [json_name = "captchaRecognized"]; // 识别的验证码
+    string final_url = 4 [json_name = "finalUrl"]; // 最终URL
+    string page_title = 5 [json_name = "pageTitle"]; // 页面标题
+    string html_file = 6 [json_name = "htmlFile"]; // HTML文件路径
+    string screenshot = 7 [json_name = "screenshot"]; // 截图路径
+    string output_dir = 8 [json_name = "outputDir"]; // 输出目录
+    string query_result = 9 [json_name = "queryResult"]; // 查询结果消息
+    bool has_data = 10 [json_name = "hasData"]; // 是否有数据
+    string result_data = 11 [json_name = "resultData"]; // 结果数据
+    string error_message = 12 [json_name = "errorMessage"]; // 错误消息（仅代码错误）
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
 // 数据源搜索任务定义
 message DataSourceSearchTask {
   string search_query = 1 [json_name = "searchQuery"]; // 搜索查询
@@ -321,6 +351,14 @@ service ImmigrantAIAgent {
   rpc CancelTask(TaskCancelRequest) returns (TaskCancelResponse) {
     option (google.api.http) = {
       post: "/api/task/cancel"
+      body: "*"
+    };
+  }
+
+  // 护照状态查询:快速查询CEAC护照状态
+  rpc PassportStatusQuery(PassportStatusQueryRequest) returns (PassportStatusQueryResponse) {
+    option (google.api.http) = {
+      post: "/api/passport/statusQuery"
       body: "*"
     };
   }
