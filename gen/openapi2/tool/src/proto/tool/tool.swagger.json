@@ -96,6 +96,12 @@
       "properties": {
         "result": {
           "type": "string"
+        },
+        "outputFileUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

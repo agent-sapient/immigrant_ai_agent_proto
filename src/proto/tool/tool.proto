@@ -10,30 +10,17 @@ import "openapi/v3/annotations.proto";
 
 option (openapi.v3.document) = {
   info: {
-    title: "Title from annotation";
-    version: "Version from annotation";
-    description: "Description from annotation";
-    contact: {
-      name: "Contact Name";
-      url: "https://github.com/google/gnostic";
-      email: "gnostic@google.com";
-    }
-    license: {
-      name: "Apache License";
-      url: "https://github.com/google/gnostic/blob/master/LICENSE";
-    }
+    title: "BrowserUseAIAgent";
+    version: "1.0";
+    description: "BrowserUseAIAgent";
   }
   servers: [
     {
-      url: "https://api.example.com/v1";
-      description: "Production server";
+      url: "http://101.6.161.45:18000";
+      description: "server";
     }
   ];
   tags: []
-  external_docs: {
-    description: "API Documentation";
-    url: "https://github.com/google/gnostic/tree/master/examples/openapi";
-  }
   components: {
     security_schemes: {
       additional_properties: [
@@ -58,6 +45,7 @@ message UseAIAgentRequest {
 
 message UseAIAgentResponse {
   string result = 1 [json_name = "result"];
+  repeated string output_file_urls = 2 [json_name = "outputFileUrls"];
 }
 
 service BrowserUseAIAgent {
