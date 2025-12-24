@@ -336,8 +336,142 @@ message DownloadOutputFileResponse {
   int64 file_size = 4 [json_name = "fileSize"]; // 文件大小
 }
 
+// 评估结果
+message EvaluationResult {
+  string category = 1 [json_name = "category"]; // 评估类别
+  int32 score = 2 [json_name = "score"]; // 得分
+  string description = 3 [json_name = "description"]; // 描述
+}
+
+// 生成策划案请求
+message GeneratePlanRequest {
+  int64 id = 1 [json_name = "id"]; // ID
+  int64 member_id = 2 [json_name = "memberId"]; // 会员ID
+  string name = 3 [json_name = "name"]; // 姓名
+  string gender = 4 [json_name = "gender"]; // 性别
+  int32 age = 5 [json_name = "age"]; // 年龄
+  string marital_status = 6 [json_name = "maritalStatus"]; // 婚姻状况
+  string education = 7 [json_name = "education"]; // 教育背景
+  string major = 8 [json_name = "major"]; // 专业
+  string graduated_school = 9 [json_name = "graduatedSchool"]; // 毕业院校
+  string spouse_education = 10 [json_name = "spouseEducation"]; // 配偶教育背景
+  string spouse_major = 11 [json_name = "spouseMajor"]; // 配偶专业
+  int32 children_count = 12 [json_name = "childrenCount"]; // 子女数量
+  bool has_children = 13 [json_name = "hasChildren"]; // 是否有子女
+  string children_age = 14 [json_name = "childrenAge"]; // 子女年龄
+  string children_status = 15 [json_name = "childrenStatus"]; // 子女状态
+  string phone = 16 [json_name = "phone"]; // 电话
+  string email = 17 [json_name = "email"]; // 邮箱
+  string wechat = 18 [json_name = "wechat"]; // 微信
+  string account_location = 19 [json_name = "accountLocation"]; // 账户所在地
+  string current_residence = 20 [json_name = "currentResidence"]; // 现居住地
+  string political_status = 21 [json_name = "politicalStatus"]; // 政治面貌
+  string military_service = 22 [json_name = "militaryService"]; // 服兵役情况
+  bool has_criminal_record = 23 [json_name = "hasCriminalRecord"]; // 是否有犯罪记录
+  string criminal_record = 24 [json_name = "criminalRecord"]; // 犯罪记录
+  string immigration_intent = 25 [json_name = "immigrationIntent"]; // 移民意向
+  string application_date = 26 [json_name = "applicationDate"]; // 申请日期
+  string visa_type = 27 [json_name = "visaType"]; // 签证类型
+  string application_category = 28 [json_name = "applicationCategory"]; // 申请类别
+  string application_category_desc = 29 [json_name = "applicationCategoryDesc"]; // 申请类别描述
+  string us_immigration_category = 30 [json_name = "usImmigrationCategory"]; // 美国移民类别
+  string us_immigration_apply_date = 31 [json_name = "usImmigrationApplyDate"]; // 美国移民申请日期
+  string us_immigration_result = 32 [json_name = "usImmigrationResult"]; // 美国移民结果
+  string applied_us_immigration = 33 [json_name = "appliedUsImmigration"]; // 是否申请过美国移民
+  string applied_us_visa = 34 [json_name = "appliedUsVisa"]; // 是否申请过美国签证
+  string us_visa_category = 35 [json_name = "usVisaCategory"]; // 美国签证类别
+  string us_visa_category_desc = 36 [json_name = "usVisaCategoryDesc"]; // 美国签证类别描述
+  string us_visa_status = 37 [json_name = "usVisaStatus"]; // 美国签证状态
+  string us_visa_valid = 38 [json_name = "usVisaValid"]; // 美国签证是否有效
+  string us_visa_result = 39 [json_name = "usVisaResult"]; // 美国签证结果
+  string b_visa_validity_type = 40 [json_name = "bVisaValidityType"]; // B签证有效期类型
+  string evus_status = 41 [json_name = "evusStatus"]; // EVUS状态
+  string evus_status_desc = 42 [json_name = "evusStatusDesc"]; // EVUS状态描述
+  string evus_last_update_date = 43 [json_name = "evusLastUpdateDate"]; // EVUS最后更新日期
+  string visa_status = 44 [json_name = "visaStatus"]; // 签证状态
+  string result = 45 [json_name = "result"]; // 结果
+  string apply_type = 46 [json_name = "applyType"]; // 申请类型
+  string current_job = 47 [json_name = "currentJob"]; // 当前工作
+  string current_employer = 48 [json_name = "currentEmployer"]; // 当前雇主
+  string current_position = 49 [json_name = "currentPosition"]; // 当前职位
+  string work_experience = 50 [json_name = "workExperience"]; // 工作经验
+  string company_info = 51 [json_name = "companyInfo"]; // 公司信息
+  string core_assets = 52 [json_name = "coreAssets"]; // 核心资产
+  string supplement_info = 53 [json_name = "supplementInfo"]; // 补充信息
+  string awards = 54 [json_name = "awards"]; // 奖项
+  bool has_national_or_international_award = 55 [json_name = "hasNationalOrInternationalAward"]; // 是否有国家级或国际级奖项
+  string national_or_international_award_name = 56 [json_name = "nationalOrInternationalAwardName"]; // 国家级或国际级奖项名称
+  int32 national_or_international_award_count = 57 [json_name = "nationalOrInternationalAwardCount"]; // 国家级或国际级奖项数量
+  bool has_provincial_or_association_award = 58 [json_name = "hasProvincialOrAssociationAward"]; // 是否有省级或协会级奖项
+  string provincial_or_association_award_name = 59 [json_name = "provincialOrAssociationAwardName"]; // 省级或协会级奖项名称
+  int32 provincial_or_association_award_count = 60 [json_name = "provincialOrAssociationAwardCount"]; // 省级或协会级奖项数量
+  string academic_achievements = 61 [json_name = "academicAchievements"]; // 学术成就
+  bool has_academic_paper_citation = 62 [json_name = "hasAcademicPaperCitation"]; // 是否有学术论文引用
+  int32 citation_count = 63 [json_name = "citationCount"]; // 引用次数
+  bool has_core_journal_or_conference_paper = 64 [json_name = "hasCoreJournalOrConferencePaper"]; // 是否有核心期刊或会议论文
+  string core_journal_or_conference_paper_types = 65 [json_name = "coreJournalOrConferencePaperTypes"]; // 核心期刊或会议论文类型
+  int32 core_journal_or_conference_paper_count = 66 [json_name = "coreJournalOrConferencePaperCount"]; // 核心期刊或会议论文数量
+  string media_recognition = 67 [json_name = "mediaRecognition"]; // 媒体认可
+  bool has_media_recognition = 68 [json_name = "hasMediaRecognition"]; // 是否有媒体认可
+  string media_platform_types = 69 [json_name = "mediaPlatformTypes"]; // 媒体平台类型
+  string media_platform_other = 70 [json_name = "mediaPlatformOther"]; // 其他媒体平台
+  int32 media_recognition_count = 71 [json_name = "mediaRecognitionCount"]; // 媒体认可次数
+  string professional_membership = 72 [json_name = "professionalMembership"]; // 专业会员资格
+  bool has_national_or_international_association = 73 [json_name = "hasNationalOrInternationalAssociation"]; // 是否有国家级或国际级协会
+  string association_roles = 74 [json_name = "associationRoles"]; // 协会角色
+  int32 association_count = 75 [json_name = "associationCount"]; // 协会数量
+  string judge_experience = 76 [json_name = "judgeExperience"]; // 评审经验
+  string review_roles = 77 [json_name = "reviewRoles"]; // 评审角色
+  int32 review_role_count = 78 [json_name = "reviewRoleCount"]; // 评审角色数量
+  string original_contribution = 79 [json_name = "originalContribution"]; // 原创贡献
+  bool has_breakthrough_theory_or_tech = 80 [json_name = "hasBreakthroughTheoryOrTech"]; // 是否有突破性理论或技术
+  int32 breakthrough_theory_or_tech_count = 81 [json_name = "breakthroughTheoryOrTechCount"]; // 突破性理论或技术数量
+  string leadership = 82 [json_name = "leadership"]; // 领导力
+  bool has_landmark_project_or_case = 83 [json_name = "hasLandmarkProjectOrCase"]; // 是否有标志性项目或案例
+  int32 landmark_project_or_case_count = 84 [json_name = "landmarkProjectOrCaseCount"]; // 标志性项目或案例数量
+  string high_salary = 85 [json_name = "highSalary"]; // 高薪
+  string commercial_success = 86 [json_name = "commercialSuccess"]; // 商业成功
+  string economic_achievement_types = 87 [json_name = "economicAchievementTypes"]; // 经济成就类型
+  bool has_invention_patent = 88 [json_name = "hasInventionPatent"]; // 是否有发明专利
+  int32 invention_patent_count = 89 [json_name = "inventionPatentCount"]; // 发明专利数量
+  bool has_software_copyright = 90 [json_name = "hasSoftwareCopyright"]; // 是否有软件著作权
+  int32 software_copyright_count = 91 [json_name = "softwareCopyrightCount"]; // 软件著作权数量
+  bool has_national_or_international_project = 92 [json_name = "hasNationalOrInternationalProject"]; // 是否有国家级或国际级项目
+  int32 national_or_international_project_count = 93 [json_name = "nationalOrInternationalProjectCount"]; // 国家级或国际级项目数量
+  bool has_international_activity = 94 [json_name = "hasInternationalActivity"]; // 是否有国际活动
+  string international_activity_types = 95 [json_name = "internationalActivityTypes"]; // 国际活动类型
+  bool has_social_title_or_honor = 96 [json_name = "hasSocialTitleOrHonor"]; // 是否有社会头衔或荣誉
+  string social_title_or_honor_types = 97 [json_name = "socialTitleOrHonorTypes"]; // 社会头衔或荣誉类型
+  string social_title_or_honor_other = 98 [json_name = "socialTitleOrHonorOther"]; // 其他社会头衔或荣誉
+  bool has_special_achievement = 99 [json_name = "hasSpecialAchievement"]; // 是否有特殊成就
+  string special_achievement_types = 100 [json_name = "specialAchievementTypes"]; // 特殊成就类型
+  bool has_us_document = 101 [json_name = "hasUsDocument"]; // 是否有美国文件
+  string us_document_types = 102 [json_name = "usDocumentTypes"]; // 美国文件类型
+  string business_industry_value = 103 [json_name = "businessIndustryValue"]; // 商业行业价值
+  google.protobuf.Timestamp created_at = 104 [json_name = "createdAt"]; // 创建时间
+  google.protobuf.Timestamp updated_at = 105 [json_name = "updatedAt"]; // 更新时间
+}
+
+// 生成策划案响应
+message GeneratePlanResponse {
+  message Result {
+    string plan = 1 [json_name = "plan"]; // 策划案内容
+    repeated EvaluationResult evaluation_results = 2 [json_name = "evaluationResults"]; // 评估结果列表
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
 // 移民AI代理服务
 service ImmigrantAIAgent {
+  // 生成策划案:根据请求信息返回策划结果
+  rpc GeneratePlan(GeneratePlanRequest) returns (GeneratePlanResponse) {
+    option (google.api.http) = {
+      post: "/api/pre-review/generatePlan"
+      body: "*"
+    };
+  }
   // 获取申请人背景信息:使用agent实现全网搜索
   rpc GetBackgroundInfo(GetBackgroundInfoRequest) returns (GetBackgroundInfoResponse) {
     option (google.api.http) = {
@@ -417,4 +551,5 @@ service ImmigrantAIAgent {
       body: "*"
     };
   }
+
 }
