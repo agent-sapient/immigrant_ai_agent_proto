@@ -39,6 +39,15 @@ option (openapi.v3.document) = {
 };
 
 
+// 模型枚举
+enum Model {
+  MODEL_UNSPECIFIED = 0;
+  GPT_4O = 1;
+  GPT_5_1 = 2;
+  CLAUDE_SONNET_4_5 = 3;
+  GEMINI_2_5_FLASH = 4;
+}
+
 message UseAIAgentRequest {
   string prompt = 1 [json_name = "prompt", (google.api.field_behavior) = REQUIRED];
 }
@@ -48,12 +57,36 @@ message UseAIAgentResponse {
   repeated string output_file_urls = 2 [json_name = "outputFileUrls"];
 }
 
+// 批量请求消息
+message BatchUseAIAgentRequest {
+  string prompt = 1 [json_name = "prompt", (google.api.field_behavior) = REQUIRED];
+  repeated Model models = 2 [json_name = "models", (google.api.field_behavior) = REQUIRED];
+}
+
+// 单个模型的结果
+message ModelResult {
+  Model model = 1 [json_name = "model"];
+  string result = 2 [json_name = "result"];
+  repeated string output_file_urls = 3 [json_name = "outputFileUrls"];
+}
+
+// 批量响应消息
+message BatchUseAIAgentResponse {
+  repeated ModelResult results = 1 [json_name = "results"];
+}
+
 service BrowserUseAIAgent {
   rpc UseAIAgent(UseAIAgentRequest) returns (UseAIAgentResponse) {
     option (google.api.http) = {
       post: "/api/use_ai_agent"
       body: "*"
     };
+  }
 
+  rpc BatchUseAIAgent(BatchUseAIAgentRequest) returns (BatchUseAIAgentResponse) {
+    option (google.api.http) = {
+      post: "/api/batch_use_ai_agent"
+      body: "*"
+    };
   }
 }
