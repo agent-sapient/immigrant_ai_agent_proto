@@ -19,12 +19,23 @@ class BrowserUseAIAgentStub(object):
                 request_serializer=src_dot_proto_dot_tool_dot_tool__pb2.UseAIAgentRequest.SerializeToString,
                 response_deserializer=src_dot_proto_dot_tool_dot_tool__pb2.UseAIAgentResponse.FromString,
                 _registered_method=True)
+        self.BatchUseAIAgent = channel.unary_unary(
+                '/tool.BrowserUseAIAgent/BatchUseAIAgent',
+                request_serializer=src_dot_proto_dot_tool_dot_tool__pb2.BatchUseAIAgentRequest.SerializeToString,
+                response_deserializer=src_dot_proto_dot_tool_dot_tool__pb2.BatchUseAIAgentResponse.FromString,
+                _registered_method=True)
 
 
 class BrowserUseAIAgentServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def UseAIAgent(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BatchUseAIAgent(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -37,6 +48,11 @@ def add_BrowserUseAIAgentServicer_to_server(servicer, server):
                     servicer.UseAIAgent,
                     request_deserializer=src_dot_proto_dot_tool_dot_tool__pb2.UseAIAgentRequest.FromString,
                     response_serializer=src_dot_proto_dot_tool_dot_tool__pb2.UseAIAgentResponse.SerializeToString,
+            ),
+            'BatchUseAIAgent': grpc.unary_unary_rpc_method_handler(
+                    servicer.BatchUseAIAgent,
+                    request_deserializer=src_dot_proto_dot_tool_dot_tool__pb2.BatchUseAIAgentRequest.FromString,
+                    response_serializer=src_dot_proto_dot_tool_dot_tool__pb2.BatchUseAIAgentResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -66,6 +82,33 @@ class BrowserUseAIAgent(object):
             '/tool.BrowserUseAIAgent/UseAIAgent',
             src_dot_proto_dot_tool_dot_tool__pb2.UseAIAgentRequest.SerializeToString,
             src_dot_proto_dot_tool_dot_tool__pb2.UseAIAgentResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def BatchUseAIAgent(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/tool.BrowserUseAIAgent/BatchUseAIAgent',
+            src_dot_proto_dot_tool_dot_tool__pb2.BatchUseAIAgentRequest.SerializeToString,
+            src_dot_proto_dot_tool_dot_tool__pb2.BatchUseAIAgentResponse.FromString,
             options,
             channel_credentials,
             insecure,

@@ -10,6 +10,30 @@ servers:
     - url: http://101.6.161.45:18000
       description: server
 paths:
+    /api/batch_use_ai_agent:
+        post:
+            tags:
+                - BrowserUseAIAgent
+            operationId: BrowserUseAIAgent_BatchUseAIAgent
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/BatchUseAIAgentRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BatchUseAIAgentResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/use_ai_agent:
         post:
             tags:
@@ -36,6 +60,28 @@ paths:
                                 $ref: '#/components/schemas/Status'
 components:
     schemas:
+        BatchUseAIAgentRequest:
+            required:
+                - prompt
+                - models
+            type: object
+            properties:
+                prompt:
+                    type: string
+                models:
+                    type: array
+                    items:
+                        type: integer
+                        format: enum
+            description: 批量请求消息
+        BatchUseAIAgentResponse:
+            type: object
+            properties:
+                results:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/ModelResult'
+            description: 批量响应消息
         GoogleProtobufAny:
             type: object
             properties:
@@ -44,6 +90,19 @@ components:
                     description: The type of the serialized message.
             additionalProperties: true
             description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+        ModelResult:
+            type: object
+            properties:
+                model:
+                    type: integer
+                    format: enum
+                result:
+                    type: string
+                outputFileUrls:
+                    type: array
+                    items:
+                        type: string
+            description: 单个模型的结果
         Status:
             type: object
             properties:

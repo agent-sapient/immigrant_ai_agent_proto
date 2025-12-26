@@ -27,7 +27,7 @@ from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior_
 from openapi.v3 import annotations_pb2 as openapi_dot_v3_dot_annotations__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19src/proto/tool/tool.proto\x12\x04tool\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1copenapi/v3/annotations.proto\"0\n\x11UseAIAgentRequest\x12\x1b\n\x06prompt\x18\x01 \x01(\tB\x03\xe0\x41\x02R\x06prompt\"V\n\x12UseAIAgentResponse\x12\x16\n\x06result\x18\x01 \x01(\tR\x06result\x12(\n\x10output_file_urls\x18\x02 \x03(\tR\x0eoutputFileUrls2r\n\x11\x42rowserUseAIAgent\x12]\n\nUseAIAgent\x12\x17.tool.UseAIAgentRequest\x1a\x18.tool.UseAIAgentResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\"\x11/api/use_ai_agent:\x01*B\xf6\x01\n\x08\x63om.toolB\tToolProtoP\x01Z8github.com/agent-sapient/immigrant_ai_agent_go/tool;tool\xa2\x02\x03TXX\xaa\x02\x04Tool\xca\x02\x04Tool\xe2\x02\x10Tool\\GPBMetadata\xea\x02\x04Tool\xbaGt\x12+\n\x11\x42rowserUseAIAgent\x12\x11\x42rowserUseAIAgent2\x03\x31.0\x1a#\n\x19http://101.6.161.45:18000\x12\x06server* :\x1e\n\x1c\n\tBasicAuth\x12\x0f\n\r\n\x04http*\x05\x62\x61sicb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19src/proto/tool/tool.proto\x12\x04tool\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1copenapi/v3/annotations.proto\"0\n\x11UseAIAgentRequest\x12\x1b\n\x06prompt\x18\x01 \x01(\tB\x03\xe0\x41\x02R\x06prompt\"V\n\x12UseAIAgentResponse\x12\x16\n\x06result\x18\x01 \x01(\tR\x06result\x12(\n\x10output_file_urls\x18\x02 \x03(\tR\x0eoutputFileUrls\"_\n\x16\x42\x61tchUseAIAgentRequest\x12\x1b\n\x06prompt\x18\x01 \x01(\tB\x03\xe0\x41\x02R\x06prompt\x12(\n\x06models\x18\x02 \x03(\x0e\x32\x0b.tool.ModelB\x03\xe0\x41\x02R\x06models\"r\n\x0bModelResult\x12!\n\x05model\x18\x01 \x01(\x0e\x32\x0b.tool.ModelR\x05model\x12\x16\n\x06result\x18\x02 \x01(\tR\x06result\x12(\n\x10output_file_urls\x18\x03 \x03(\tR\x0eoutputFileUrls\"F\n\x17\x42\x61tchUseAIAgentResponse\x12+\n\x07results\x18\x01 \x03(\x0b\x32\x11.tool.ModelResultR\x07results*_\n\x05Model\x12\x15\n\x11MODEL_UNSPECIFIED\x10\x00\x12\n\n\x06GPT_4O\x10\x01\x12\x0b\n\x07GPT_5_1\x10\x02\x12\x15\n\x11\x43LAUDE_SONNET_4_5\x10\x03\x12\x0f\n\x0bGPT_4O_MINI\x10\x04\x32\xe6\x01\n\x11\x42rowserUseAIAgent\x12]\n\nUseAIAgent\x12\x17.tool.UseAIAgentRequest\x1a\x18.tool.UseAIAgentResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\"\x11/api/use_ai_agent:\x01*\x12r\n\x0f\x42\x61tchUseAIAgent\x12\x1c.tool.BatchUseAIAgentRequest\x1a\x1d.tool.BatchUseAIAgentResponse\"\"\x82\xd3\xe4\x93\x02\x1c\"\x17/api/batch_use_ai_agent:\x01*B\xf6\x01\n\x08\x63om.toolB\tToolProtoP\x01Z8github.com/agent-sapient/immigrant_ai_agent_go/tool;tool\xa2\x02\x03TXX\xaa\x02\x04Tool\xca\x02\x04Tool\xe2\x02\x10Tool\\GPBMetadata\xea\x02\x04Tool\xbaGt\x12+\n\x11\x42rowserUseAIAgent\x12\x11\x42rowserUseAIAgent2\x03\x31.0\x1a#\n\x19http://101.6.161.45:18000\x12\x06server* :\x1e\n\x1c\n\tBasicAuth\x12\x0f\n\r\n\x04http*\x05\x62\x61sicb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -37,12 +37,26 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._serialized_options = b'\n\010com.toolB\tToolProtoP\001Z8github.com/agent-sapient/immigrant_ai_agent_go/tool;tool\242\002\003TXX\252\002\004Tool\312\002\004Tool\342\002\020Tool\\GPBMetadata\352\002\004Tool\272Gt\022+\n\021BrowserUseAIAgent\022\021BrowserUseAIAgent2\0031.0\032#\n\031http://101.6.161.45:18000\022\006server* :\036\n\034\n\tBasicAuth\022\017\n\r\n\004http*\005basic'
   _globals['_USEAIAGENTREQUEST'].fields_by_name['prompt']._loaded_options = None
   _globals['_USEAIAGENTREQUEST'].fields_by_name['prompt']._serialized_options = b'\340A\002'
+  _globals['_BATCHUSEAIAGENTREQUEST'].fields_by_name['prompt']._loaded_options = None
+  _globals['_BATCHUSEAIAGENTREQUEST'].fields_by_name['prompt']._serialized_options = b'\340A\002'
+  _globals['_BATCHUSEAIAGENTREQUEST'].fields_by_name['models']._loaded_options = None
+  _globals['_BATCHUSEAIAGENTREQUEST'].fields_by_name['models']._serialized_options = b'\340A\002'
   _globals['_BROWSERUSEAIAGENT'].methods_by_name['UseAIAgent']._loaded_options = None
   _globals['_BROWSERUSEAIAGENT'].methods_by_name['UseAIAgent']._serialized_options = b'\202\323\344\223\002\026\"\021/api/use_ai_agent:\001*'
+  _globals['_BROWSERUSEAIAGENT'].methods_by_name['BatchUseAIAgent']._loaded_options = None
+  _globals['_BROWSERUSEAIAGENT'].methods_by_name['BatchUseAIAgent']._serialized_options = b'\202\323\344\223\002\034\"\027/api/batch_use_ai_agent:\001*'
+  _globals['_MODEL']._serialized_start=551
+  _globals['_MODEL']._serialized_end=646
   _globals['_USEAIAGENTREQUEST']._serialized_start=128
   _globals['_USEAIAGENTREQUEST']._serialized_end=176
   _globals['_USEAIAGENTRESPONSE']._serialized_start=178
   _globals['_USEAIAGENTRESPONSE']._serialized_end=264
-  _globals['_BROWSERUSEAIAGENT']._serialized_start=266
-  _globals['_BROWSERUSEAIAGENT']._serialized_end=380
+  _globals['_BATCHUSEAIAGENTREQUEST']._serialized_start=266
+  _globals['_BATCHUSEAIAGENTREQUEST']._serialized_end=361
+  _globals['_MODELRESULT']._serialized_start=363
+  _globals['_MODELRESULT']._serialized_end=477
+  _globals['_BATCHUSEAIAGENTRESPONSE']._serialized_start=479
+  _globals['_BATCHUSEAIAGENTRESPONSE']._serialized_end=549
+  _globals['_BROWSERUSEAIAGENT']._serialized_start=649
+  _globals['_BROWSERUSEAIAGENT']._serialized_end=879
 # @@protoc_insertion_point(module_scope)

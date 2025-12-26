@@ -16,6 +16,38 @@
     "application/json"
   ],
   "paths": {
+    "/api/batch_use_ai_agent": {
+      "post": {
+        "operationId": "BrowserUseAIAgent_BatchUseAIAgent",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/toolBatchUseAIAgentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/toolBatchUseAIAgentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "BrowserUseAIAgent"
+        ]
+      }
+    },
     "/api/use_ai_agent": {
       "post": {
         "operationId": "BrowserUseAIAgent_UseAIAgent",
@@ -79,6 +111,68 @@
           }
         }
       }
+    },
+    "toolBatchUseAIAgentRequest": {
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string"
+        },
+        "models": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/toolModel"
+          }
+        }
+      },
+      "title": "批量请求消息",
+      "required": [
+        "prompt",
+        "models"
+      ]
+    },
+    "toolBatchUseAIAgentResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/toolModelResult"
+          }
+        }
+      },
+      "title": "批量响应消息"
+    },
+    "toolModel": {
+      "type": "string",
+      "enum": [
+        "MODEL_UNSPECIFIED",
+        "GPT_4O",
+        "GPT_5_1",
+        "CLAUDE_SONNET_4_5",
+        "GPT_4O_MINI"
+      ],
+      "default": "MODEL_UNSPECIFIED",
+      "title": "模型枚举"
+    },
+    "toolModelResult": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "$ref": "#/definitions/toolModel"
+        },
+        "result": {
+          "type": "string"
+        },
+        "outputFileUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "单个模型的结果"
     },
     "toolUseAIAgentRequest": {
       "type": "object",
