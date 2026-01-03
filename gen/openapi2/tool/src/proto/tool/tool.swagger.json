@@ -154,8 +154,7 @@
         "GPT_4O_MINI",
         "GEMINI_2_5_FLASH",
         "GEMINI_2_5_PRO",
-        "GROK_4_1_FAST",
-        "GROK_4_1_FAST_REASONING",
+        "GROK_4",
         "DOUBAO_SEED_1_6_VISION"
       ],
       "default": "MODEL_UNSPECIFIED",

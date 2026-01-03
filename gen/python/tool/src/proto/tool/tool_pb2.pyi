@@ -19,8 +19,7 @@ class Model(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     GPT_4O_MINI: _ClassVar[Model]
     GEMINI_2_5_FLASH: _ClassVar[Model]
     GEMINI_2_5_PRO: _ClassVar[Model]
-    GROK_4_1_FAST: _ClassVar[Model]
-    GROK_4_1_FAST_REASONING: _ClassVar[Model]
+    GROK_4: _ClassVar[Model]
     DOUBAO_SEED_1_6_VISION: _ClassVar[Model]
 MODEL_UNSPECIFIED: Model
 GPT_4O: Model
@@ -29,8 +28,7 @@ CLAUDE_SONNET_4_5: Model
 GPT_4O_MINI: Model
 GEMINI_2_5_FLASH: Model
 GEMINI_2_5_PRO: Model
-GROK_4_1_FAST: Model
-GROK_4_1_FAST_REASONING: Model
+GROK_4: Model
 DOUBAO_SEED_1_6_VISION: Model
 
 class UseAIAgentRequest(_message.Message):

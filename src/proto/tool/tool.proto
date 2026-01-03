@@ -48,9 +48,8 @@ enum Model {
   GPT_4O_MINI = 4;
   GEMINI_2_5_FLASH = 5;
   GEMINI_2_5_PRO = 6;
-  GROK_4_1_FAST = 7;
-  GROK_4_1_FAST_REASONING = 8;
-  DOUBAO_SEED_1_6_VISION = 9;
+  GROK_4 = 7;
+  DOUBAO_SEED_1_6_VISION = 8;
 }
 
 message UseAIAgentRequest {
