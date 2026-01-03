@@ -151,7 +151,12 @@
         "GPT_4O",
         "GPT_5_1",
         "CLAUDE_SONNET_4_5",
-        "GPT_4O_MINI"
+        "GPT_4O_MINI",
+        "GEMINI_2_5_FLASH",
+        "GEMINI_2_5_PRO",
+        "GROK_4_1_FAST",
+        "GROK_4_1_FAST_REASONING",
+        "DOUBAO_SEED_1_6_VISION"
       ],
       "default": "MODEL_UNSPECIFIED",
       "title": "模型枚举"

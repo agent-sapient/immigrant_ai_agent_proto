@@ -46,6 +46,11 @@ enum Model {
   GPT_5_1 = 2;
   CLAUDE_SONNET_4_5 = 3;
   GPT_4O_MINI = 4;
+  GEMINI_2_5_FLASH = 5;
+  GEMINI_2_5_PRO = 6;
+  GROK_4_1_FAST = 7;
+  GROK_4_1_FAST_REASONING = 8;
+  DOUBAO_SEED_1_6_VISION = 9;
 }
 
 message UseAIAgentRequest {
