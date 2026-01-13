@@ -450,6 +450,7 @@ message GeneratePlanRequest {
   string business_industry_value = 103 [json_name = "businessIndustryValue"]; // 商业行业价值
   google.protobuf.Timestamp created_at = 104 [json_name = "createdAt"]; // 创建时间
   google.protobuf.Timestamp updated_at = 105 [json_name = "updatedAt"]; // 更新时间
+  string immigration_type = 146 [json_name = "immigrationType"]; // 申请类型
 }
 
 // 生成策划案响应
