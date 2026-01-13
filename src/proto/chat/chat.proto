@@ -1,0 +1,231 @@
+syntax = "proto3";
+
+package mgx.thinking;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/struct.proto";
+
+// ============================================================================
+// Thinking Service (合并了 Role 功能)
+// ============================================================================
+
+// 初始化请求
+message ThinkingInitRequest {
+    string chat_id = 1;  // 对话ID
+    string query   = 2;  // 初始查询
+    google.protobuf.Struct config = 3;  // 配置信息
+}
+
+// 初始化响应
+message ThinkingInitResponse {
+    string chat_id = 1;  // 对话ID
+    bool success   = 2;  // 是否成功
+    string message = 3;  // 消息
+}
+
+// 思考请求
+message ThinkingThinkRequest {
+    string chat_id = 1;  // 对话ID
+    google.protobuf.Struct options = 2;  // 选项
+}
+
+// 动作定义
+message Action {
+    string desc    = 1;  // 动作描述
+    google.protobuf.Struct options = 2;  // 动作选项
+}
+
+// 思考响应
+message ThinkingThinkResponse {
+    bool finished  = 1;  // 是否完成
+    Action action  = 2;  // 下一步动作
+    google.protobuf.Struct options = 3;  // 选项
+}
+
+// 执行请求
+message ThinkingActRequest {
+    string chat_id = 1;  // 对话ID
+    google.protobuf.Struct options = 2;  // 选项
+}
+
+// 执行响应
+message ThinkingActResponse {
+    string content         = 1;  // 内容（JSON 字符串，Delta 格式）
+    bytes instruct_content = 2;  // 结构化指令
+    string cause_by        = 3;  // 触发原因
+    google.protobuf.Struct options = 4;  // 选项
+}
+
+// 流式执行响应
+message ThinkingActStreamResponse {
+    oneof data {
+        string chunk              = 1;  // 文本片段
+        ThinkingActResponse answer = 2;  // 完整答案
+    }
+}
+
+// 预检查响应
+message ThinkingPreCheckResponse {
+    bool ready = 1;  // 是否就绪
+    string msg  = 2;  // 消息
+}
+
+// Thinking Service 定义（合并了 Role 功能）
+service ThinkingService {
+    // 初始化对话
+    rpc Init(ThinkingInitRequest) returns (ThinkingInitResponse);
+    
+    // 思考下一步行动
+    rpc Think(ThinkingThinkRequest) returns (ThinkingThinkResponse);
+    
+    // 执行行动（非流式）
+    rpc Act(ThinkingActRequest) returns (ThinkingActResponse);
+    
+    // 执行行动（流式）
+    rpc StreamAct(ThinkingActRequest) returns (stream ThinkingActStreamResponse);
+    
+    // 预检查
+    rpc PreCheck(google.protobuf.Empty) returns (ThinkingPreCheckResponse);
+}
+
+// ============================================================================
+// Backend Service (主服务 - HTTP API)
+// ============================================================================
+
+// 普通消息创建请求（HTTP API POST /api/v1/chats/{chat_id}/messages）
+message CreateMessageRequest {
+    string chat_id                = 1;  // 对话ID
+    google.protobuf.Value content = 2;  // 消息内容（Delta 格式数组）
+    int64 refer_id                = 3;  // 引用消息ID（可选）
+    string type                   = 4;  // 消息类型: "message", "thinking", etc.
+    google.protobuf.Struct metadata = 5;  // 元数据（agent_mode, default_model, etc.）
+    bool use_boost                = 6;  // 是否使用加速
+    bool use_auto_model           = 7;  // 是否自动选择模型
+    repeated string boost_models  = 8;  // 加速模型列表
+}
+
+// 普通消息创建响应
+message CreateMessageResponse {
+    int64 id                      = 1;  // 消息ID
+    string chat_id                = 2;  // 对话ID
+    string type                   = 3;  // 消息类型
+    google.protobuf.Value content = 4;  // 消息内容（Delta 格式）
+    int64 refer_id                = 5;  // 引用消息ID
+    google.protobuf.Struct metadata = 6;  // 元数据
+    int64 timestamp               = 7;  // 时间戳
+    bool is_finished              = 8;  // 是否完成
+}
+
+// Backend Service 定义（主服务 - 处理 HTTP API）
+service BackendService {
+    // 创建消息（HTTP POST /api/v1/chats/{chat_id}/messages）
+    rpc CreateMessage(CreateMessageRequest) returns (CreateMessageResponse);
+}
+
+// ============================================================================
+// Callback Service (Thinking → Backend)
+// ============================================================================
+
+// 消息请求（gRPC 回调使用）
+message MessageRequest {
+    string role       = 1;  // 角色
+    string type       = 2;  // 消息类型
+    int64 refer_id    = 3;  // 引用消息ID
+    string content    = 4;  // 内容（JSON 字符串，Delta 格式）
+    string uuid       = 5;  // 消息UUID
+    bool is_finished  = 6;  // 是否完成
+}
+
+// 流式消息请求
+message StreamMessageRequest {
+    oneof data {
+        MessageRequest info     = 1;  // 消息信息
+        string content          = 2;  // 内容片段
+        string json_data        = 3;  // JSON 数据
+    }
+}
+
+// 消息响应
+message MessageResponse {
+    int64 id = 1;  // 消息ID
+}
+
+// 聊天任务
+message ChatTask {
+    string chat_id                = 1;  // 对话ID
+    google.protobuf.Struct config = 2;  // 配置
+}
+
+// 聊天任务事件
+message ChatTaskEvent {
+    enum EventType {
+        HEARTBEAT  = 0;  // 心跳
+        READY      = 1;  // 等待对话
+        CHAT_DONE  = 2;  // 对话完成
+    }
+    EventType type = 1;  // 事件类型
+    string chat_id = 2;  // 对话ID
+    int32 status   = 3;  // 任务状态
+}
+
+// 聊天消息
+message ChatMessage {
+    int64 id                        = 1;  // 数据库记录ID
+    string type                     = 2;  // 消息类型
+    google.protobuf.Value content   = 3;  // 消息内容（Delta 格式）
+    int64 refer_id                  = 4;  // 引用消息ID
+    google.protobuf.Struct metadata = 5;  // 元数据
+}
+
+// 客户端事件
+message ChatClientEvent {
+    enum EventType {
+        HEARTBEAT = 0;  // 心跳
+        STOP      = 1;  // 停止
+        MSG_ACK   = 2;  // 消息确认
+    }
+    EventType type = 1;  // 事件类型
+}
+
+// 服务端事件
+message ChatServerEvent {
+    enum EventType {
+        MESSAGE   = 0;  // 消息
+        INTERRUPT = 1;  // 中断
+        KEEPALIVE = 2;  // 保活
+        DELETE    = 3;  // 删除
+    }
+    EventType type = 1;  // 事件类型
+    ChatMessage message = 2;  // 消息
+    google.protobuf.Struct data = 3;  // 数据
+}
+
+// WebSocket 消息（用于 WebSocket 双向长连接）
+message WebSocketMessage {
+    string event = 1;  // 事件类型: "msg:create", "msg:update", "heartbeat", etc.
+    int64 timestamp = 2;  // 时间戳
+    oneof payload {
+        ChatMessage message = 3;  // 聊天消息
+        ChatClientEvent client_event = 4;  // 客户端事件
+        ChatServerEvent server_event = 5;  // 服务端事件
+        ChatTaskEvent task_event = 6;  // 任务事件
+    }
+}
+
+// Callback Service 定义
+service MGXCallback {
+    // 消息回调（单次）
+    rpc MessageCallback(MessageRequest) returns (MessageResponse);
+    
+    // 消息回调（流式）
+    rpc StreamMessageCallback(stream StreamMessageRequest) returns (MessageResponse);
+    
+    // 双向流通信
+    rpc StreamChatCallback(stream ChatClientEvent) returns (stream ChatServerEvent);
+    
+    // 任务分发
+    rpc ListenChatTask(stream ChatTaskEvent) returns (stream ChatTask);
+    
+    // 保活
+    rpc KeepAlive(google.protobuf.Empty) returns (google.protobuf.Empty);
+}

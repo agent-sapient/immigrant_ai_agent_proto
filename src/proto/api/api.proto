@@ -366,7 +366,7 @@ message GeneratePlanRequest {
   string account_location = 19 [json_name = "accountLocation"]; // 账户所在地
   string current_residence = 20 [json_name = "currentResidence"]; // 现居住地
   string political_status = 21 [json_name = "politicalStatus"]; // 政治面貌
-  string military_service = 22 [json_name = "militaryService"]; // 服兵役情况
+  bool military_service = 22 [json_name = "militaryService"]; // 服兵役情况
   bool has_criminal_record = 23 [json_name = "hasCriminalRecord"]; // 是否有犯罪记录
   string criminal_record = 24 [json_name = "criminalRecord"]; // 犯罪记录
   string immigration_intent = 25 [json_name = "immigrationIntent"]; // 移民意向
@@ -377,8 +377,8 @@ message GeneratePlanRequest {
   string us_immigration_category = 30 [json_name = "usImmigrationCategory"]; // 美国移民类别
   string us_immigration_apply_date = 31 [json_name = "usImmigrationApplyDate"]; // 美国移民申请日期
   string us_immigration_result = 32 [json_name = "usImmigrationResult"]; // 美国移民结果
-  string applied_us_immigration = 33 [json_name = "appliedUsImmigration"]; // 是否申请过美国移民
-  string applied_us_visa = 34 [json_name = "appliedUsVisa"]; // 是否申请过美国签证
+  bool applied_us_immigration = 33 [json_name = "appliedUsImmigration"]; // 是否申请过美国移民
+  bool applied_us_visa = 34 [json_name = "appliedUsVisa"]; // 是否申请过美国签证
   string us_visa_category = 35 [json_name = "usVisaCategory"]; // 美国签证类别
   string us_visa_category_desc = 36 [json_name = "usVisaCategoryDesc"]; // 美国签证类别描述
   string us_visa_status = 37 [json_name = "usVisaStatus"]; // 美国签证状态
