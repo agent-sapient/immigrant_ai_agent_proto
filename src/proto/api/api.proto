@@ -368,7 +368,6 @@ message GeneratePlanRequest {
   string political_status = 21 [json_name = "politicalStatus"]; // 政治面貌
   bool military_service = 22 [json_name = "militaryService"]; // 是否服过兵役
   bool has_criminal_record = 23 [json_name = "hasCriminalRecord"]; // 截至目前，您是否有任何刑事犯罪记录
-  string criminal_record = 24 [json_name = "criminalRecord"]; // 犯罪记录
   string immigration_intent = 25 [json_name = "immigrationIntent"]; // 申请意向国家/地区
   string application_date = 26 [json_name = "applicationDate"]; // 申请时间
   string visa_type = 27 [json_name = "visaType"]; // 签证类型
