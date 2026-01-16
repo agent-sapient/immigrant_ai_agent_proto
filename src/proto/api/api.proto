@@ -458,6 +458,7 @@ message GeneratePlanResponse {
     string plan = 1 [json_name = "plan"]; // 策划案内容
     string plan_url = 2 [json_name = "planUrl"]; // 策划案URL
     repeated EvaluationResult evaluation_results = 3 [json_name = "evaluationResults"]; // 评估结果列表
+    Result result_en = 4 [json_name="result_en"]; // 英文结果
   }
   bool success = 1 [json_name = "success"]; // 是否成功
   string message = 2 [json_name = "message"]; // 响应消息
