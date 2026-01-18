@@ -465,6 +465,310 @@ message GeneratePlanResponse {
   Result result_en = 4 [json_name="result_en"]; // 英文结果
 }
 
+// ========== 基本信息管理 ==========
+
+// 扩展的基本信息（包含身份证、护照等）
+message ExtendedBasicInfo {
+  BasicInfo basic_info = 1 [json_name = "basicInfo"]; // 基本信息
+  string id_card = 2 [json_name = "idCard"]; // 身份证号
+  string id_card_start_date = 3 [json_name = "idCardStartDate"]; // 身份证有效期开始日期
+  string id_card_expiry = 4 [json_name = "idCardExpiry"]; // 身份证有效期结束日期
+  string passport_number = 5 [json_name = "passportNumber"]; // 护照号
+  string passport_start_date = 6 [json_name = "passportStartDate"]; // 护照有效期开始日期
+  string passport_expiry = 7 [json_name = "passportExpiry"]; // 护照有效期结束日期
+  string immigration_type_other = 8 [json_name = "immigrationTypeOther"]; // 其他移民类型说明
+}
+
+// 保存基本信息请求
+message SaveBasicInfoRequest {
+  ExtendedBasicInfo basic_info = 1 [json_name = "basicInfo"]; // 基本信息
+  string case_id = 2 [json_name = "caseId"]; // 案件ID（可选，如果提供则更新，否则创建新案件）
+}
+
+// 保存基本信息响应
+message SaveBasicInfoResponse {
+  message Result {
+    string case_id = 1 [json_name = "caseId"]; // 案件ID
+    ExtendedBasicInfo basic_info = 2 [json_name = "basicInfo"]; // 保存的基本信息
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
+// 获取基本信息请求
+message GetBasicInfoRequest {
+  string case_id = 1 [json_name = "caseId"]; // 案件ID
+}
+
+// 获取基本信息响应
+message GetBasicInfoResponse {
+  message Result {
+    ExtendedBasicInfo basic_info = 1 [json_name = "basicInfo"]; // 基本信息
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
+// 保存基本信息草稿请求
+message SaveBasicInfoDraftRequest {
+  ExtendedBasicInfo basic_info = 1 [json_name = "basicInfo"]; // 基本信息草稿
+  string case_id = 2 [json_name = "caseId"]; // 案件ID（可选）
+}
+
+// 保存基本信息草稿响应
+message SaveBasicInfoDraftResponse {
+  message Result {
+    string case_id = 1 [json_name = "caseId"]; // 案件ID
+    google.protobuf.Timestamp saved_at = 2 [json_name = "savedAt"]; // 保存时间
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
+// ========== 奖项管理 ==========
+
+// 奖项信息
+message AwardInfo {
+  string id = 1 [json_name = "id"]; // 奖项ID
+  string case_id = 2 [json_name = "caseId"]; // 案件ID
+  string title = 3 [json_name = "title"]; // 奖项名称
+  string year = 4 [json_name = "year"]; // 获奖年份
+  string level = 5 [json_name = "level"]; // 级别：international(国际级)、national(国家级)、provincial(省部级)、company(公司级)
+  string status = 6 [json_name = "status"]; // 状态：idle(待开始)、analyzing(检查中)、needs_revision(建议修改)、ready_to_search(待检索)、searching(检索中)、reviewing(待确认)、locked(已锁定)
+  google.protobuf.Timestamp created_at = 7 [json_name = "createdAt"]; // 创建时间
+  google.protobuf.Timestamp updated_at = 8 [json_name = "updatedAt"]; // 更新时间
+}
+
+// 创建奖项请求
+message CreateAwardRequest {
+  string case_id = 1 [json_name = "caseId"]; // 案件ID
+  string title = 2 [json_name = "title"]; // 奖项名称
+  string year = 3 [json_name = "year"]; // 获奖年份（可选）
+  string level = 4 [json_name = "level"]; // 级别（可选）
+}
+
+// 创建奖项响应
+message CreateAwardResponse {
+  message Result {
+    AwardInfo award = 1 [json_name = "award"]; // 创建的奖项
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
+// 获取奖项列表请求
+message ListAwardsRequest {
+  string case_id = 1 [json_name = "caseId"]; // 案件ID
+  string status = 2 [json_name = "status"]; // 状态筛选（可选）
+}
+
+// 获取奖项列表响应
+message ListAwardsResponse {
+  message Result {
+    repeated AwardInfo awards = 1 [json_name = "awards"]; // 奖项列表
+    int32 total = 2 [json_name = "total"]; // 总数
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
+// 更新奖项请求
+message UpdateAwardRequest {
+  string award_id = 1 [json_name = "awardId"]; // 奖项ID
+  string title = 2 [json_name = "title"]; // 奖项名称（可选）
+  string year = 3 [json_name = "year"]; // 获奖年份（可选）
+  string level = 4 [json_name = "level"]; // 级别（可选）
+}
+
+// 更新奖项响应
+message UpdateAwardResponse {
+  message Result {
+    AwardInfo award = 1 [json_name = "award"]; // 更新后的奖项
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
+// 删除奖项请求
+message DeleteAwardRequest {
+  string award_id = 1 [json_name = "awardId"]; // 奖项ID
+}
+
+// 删除奖项响应
+message DeleteAwardResponse {
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+}
+
+// 锁定奖项请求
+message LockAwardRequest {
+  string award_id = 1 [json_name = "awardId"]; // 奖项ID
+}
+
+// 锁定奖项响应
+message LockAwardResponse {
+  message Result {
+    AwardInfo award = 1 [json_name = "award"]; // 锁定后的奖项
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
+// 解锁奖项请求
+message UnlockAwardRequest {
+  string award_id = 1 [json_name = "awardId"]; // 奖项ID
+}
+
+// 解锁奖项响应
+message UnlockAwardResponse {
+  message Result {
+    AwardInfo award = 1 [json_name = "award"]; // 解锁后的奖项
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
+// ========== 奖项文件管理 ==========
+
+// 奖项文件信息
+message AwardFileInfo {
+  string id = 1 [json_name = "id"]; // 文件ID
+  string award_id = 2 [json_name = "awardId"]; // 奖项ID
+  string name = 3 [json_name = "name"]; // 文件名
+  string size = 4 [json_name = "size"]; // 文件大小（字符串格式，如 "1.2 MB"）
+  string type = 5 [json_name = "type"]; // 文件MIME类型
+  string url = 6 [json_name = "url"]; // 文件URL
+  string category = 7 [json_name = "category"]; // 文件类别：certificate(证书)、media(媒体报道)、letter(推荐信)、other(其他)
+  string status = 8 [json_name = "status"]; // 状态：uploading(上传中)、complete(完成)、error(错误)
+  int32 upload_progress = 9 [json_name = "uploadProgress"]; // 上传进度 0-100
+  google.protobuf.Timestamp created_at = 10 [json_name = "createdAt"]; // 创建时间
+}
+
+// 上传奖项文件请求
+message UploadAwardFileRequest {
+  string award_id = 1 [json_name = "awardId"]; // 奖项ID
+  bytes file_content = 2 [json_name = "fileContent"]; // 文件内容（base64编码或直接字节）
+  string file_name = 3 [json_name = "fileName"]; // 文件名
+  string file_type = 4 [json_name = "fileType"]; // 文件MIME类型
+}
+
+// 上传奖项文件响应
+message UploadAwardFileResponse {
+  message Result {
+    AwardFileInfo file = 1 [json_name = "file"]; // 上传的文件信息
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
+// 删除奖项文件请求
+message DeleteAwardFileRequest {
+  string file_id = 1 [json_name = "fileId"]; // 文件ID
+}
+
+// 删除奖项文件响应
+message DeleteAwardFileResponse {
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+}
+
+// 列出奖项文件请求
+message ListAwardFilesRequest {
+  string award_id = 1 [json_name = "awardId"]; // 奖项ID
+}
+
+// 列出奖项文件响应
+message ListAwardFilesResponse {
+  message Result {
+    repeated AwardFileInfo files = 1 [json_name = "files"]; // 文件列表
+    int32 total = 2 [json_name = "total"]; // 总数
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
+// 分析奖项文件完整性请求
+message AnalyzeAwardFilesRequest {
+  string award_id = 1 [json_name = "awardId"]; // 奖项ID
+}
+
+// 分析奖项文件完整性响应
+message AnalyzeAwardFilesResponse {
+  message Result {
+    bool is_complete = 1 [json_name = "isComplete"]; // 是否完整
+    repeated string missing_items = 2 [json_name = "missingItems"]; // 缺失的项目列表
+    string analysis_message = 3 [json_name = "analysisMessage"]; // 分析消息
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
+// 检索奖项补充材料请求
+message SearchAwardMaterialsRequest {
+  string award_id = 1 [json_name = "awardId"]; // 奖项ID
+  string search_query = 2 [json_name = "searchQuery"]; // 搜索查询（可选，如果不提供则基于奖项信息自动生成）
+}
+
+// 检索奖项补充材料响应
+message SearchAwardMaterialsResponse {
+  message Result {
+    repeated SearchResult search_results = 1 [json_name = "searchResults"]; // 搜索结果
+    repeated AwardFileInfo retrieved_files = 2 [json_name = "retrievedFiles"]; // 检索到的文件列表
+    string merged_result = 3 [json_name = "mergedResult"]; // 合并后的结果
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
+// ========== 案件管理 ==========
+
+// 创建案件请求
+message CreateCaseRequest {
+  ExtendedBasicInfo basic_info = 1 [json_name = "basicInfo"]; // 基本信息（可选）
+}
+
+// 创建案件响应
+message CreateCaseResponse {
+  message Result {
+    string case_id = 1 [json_name = "caseId"]; // 案件ID
+    google.protobuf.Timestamp created_at = 2 [json_name = "createdAt"]; // 创建时间
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
+// 获取案件信息请求
+message GetCaseRequest {
+  string case_id = 1 [json_name = "caseId"]; // 案件ID
+}
+
+// 获取案件信息响应
+message GetCaseResponse {
+  message Result {
+    string case_id = 1 [json_name = "caseId"]; // 案件ID
+    ExtendedBasicInfo basic_info = 2 [json_name = "basicInfo"]; // 基本信息
+    repeated AwardInfo awards = 3 [json_name = "awards"]; // 奖项列表
+    google.protobuf.Timestamp created_at = 4 [json_name = "createdAt"]; // 创建时间
+    google.protobuf.Timestamp updated_at = 5 [json_name = "updatedAt"]; // 更新时间
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
 // 移民AI代理服务
 service ImmigrantAIAgent {
   // 生成策划案:根据请求信息返回策划结果
@@ -550,6 +854,142 @@ service ImmigrantAIAgent {
   rpc DownloadOutputFile(DownloadOutputFileRequest) returns (DownloadOutputFileResponse) {
     option (google.api.http) = {
       post: "/api/output/download"
+      body: "*"
+    };
+  }
+
+  // ========== 基本信息管理 ==========
+
+  // 保存基本信息:保存或更新申请人的基本信息
+  rpc SaveBasicInfo(SaveBasicInfoRequest) returns (SaveBasicInfoResponse) {
+    option (google.api.http) = {
+      post: "/api/case/saveBasicInfo"
+      body: "*"
+    };
+  }
+
+  // 获取基本信息:根据案件ID获取基本信息
+  rpc GetBasicInfo(GetBasicInfoRequest) returns (GetBasicInfoResponse) {
+    option (google.api.http) = {
+      post: "/api/case/getBasicInfo"
+      body: "*"
+    };
+  }
+
+  // 保存基本信息草稿:保存基本信息草稿，不提交
+  rpc SaveBasicInfoDraft(SaveBasicInfoDraftRequest) returns (SaveBasicInfoDraftResponse) {
+    option (google.api.http) = {
+      post: "/api/case/saveBasicInfoDraft"
+      body: "*"
+    };
+  }
+
+  // ========== 案件管理 ==========
+
+  // 创建案件:创建一个新的案件
+  rpc CreateCase(CreateCaseRequest) returns (CreateCaseResponse) {
+    option (google.api.http) = {
+      post: "/api/case/create"
+      body: "*"
+    };
+  }
+
+  // 获取案件信息:获取完整的案件信息，包括基本信息和奖项列表
+  rpc GetCase(GetCaseRequest) returns (GetCaseResponse) {
+    option (google.api.http) = {
+      post: "/api/case/get"
+      body: "*"
+    };
+  }
+
+  // ========== 奖项管理 ==========
+
+  // 创建奖项:为案件创建一个新的奖项
+  rpc CreateAward(CreateAwardRequest) returns (CreateAwardResponse) {
+    option (google.api.http) = {
+      post: "/api/award/create"
+      body: "*"
+    };
+  }
+
+  // 获取奖项列表:获取案件的所有奖项列表
+  rpc ListAwards(ListAwardsRequest) returns (ListAwardsResponse) {
+    option (google.api.http) = {
+      post: "/api/award/list"
+      body: "*"
+    };
+  }
+
+  // 更新奖项:更新奖项信息
+  rpc UpdateAward(UpdateAwardRequest) returns (UpdateAwardResponse) {
+    option (google.api.http) = {
+      post: "/api/award/update"
+      body: "*"
+    };
+  }
+
+  // 删除奖项:删除指定的奖项
+  rpc DeleteAward(DeleteAwardRequest) returns (DeleteAwardResponse) {
+    option (google.api.http) = {
+      post: "/api/award/delete"
+      body: "*"
+    };
+  }
+
+  // 锁定奖项:锁定奖项，表示证据链已归档
+  rpc LockAward(LockAwardRequest) returns (LockAwardResponse) {
+    option (google.api.http) = {
+      post: "/api/award/lock"
+      body: "*"
+    };
+  }
+
+  // 解锁奖项:解锁已锁定的奖项
+  rpc UnlockAward(UnlockAwardRequest) returns (UnlockAwardResponse) {
+    option (google.api.http) = {
+      post: "/api/award/unlock"
+      body: "*"
+    };
+  }
+
+  // ========== 奖项文件管理 ==========
+
+  // 上传奖项文件:上传奖项相关的文件
+  rpc UploadAwardFile(UploadAwardFileRequest) returns (UploadAwardFileResponse) {
+    option (google.api.http) = {
+      post: "/api/award/uploadFile"
+      body: "*"
+    };
+  }
+
+  // 删除奖项文件:删除指定的奖项文件
+  rpc DeleteAwardFile(DeleteAwardFileRequest) returns (DeleteAwardFileResponse) {
+    option (google.api.http) = {
+      post: "/api/award/deleteFile"
+      body: "*"
+    };
+  }
+
+  // 列出奖项文件:获取奖项的所有文件列表
+  rpc ListAwardFiles(ListAwardFilesRequest) returns (ListAwardFilesResponse) {
+    option (google.api.http) = {
+      post: "/api/award/listFiles"
+      body: "*"
+    };
+  }
+
+  // 分析奖项文件完整性:AI分析奖项文件是否完整
+  rpc AnalyzeAwardFiles(AnalyzeAwardFilesRequest) returns (AnalyzeAwardFilesResponse) {
+    option (google.api.http) = {
+      post: "/api/award/analyzeFiles"
+      body: "*"
+    };
+  }
+
+  // 检索奖项补充材料:使用AI检索互联网上的补充材料
+  rpc SearchAwardMaterials(SearchAwardMaterialsRequest) returns (SearchAwardMaterialsResponse) {
+    option (google.api.http) = {
+      post: "/api/award/searchMaterials"
       body: "*"
     };
   }
