@@ -14,3 +14,12 @@ plugins:
     out: gen/python/tool
   - plugin: buf.build/protocolbuffers/python:v33.2
     out: gen/python/tool
+  # TypeScript 代码生成
+  - plugin: buf.build/bufbuild/es:v2.2.3
+    out: gen/typescript
+    opt:
+      - target=ts
+  - plugin: buf.build/connectrpc/es:v1.6.1
+    out: gen/typescript
+    opt:
+      - target=ts
