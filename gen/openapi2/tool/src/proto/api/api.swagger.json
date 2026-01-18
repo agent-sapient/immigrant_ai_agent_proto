@@ -1,0 +1,3676 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "src/proto/api/api.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ImmigrantAIAgent"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/award/analyzeFiles": {
+      "post": {
+        "summary": "分析奖项文件完整性:AI分析奖项文件是否完整",
+        "operationId": "ImmigrantAIAgent_AnalyzeAwardFiles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiAnalyzeAwardFilesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiAnalyzeAwardFilesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/award/create": {
+      "post": {
+        "summary": "创建奖项:为案件创建一个新的奖项",
+        "operationId": "ImmigrantAIAgent_CreateAward",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiCreateAwardResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiCreateAwardRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/award/delete": {
+      "post": {
+        "summary": "删除奖项:删除指定的奖项",
+        "operationId": "ImmigrantAIAgent_DeleteAward",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiDeleteAwardResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiDeleteAwardRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/award/deleteChatMessages": {
+      "post": {
+        "summary": "删除奖项聊天消息:删除指定的聊天消息",
+        "operationId": "ImmigrantAIAgent_DeleteAwardChatMessages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiDeleteAwardChatMessagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiDeleteAwardChatMessagesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/award/deleteFile": {
+      "post": {
+        "summary": "删除奖项文件:删除指定的奖项文件",
+        "operationId": "ImmigrantAIAgent_DeleteAwardFile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiDeleteAwardFileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiDeleteAwardFileRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/award/getChatMessages": {
+      "post": {
+        "summary": "获取奖项聊天消息:分页获取奖项的聊天消息",
+        "operationId": "ImmigrantAIAgent_GetAwardChatMessages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetAwardChatMessagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiGetAwardChatMessagesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/award/getRequiredFiles": {
+      "post": {
+        "summary": "获取奖项所需文件列表:根据奖项信息返回需要收集的文件清单",
+        "operationId": "ImmigrantAIAgent_GetAwardRequiredFiles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetAwardRequiredFilesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiGetAwardRequiredFilesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/award/list": {
+      "post": {
+        "summary": "获取奖项列表:获取案件的所有奖项列表",
+        "operationId": "ImmigrantAIAgent_ListAwards",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListAwardsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiListAwardsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/award/listFiles": {
+      "post": {
+        "summary": "列出奖项文件:获取奖项的所有文件列表",
+        "operationId": "ImmigrantAIAgent_ListAwardFiles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListAwardFilesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiListAwardFilesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/award/lock": {
+      "post": {
+        "summary": "锁定奖项:锁定奖项，表示证据链已归档",
+        "operationId": "ImmigrantAIAgent_LockAward",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiLockAwardResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiLockAwardRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/award/saveChatMessages": {
+      "post": {
+        "summary": "保存奖项聊天消息:全量覆盖模式，保存奖项的所有聊天消息",
+        "operationId": "ImmigrantAIAgent_SaveAwardChatMessages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiSaveAwardChatMessagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiSaveAwardChatMessagesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/award/searchMaterials": {
+      "post": {
+        "summary": "检索奖项补充材料:使用AI检索互联网上的补充材料",
+        "operationId": "ImmigrantAIAgent_SearchAwardMaterials",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiSearchAwardMaterialsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiSearchAwardMaterialsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/award/unlock": {
+      "post": {
+        "summary": "解锁奖项:解锁已锁定的奖项",
+        "operationId": "ImmigrantAIAgent_UnlockAward",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiUnlockAwardResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiUnlockAwardRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/award/update": {
+      "post": {
+        "summary": "更新奖项:更新奖项信息",
+        "operationId": "ImmigrantAIAgent_UpdateAward",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiUpdateAwardResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiUpdateAwardRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/award/uploadFile": {
+      "post": {
+        "summary": "上传奖项文件:上传奖项相关的文件",
+        "operationId": "ImmigrantAIAgent_UploadAwardFile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiUploadAwardFileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiUploadAwardFileRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/case/create": {
+      "post": {
+        "summary": "创建案件:创建一个新的案件",
+        "operationId": "ImmigrantAIAgent_CreateCase",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiCreateCaseResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiCreateCaseRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/case/get": {
+      "post": {
+        "summary": "获取案件信息:获取完整的案件信息，包括基本信息和奖项列表",
+        "operationId": "ImmigrantAIAgent_GetCase",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetCaseResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiGetCaseRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/case/getBasicInfo": {
+      "post": {
+        "summary": "获取基本信息:根据案件ID获取基本信息",
+        "operationId": "ImmigrantAIAgent_GetBasicInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetBasicInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiGetBasicInfoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/case/saveBasicInfo": {
+      "post": {
+        "summary": "保存基本信息:保存或更新申请人的基本信息",
+        "operationId": "ImmigrantAIAgent_SaveBasicInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiSaveBasicInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiSaveBasicInfoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/case/saveBasicInfoDraft": {
+      "post": {
+        "summary": "保存基本信息草稿:保存基本信息草稿，不提交",
+        "operationId": "ImmigrantAIAgent_SaveBasicInfoDraft",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiSaveBasicInfoDraftResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiSaveBasicInfoDraftRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/output/download": {
+      "post": {
+        "summary": "下载输出文件:下载output文件夹下的指定文件或文件夹",
+        "operationId": "ImmigrantAIAgent_DownloadOutputFile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiDownloadOutputFileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiDownloadOutputFileRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/output/listFiles": {
+      "post": {
+        "summary": "列出输出文件:列出output文件夹下的所有文件和文件夹",
+        "operationId": "ImmigrantAIAgent_ListOutputFiles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListOutputFilesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiListOutputFilesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/passport/statusQuery": {
+      "post": {
+        "summary": "护照状态查询:快速查询CEAC护照状态",
+        "operationId": "ImmigrantAIAgent_PassportStatusQuery",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPassportStatusQueryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPassportStatusQueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/pre-review/evaluateCase": {
+      "post": {
+        "summary": "案件评测-使用ai分析",
+        "operationId": "ImmigrantAIAgent_EvaluateCase",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiEvaluateCaseResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiEvaluateCaseRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/pre-review/generateApplicationMaterials": {
+      "post": {
+        "summary": "生成申请材料（个人陈述、赴美计划、文件目录）-使用ai生成",
+        "operationId": "ImmigrantAIAgent_GenerateApplicationMaterials",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGenerateApplicationMaterialsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiGenerateApplicationMaterialsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/pre-review/generatePlan": {
+      "post": {
+        "summary": "生成策划案:根据请求信息返回策划结果",
+        "operationId": "ImmigrantAIAgent_GeneratePlan",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGeneratePlanResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiGeneratePlanRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/pre-review/getBackgroundInfo": {
+      "post": {
+        "summary": "获取申请人背景信息:使用agent实现全网搜索",
+        "operationId": "ImmigrantAIAgent_GetBackgroundInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetBackgroundInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiGetBackgroundInfoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/pre-review/getRecommondLetter": {
+      "post": {
+        "summary": "获取推荐信列表:使用ai生成推荐信",
+        "operationId": "ImmigrantAIAgent_GetRecommendLetter",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRecommendLetterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiGetRecommendLetterRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/task/cancel": {
+      "post": {
+        "summary": "取消任务",
+        "operationId": "ImmigrantAIAgent_CancelTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiTaskCancelResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiTaskCancelRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/task/query": {
+      "post": {
+        "summary": "查询任务状态",
+        "operationId": "ImmigrantAIAgent_TaskQuery",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiTaskQueryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiTaskQueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/task/submit": {
+      "post": {
+        "summary": "提交异步任务",
+        "operationId": "ImmigrantAIAgent_SubmitTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiSubmitTaskResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiSubmitTaskRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "apiAnalyzeAwardFilesRequest": {
+      "type": "object",
+      "properties": {
+        "awardId": {
+          "type": "string",
+          "title": "奖项ID"
+        }
+      },
+      "title": "分析奖项文件完整性请求"
+    },
+    "apiAnalyzeAwardFilesResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiAnalyzeAwardFilesResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "分析奖项文件完整性响应"
+    },
+    "apiAnalyzeAwardFilesResponseResult": {
+      "type": "object",
+      "properties": {
+        "isComplete": {
+          "type": "boolean",
+          "title": "是否完整"
+        },
+        "missingItems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "缺失的项目列表"
+        },
+        "analysisMessage": {
+          "type": "string",
+          "title": "分析消息"
+        }
+      }
+    },
+    "apiAwardChatMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "消息ID（由前端生成）"
+        },
+        "awardId": {
+          "type": "string",
+          "title": "奖项ID"
+        },
+        "content": {
+          "type": "string",
+          "title": "消息内容（JSON字符串，前端自定义格式）"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        }
+      },
+      "title": "奖项聊天消息（格式由前端定义，后端只存储）"
+    },
+    "apiAwardFileInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "文件ID"
+        },
+        "awardId": {
+          "type": "string",
+          "title": "奖项ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "文件名"
+        },
+        "size": {
+          "type": "string",
+          "title": "文件大小（字符串格式，如 \"1.2 MB\"）"
+        },
+        "type": {
+          "type": "string",
+          "title": "文件MIME类型"
+        },
+        "url": {
+          "type": "string",
+          "title": "文件URL"
+        },
+        "category": {
+          "type": "string",
+          "title": "文件类别：certificate(证书)、media(媒体报道)、letter(推荐信)、other(其他)"
+        },
+        "status": {
+          "type": "string",
+          "title": "状态：uploading(上传中)、complete(完成)、error(错误)"
+        },
+        "uploadProgress": {
+          "type": "integer",
+          "format": "int32",
+          "title": "上传进度 0-100"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        }
+      },
+      "title": "奖项文件信息"
+    },
+    "apiAwardInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "奖项ID"
+        },
+        "caseId": {
+          "type": "string",
+          "title": "案件ID"
+        },
+        "title": {
+          "type": "string",
+          "title": "奖项名称"
+        },
+        "year": {
+          "type": "string",
+          "title": "获奖年份"
+        },
+        "level": {
+          "type": "string",
+          "title": "级别：international(国际级)、national(国家级)、provincial(省部级)、company(公司级)"
+        },
+        "status": {
+          "type": "string",
+          "title": "状态：idle(待开始)、analyzing(检查中)、needs_revision(建议修改)、ready_to_search(待检索)、searching(检索中)、reviewing(待确认)、locked(已锁定)"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "更新时间"
+        }
+      },
+      "title": "奖项信息"
+    },
+    "apiBackgroundInfo": {
+      "type": "object",
+      "properties": {
+        "awards": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "奖项"
+        },
+        "memberships": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "会员"
+        },
+        "reviews": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "评审"
+        },
+        "mediaReports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "媒体报道"
+        },
+        "originalContributions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "原创性贡献"
+        },
+        "papers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "论文"
+        },
+        "exhibitions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "展览展示"
+        },
+        "leadership": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "领导力"
+        },
+        "businessValue": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "商业价值"
+        },
+        "highIncome": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "高收入"
+        }
+      },
+      "title": "背景信息"
+    },
+    "apiBasicInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "主键ID"
+        },
+        "code": {
+          "type": "string",
+          "title": "案件编码"
+        },
+        "name": {
+          "type": "string",
+          "title": "申请人姓名"
+        },
+        "nameToAi": {
+          "type": "boolean",
+          "title": "姓名是否传送给AI分析"
+        },
+        "birthDate": {
+          "type": "string",
+          "title": "出生日期"
+        },
+        "birthDateToAi": {
+          "type": "boolean",
+          "title": "出生日期是否传送给AI分析"
+        },
+        "workUnit": {
+          "type": "string",
+          "title": "工作单位"
+        },
+        "workUnitToAi": {
+          "type": "boolean",
+          "title": "工作单位是否传送给AI分析"
+        },
+        "position": {
+          "type": "string",
+          "title": "职位"
+        },
+        "positionToAi": {
+          "type": "boolean",
+          "title": "职位是否传送给AI分析"
+        },
+        "industry": {
+          "type": "string",
+          "title": "行业"
+        },
+        "industryToAi": {
+          "type": "boolean",
+          "title": "行业是否传送给AI分析"
+        },
+        "immigrationType": {
+          "type": "string",
+          "title": "移民类型"
+        },
+        "immigrationTypeToAi": {
+          "type": "boolean",
+          "title": "移民类型是否传送给AI分析"
+        },
+        "field": {
+          "type": "string",
+          "title": "专业领域"
+        },
+        "fieldToAi": {
+          "type": "boolean",
+          "title": "专业领域是否传送给AI分析"
+        },
+        "education": {
+          "type": "string",
+          "title": "教育背景"
+        },
+        "educationToAi": {
+          "type": "boolean",
+          "title": "教育背景是否传送给AI分析"
+        },
+        "major": {
+          "type": "string",
+          "title": "专业"
+        },
+        "majorToAi": {
+          "type": "boolean",
+          "title": "专业是否传送给AI分析"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "更新时间"
+        }
+      },
+      "title": "基本信息"
+    },
+    "apiCreateAwardRequest": {
+      "type": "object",
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "title": "案件ID"
+        },
+        "title": {
+          "type": "string",
+          "title": "奖项名称"
+        },
+        "year": {
+          "type": "string",
+          "title": "获奖年份（可选）"
+        },
+        "level": {
+          "type": "string",
+          "title": "级别（可选）"
+        }
+      },
+      "title": "创建奖项请求"
+    },
+    "apiCreateAwardResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiCreateAwardResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "创建奖项响应"
+    },
+    "apiCreateAwardResponseResult": {
+      "type": "object",
+      "properties": {
+        "award": {
+          "$ref": "#/definitions/apiAwardInfo",
+          "title": "创建的奖项"
+        }
+      }
+    },
+    "apiCreateCaseRequest": {
+      "type": "object",
+      "properties": {
+        "basicInfo": {
+          "$ref": "#/definitions/apiExtendedBasicInfo",
+          "title": "基本信息（可选）"
+        }
+      },
+      "title": "创建案件请求"
+    },
+    "apiCreateCaseResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiCreateCaseResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "创建案件响应"
+    },
+    "apiCreateCaseResponseResult": {
+      "type": "object",
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "title": "案件ID"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        }
+      }
+    },
+    "apiDeleteAwardChatMessagesRequest": {
+      "type": "object",
+      "properties": {
+        "awardId": {
+          "type": "string",
+          "title": "奖项ID"
+        },
+        "messageIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "要删除的消息ID列表（为空则删除该奖项所有消息）"
+        }
+      },
+      "title": "删除奖项聊天消息请求"
+    },
+    "apiDeleteAwardChatMessagesResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiDeleteAwardChatMessagesResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "删除奖项聊天消息响应"
+    },
+    "apiDeleteAwardChatMessagesResponseResult": {
+      "type": "object",
+      "properties": {
+        "deletedCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "成功删除的消息数量"
+        }
+      }
+    },
+    "apiDeleteAwardFileRequest": {
+      "type": "object",
+      "properties": {
+        "fileId": {
+          "type": "string",
+          "title": "文件ID"
+        }
+      },
+      "title": "删除奖项文件请求"
+    },
+    "apiDeleteAwardFileResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        }
+      },
+      "title": "删除奖项文件响应"
+    },
+    "apiDeleteAwardRequest": {
+      "type": "object",
+      "properties": {
+        "awardId": {
+          "type": "string",
+          "title": "奖项ID"
+        }
+      },
+      "title": "删除奖项请求"
+    },
+    "apiDeleteAwardResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        }
+      },
+      "title": "删除奖项响应"
+    },
+    "apiDownloadOutputFileRequest": {
+      "type": "object",
+      "properties": {
+        "filePath": {
+          "type": "string",
+          "title": "文件路径（相对于output目录），例如: \"automate_ceac_status_check_xxx/screenshot.png\""
+        },
+        "asZip": {
+          "type": "boolean",
+          "title": "如果是目录，是否打包成zip下载"
+        }
+      },
+      "title": "下载输出文件请求"
+    },
+    "apiDownloadOutputFileResponse": {
+      "type": "object",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "title": "文件名"
+        },
+        "contentType": {
+          "type": "string",
+          "title": "内容类型"
+        },
+        "fileContent": {
+          "type": "string",
+          "format": "byte",
+          "title": "文件内容（base64编码或直接字节）"
+        },
+        "fileSize": {
+          "type": "string",
+          "format": "int64",
+          "title": "文件大小"
+        }
+      },
+      "title": "下载输出文件响应（仅用于gRPC，FastAPI直接返回文件流）"
+    },
+    "apiEvaluateCaseRequest": {
+      "type": "object",
+      "properties": {
+        "personalStatement": {
+          "type": "string",
+          "title": "个人陈述"
+        },
+        "usPlan": {
+          "type": "string",
+          "title": "赴美计划"
+        },
+        "fileList": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiFileInfo"
+          },
+          "title": "文件列表"
+        }
+      },
+      "title": "案件评测请求"
+    },
+    "apiEvaluateCaseResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiEvaluateCaseResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "案件评测响应"
+    },
+    "apiEvaluateCaseResponseResult": {
+      "type": "object",
+      "properties": {
+        "evaluationReport": {
+          "type": "string",
+          "title": "评测报告"
+        }
+      }
+    },
+    "apiEvaluationResult": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string",
+          "title": "评估类别"
+        },
+        "score": {
+          "type": "integer",
+          "format": "int32",
+          "title": "得分"
+        },
+        "description": {
+          "type": "string",
+          "title": "描述"
+        }
+      },
+      "title": "评估结果"
+    },
+    "apiExtendedBasicInfo": {
+      "type": "object",
+      "properties": {
+        "basicInfo": {
+          "$ref": "#/definitions/apiBasicInfo",
+          "title": "基本信息"
+        },
+        "idCard": {
+          "type": "string",
+          "title": "身份证号"
+        },
+        "idCardStartDate": {
+          "type": "string",
+          "title": "身份证有效期开始日期"
+        },
+        "idCardExpiry": {
+          "type": "string",
+          "title": "身份证有效期结束日期"
+        },
+        "passportNumber": {
+          "type": "string",
+          "title": "护照号"
+        },
+        "passportStartDate": {
+          "type": "string",
+          "title": "护照有效期开始日期"
+        },
+        "passportExpiry": {
+          "type": "string",
+          "title": "护照有效期结束日期"
+        },
+        "immigrationTypeOther": {
+          "type": "string",
+          "title": "其他移民类型说明"
+        }
+      },
+      "title": "扩展的基本信息（包含身份证、护照等）"
+    },
+    "apiFileInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "主键ID (BIGINT AUTO_INCREMENT)"
+        },
+        "parentId": {
+          "type": "string",
+          "title": "父节点ID,根目录为NULL (BIGINT)"
+        },
+        "caseCode": {
+          "type": "string",
+          "title": "案件编号 (VARCHAR NOT NULL)"
+        },
+        "name": {
+          "type": "string",
+          "title": "文件或文件夹名称 (VARCHAR NOT NULL)"
+        },
+        "isDir": {
+          "type": "boolean",
+          "title": "是否为文件夹 1=文件夹 0=文件 (TINYINT NOT NULL)"
+        },
+        "size": {
+          "type": "string",
+          "title": "文件大小 (BIGINT DEFAULT 0)"
+        },
+        "type": {
+          "type": "string",
+          "title": "文件类型/扩展名，如jpg (VARCHAR)"
+        },
+        "url": {
+          "type": "string",
+          "title": "MinIO中的路径(文件夹可为空) (VARCHAR)"
+        },
+        "url2": {
+          "type": "string",
+          "title": "Word文档用作预览，当url是docx或doc格式时，无法用于前端浏览，需要转换为pdf，这是转换后的pdf文件路径 (VARCHAR)"
+        },
+        "orderBy": {
+          "type": "integer",
+          "format": "int32",
+          "title": "排序序号 (INT DEFAULT 1)"
+        },
+        "uploadTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "上传时间 (DATETIME DEFAULT CURRENT_TIMESTAMP)"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "修改时间 (DATETIME DEFAULT CURRENT_TIMESTAMP)"
+        },
+        "fileLabel": {
+          "type": "string",
+          "title": "文件标签：NORMAL(普通)、BACKGROUND_INFO(背景信息)、RECOMMENDATIONS(推荐信)、PLAN_USA(赴美计划)、PERSONAL_STATEMENTS(个人陈述)、DIRECTORY(文件目录) (VARCHAR)"
+        },
+        "aiText": {
+          "type": "string",
+          "title": "AI生成的文本，上传基本信息后由AI生成的文本 (LONGTEXT)"
+        }
+      },
+      "title": "文件信息"
+    },
+    "apiGenerateApplicationMaterialsRequest": {
+      "type": "object",
+      "properties": {
+        "basicInfo": {
+          "$ref": "#/definitions/apiBasicInfo",
+          "title": "基本信息"
+        },
+        "backgroundInfo": {
+          "$ref": "#/definitions/apiBackgroundInfo",
+          "title": "背景信息"
+        },
+        "recommendationLetters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiRecommendationLetterSimple"
+          },
+          "title": "推荐信列表"
+        },
+        "fileList": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiFileInfo"
+          },
+          "title": "文件列表"
+        }
+      },
+      "title": "生成申请材料请求"
+    },
+    "apiGenerateApplicationMaterialsResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiGenerateApplicationMaterialsResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "生成申请材料响应"
+    },
+    "apiGenerateApplicationMaterialsResponseResult": {
+      "type": "object",
+      "properties": {
+        "personalStatement": {
+          "type": "string",
+          "title": "个人陈述"
+        },
+        "usPlan": {
+          "type": "string",
+          "title": "赴美计划"
+        },
+        "fileDirectory": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiFileInfo"
+          },
+          "title": "文件目录"
+        }
+      }
+    },
+    "apiGeneratePlanRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "ID"
+        },
+        "memberId": {
+          "type": "string",
+          "format": "int64",
+          "title": "会员ID"
+        },
+        "name": {
+          "type": "string",
+          "title": "姓名"
+        },
+        "gender": {
+          "type": "string",
+          "title": "性别"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32",
+          "title": "年龄"
+        },
+        "maritalStatus": {
+          "type": "string",
+          "title": "婚姻状况"
+        },
+        "education": {
+          "type": "string",
+          "title": "申请人最高学历"
+        },
+        "major": {
+          "type": "string",
+          "title": "专业"
+        },
+        "graduatedSchool": {
+          "type": "string",
+          "title": "毕业院校"
+        },
+        "spouseEducation": {
+          "type": "string",
+          "title": "配偶最高学历"
+        },
+        "spouseMajor": {
+          "type": "string",
+          "title": "配偶专业"
+        },
+        "childrenCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "子女数量"
+        },
+        "hasChildren": {
+          "type": "boolean",
+          "title": "是否有子女"
+        },
+        "childrenAge": {
+          "type": "string",
+          "title": "子女年龄"
+        },
+        "childrenStatus": {
+          "type": "string",
+          "title": "子女状况"
+        },
+        "phone": {
+          "type": "string",
+          "title": "手机号"
+        },
+        "email": {
+          "type": "string",
+          "title": "邮箱"
+        },
+        "wechat": {
+          "type": "string",
+          "title": "微信ID"
+        },
+        "accountLocation": {
+          "type": "string",
+          "title": "户籍所在地"
+        },
+        "currentResidence": {
+          "type": "string",
+          "title": "现居住地"
+        },
+        "politicalStatus": {
+          "type": "string",
+          "title": "政治面貌"
+        },
+        "militaryService": {
+          "type": "boolean",
+          "title": "是否服过兵役"
+        },
+        "hasCriminalRecord": {
+          "type": "boolean",
+          "title": "截至目前，您是否有任何刑事犯罪记录"
+        },
+        "immigrationIntent": {
+          "type": "string",
+          "title": "申请意向国家/地区"
+        },
+        "applicationDate": {
+          "type": "string",
+          "title": "申请时间"
+        },
+        "visaType": {
+          "type": "string",
+          "title": "签证类型"
+        },
+        "applicationCategory": {
+          "type": "string",
+          "title": "申请类别"
+        },
+        "applicationCategoryDesc": {
+          "type": "string",
+          "title": "申请类别描述"
+        },
+        "usImmigrationCategory": {
+          "type": "string",
+          "title": "移民申请类别"
+        },
+        "usImmigrationApplyDate": {
+          "type": "string",
+          "title": "移民申请时间"
+        },
+        "usImmigrationResult": {
+          "type": "string",
+          "title": "移民申请结果"
+        },
+        "appliedUsImmigration": {
+          "type": "boolean",
+          "title": "是否申请过美国移民"
+        },
+        "appliedUsVisa": {
+          "type": "boolean",
+          "title": "是否办理过美国签证"
+        },
+        "usVisaCategory": {
+          "type": "string",
+          "title": "签证申请类别"
+        },
+        "usVisaCategoryDesc": {
+          "type": "string",
+          "title": "签证申请类别描述"
+        },
+        "usVisaStatus": {
+          "type": "string",
+          "title": "美签状态"
+        },
+        "usVisaValid": {
+          "type": "boolean",
+          "title": "美签是否有效"
+        },
+        "usVisaResult": {
+          "type": "string",
+          "title": "签证申请结果"
+        },
+        "bVisaValidityType": {
+          "type": "string",
+          "title": "B类签证有效期类型"
+        },
+        "evusStatus": {
+          "type": "string",
+          "title": "EVUS登记状态"
+        },
+        "evusStatusDesc": {
+          "type": "string",
+          "title": "EVUS登记状态描述"
+        },
+        "evusLastUpdateDate": {
+          "type": "string",
+          "title": "EVUS最后更新日期"
+        },
+        "visaStatus": {
+          "type": "string",
+          "title": "签证状态"
+        },
+        "result": {
+          "type": "string",
+          "title": "评估结果"
+        },
+        "applyType": {
+          "type": "string",
+          "title": "申请类型"
+        },
+        "currentJob": {
+          "type": "string",
+          "title": "当前工作"
+        },
+        "currentEmployer": {
+          "type": "string",
+          "title": "现任职单位"
+        },
+        "currentPosition": {
+          "type": "string",
+          "title": "现任职务"
+        },
+        "workExperience": {
+          "type": "string",
+          "title": "工作经验"
+        },
+        "companyInfo": {
+          "type": "string",
+          "title": "公司信息"
+        },
+        "coreAssets": {
+          "type": "string",
+          "title": "核心资产评估"
+        },
+        "supplementInfo": {
+          "type": "string",
+          "title": "补充信息"
+        },
+        "awards": {
+          "type": "string",
+          "title": "获奖情况"
+        },
+        "hasNationalOrInternationalAward": {
+          "type": "boolean",
+          "title": "是否获得过国家/国际级以上行业奖项"
+        },
+        "nationalOrInternationalAwardName": {
+          "type": "string",
+          "title": "国家/国际级奖项名称"
+        },
+        "nationalOrInternationalAwardCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "国家/国际级获奖数量"
+        },
+        "hasProvincialOrAssociationAward": {
+          "type": "boolean",
+          "title": "是否获得过省级/国际行业协会奖项"
+        },
+        "provincialOrAssociationAwardName": {
+          "type": "string",
+          "title": "省级/国际行业协会奖项名称"
+        },
+        "provincialOrAssociationAwardCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "省级/国际行业协会获奖数量"
+        },
+        "academicAchievements": {
+          "type": "string",
+          "title": "学术成果"
+        },
+        "hasAcademicPaperCitation": {
+          "type": "boolean",
+          "title": "学术论文是否被引用过"
+        },
+        "citationCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "引用数量"
+        },
+        "hasCoreJournalOrConferencePaper": {
+          "type": "boolean",
+          "title": "是否在核心期刊/国际会议发表过专业论文或出版著作"
+        },
+        "coreJournalOrConferencePaperTypes": {
+          "type": "string",
+          "title": "发表类型（可多选，逗号分隔）"
+        },
+        "coreJournalOrConferencePaperCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "发表数量"
+        },
+        "mediaRecognition": {
+          "type": "string",
+          "title": "媒体认可"
+        },
+        "hasMediaRecognition": {
+          "type": "boolean",
+          "title": "是否有第三方媒体报道"
+        },
+        "mediaPlatformTypes": {
+          "type": "string",
+          "title": "报道平台类型（可多选，逗号分隔）"
+        },
+        "mediaPlatformOther": {
+          "type": "string",
+          "title": "其他平台名称"
+        },
+        "mediaRecognitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "媒体报道数量"
+        },
+        "professionalMembership": {
+          "type": "string",
+          "title": "专业协会成员"
+        },
+        "hasNationalOrInternationalAssociation": {
+          "type": "boolean",
+          "title": "是否加入过全国性/国际性行业协会"
+        },
+        "associationRoles": {
+          "type": "string",
+          "title": "担任协会角色（可多选，逗号分隔）"
+        },
+        "associationCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "参与协会数量"
+        },
+        "judgeExperience": {
+          "type": "string",
+          "title": "评判经验"
+        },
+        "reviewRoles": {
+          "type": "string",
+          "title": "担任评审角色（可多选，逗号分隔）"
+        },
+        "reviewRoleCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "担任评审角色参与数量"
+        },
+        "originalContribution": {
+          "type": "string",
+          "title": "原创贡献"
+        },
+        "hasBreakthroughTheoryOrTech": {
+          "type": "boolean",
+          "title": "是否提出过行业突破性理论/技术"
+        },
+        "breakthroughTheoryOrTechCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "行业突破性理论/技术数量"
+        },
+        "leadership": {
+          "type": "string",
+          "title": "领导力"
+        },
+        "hasLandmarkProjectOrCase": {
+          "type": "boolean",
+          "title": "是否完成过标志性项目/案例"
+        },
+        "landmarkProjectOrCaseCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "标志性项目/案例数量"
+        },
+        "highSalary": {
+          "type": "string",
+          "title": "高薪酬"
+        },
+        "commercialSuccess": {
+          "type": "string",
+          "title": "商业成功"
+        },
+        "economicAchievementTypes": {
+          "type": "string",
+          "title": "是否符合以下情况（可多选，逗号分隔）：个人收入高于全球行业平均水平2倍以上、主导项目创造显著经济价值、推动过行业标准制定/技术革新、无"
+        },
+        "hasInventionPatent": {
+          "type": "boolean",
+          "title": "是否拥有发明专利"
+        },
+        "inventionPatentCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "发明专利数量"
+        },
+        "hasSoftwareCopyright": {
+          "type": "boolean",
+          "title": "是否拥有软件著作权"
+        },
+        "softwareCopyrightCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "软件著作权数量"
+        },
+        "hasNationalOrInternationalProject": {
+          "type": "boolean",
+          "title": "是否主导过国家级/国际合作科研项目"
+        },
+        "nationalOrInternationalProjectCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "国家级/国际合作科研项目数量"
+        },
+        "hasInternationalActivity": {
+          "type": "boolean",
+          "title": "是否参与过国际活动"
+        },
+        "internationalActivityTypes": {
+          "type": "string",
+          "title": "参与国际活动类型（可多选，逗号分隔）"
+        },
+        "hasSocialTitleOrHonor": {
+          "type": "boolean",
+          "title": "是否拥有社会职务或荣誉"
+        },
+        "socialTitleOrHonorTypes": {
+          "type": "string",
+          "title": "社会职务或荣誉类型（可多选，逗号分隔）"
+        },
+        "socialTitleOrHonorOther": {
+          "type": "string",
+          "title": "其他荣誉称号"
+        },
+        "hasSpecialAchievement": {
+          "type": "boolean",
+          "title": "是否符合特殊成就情况"
+        },
+        "specialAchievementTypes": {
+          "type": "string",
+          "title": "特殊成就类型（可多选，逗号分隔）"
+        },
+        "hasUsDocument": {
+          "type": "boolean",
+          "title": "是否拥有美国相关文件"
+        },
+        "usDocumentTypes": {
+          "type": "string",
+          "title": "美国相关文件类型（可多选，逗号分隔）"
+        },
+        "businessIndustryValue": {
+          "type": "string",
+          "title": "商业/行业价值"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "更新时间"
+        },
+        "immigrationType": {
+          "type": "string",
+          "title": "移民类型"
+        }
+      },
+      "title": "生成策划案请求"
+    },
+    "apiGeneratePlanResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiGeneratePlanResponseResult",
+          "title": "结果"
+        },
+        "result_en": {
+          "$ref": "#/definitions/apiGeneratePlanResponseResult",
+          "title": "英文结果"
+        }
+      },
+      "title": "生成策划案响应"
+    },
+    "apiGeneratePlanResponseResult": {
+      "type": "object",
+      "properties": {
+        "plan": {
+          "type": "string",
+          "title": "策划案内容"
+        },
+        "planUrl": {
+          "type": "string",
+          "title": "策划案URL"
+        },
+        "evaluationResults": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiEvaluationResult"
+          },
+          "title": "评估结果列表"
+        }
+      }
+    },
+    "apiGetAwardChatMessagesRequest": {
+      "type": "object",
+      "properties": {
+        "awardId": {
+          "type": "string",
+          "title": "奖项ID"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "title": "页码，从1开始，默认1"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32",
+          "title": "每页数量，默认50，最大100"
+        },
+        "cursor": {
+          "type": "string",
+          "title": "游标（可选，用于游标分页，传入上次返回的最后一条消息ID）"
+        }
+      },
+      "title": "获取奖项聊天消息请求（分页）"
+    },
+    "apiGetAwardChatMessagesResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiGetAwardChatMessagesResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "获取奖项聊天消息响应"
+    },
+    "apiGetAwardChatMessagesResponseResult": {
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiAwardChatMessage"
+          },
+          "title": "消息列表（按创建时间升序）"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "title": "总消息数"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "title": "当前页码"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32",
+          "title": "每页数量"
+        },
+        "hasMore": {
+          "type": "boolean",
+          "title": "是否还有更多消息"
+        },
+        "nextCursor": {
+          "type": "string",
+          "title": "下一页游标（最后一条消息的ID）"
+        }
+      }
+    },
+    "apiGetAwardRequiredFilesRequest": {
+      "type": "object",
+      "properties": {
+        "awardId": {
+          "type": "string",
+          "title": "奖项ID"
+        }
+      },
+      "title": "获取奖项所需文件列表请求"
+    },
+    "apiGetAwardRequiredFilesResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiGetAwardRequiredFilesResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "获取奖项所需文件列表响应"
+    },
+    "apiGetAwardRequiredFilesResponseResult": {
+      "type": "object",
+      "properties": {
+        "requiredFiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiRequiredFileItem"
+          },
+          "title": "所需文件列表"
+        },
+        "aiSuggestion": {
+          "type": "string",
+          "title": "AI建议说明（第一条消息内容）"
+        },
+        "checklistPrompt": {
+          "type": "string",
+          "title": "文件清单提示语（第二条消息内容）"
+        }
+      }
+    },
+    "apiGetBackgroundInfoRequest": {
+      "type": "object",
+      "properties": {
+        "basicInfo": {
+          "$ref": "#/definitions/apiBasicInfo",
+          "title": "基本信息"
+        },
+        "fileList": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiFileInfo"
+          },
+          "title": "文件列表"
+        }
+      },
+      "title": "获取申请人背景信息请求"
+    },
+    "apiGetBackgroundInfoResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiGetBackgroundInfoResponseResult"
+        }
+      },
+      "title": "获取申请人背景信息响应"
+    },
+    "apiGetBackgroundInfoResponseResult": {
+      "type": "object",
+      "properties": {
+        "backgroundInfo": {
+          "$ref": "#/definitions/apiBackgroundInfo",
+          "title": "申请人背景信息"
+        }
+      }
+    },
+    "apiGetBasicInfoRequest": {
+      "type": "object",
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "title": "案件ID"
+        }
+      },
+      "title": "获取基本信息请求"
+    },
+    "apiGetBasicInfoResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiGetBasicInfoResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "获取基本信息响应"
+    },
+    "apiGetBasicInfoResponseResult": {
+      "type": "object",
+      "properties": {
+        "basicInfo": {
+          "$ref": "#/definitions/apiExtendedBasicInfo",
+          "title": "基本信息"
+        }
+      }
+    },
+    "apiGetCaseRequest": {
+      "type": "object",
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "title": "案件ID"
+        }
+      },
+      "title": "获取案件信息请求"
+    },
+    "apiGetCaseResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiGetCaseResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "获取案件信息响应"
+    },
+    "apiGetCaseResponseResult": {
+      "type": "object",
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "title": "案件ID"
+        },
+        "basicInfo": {
+          "$ref": "#/definitions/apiExtendedBasicInfo",
+          "title": "基本信息"
+        },
+        "awards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiAwardInfo"
+          },
+          "title": "奖项列表"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "更新时间"
+        }
+      }
+    },
+    "apiGetRecommendLetterRequest": {
+      "type": "object",
+      "properties": {
+        "basicInfo": {
+          "$ref": "#/definitions/apiBasicInfo",
+          "title": "基本信息"
+        },
+        "backgroundInfo": {
+          "$ref": "#/definitions/apiBackgroundInfo",
+          "title": "背景信息"
+        },
+        "recommenderInfos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiRecommenderInfo"
+          },
+          "title": "推荐人信息"
+        }
+      },
+      "title": "获取推荐信列表请求"
+    },
+    "apiGetRecommendLetterResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiGetRecommendLetterResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "推荐信列表响应"
+    },
+    "apiGetRecommendLetterResponseResult": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiRecommendationLetter"
+          },
+          "title": "推荐信列表数据"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "title": "总数"
+        }
+      }
+    },
+    "apiListAwardFilesRequest": {
+      "type": "object",
+      "properties": {
+        "awardId": {
+          "type": "string",
+          "title": "奖项ID"
+        }
+      },
+      "title": "列出奖项文件请求"
+    },
+    "apiListAwardFilesResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiListAwardFilesResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "列出奖项文件响应"
+    },
+    "apiListAwardFilesResponseResult": {
+      "type": "object",
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiAwardFileInfo"
+          },
+          "title": "文件列表"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "title": "总数"
+        }
+      }
+    },
+    "apiListAwardsRequest": {
+      "type": "object",
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "title": "案件ID"
+        },
+        "status": {
+          "type": "string",
+          "title": "状态筛选（可选）"
+        }
+      },
+      "title": "获取奖项列表请求"
+    },
+    "apiListAwardsResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiListAwardsResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "获取奖项列表响应"
+    },
+    "apiListAwardsResponseResult": {
+      "type": "object",
+      "properties": {
+        "awards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiAwardInfo"
+          },
+          "title": "奖项列表"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32",
+          "title": "总数"
+        }
+      }
+    },
+    "apiListOutputFilesRequest": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "title": "可选：指定子路径，空字符串表示列出output根目录"
+        }
+      },
+      "title": "列出输出文件请求"
+    },
+    "apiListOutputFilesResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiListOutputFilesResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "列出输出文件响应"
+    },
+    "apiListOutputFilesResponseResult": {
+      "type": "object",
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiOutputFileInfo"
+          },
+          "title": "文件列表"
+        },
+        "currentPath": {
+          "type": "string",
+          "title": "当前路径"
+        }
+      }
+    },
+    "apiLockAwardRequest": {
+      "type": "object",
+      "properties": {
+        "awardId": {
+          "type": "string",
+          "title": "奖项ID"
+        }
+      },
+      "title": "锁定奖项请求"
+    },
+    "apiLockAwardResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiLockAwardResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "锁定奖项响应"
+    },
+    "apiLockAwardResponseResult": {
+      "type": "object",
+      "properties": {
+        "award": {
+          "$ref": "#/definitions/apiAwardInfo",
+          "title": "锁定后的奖项"
+        }
+      }
+    },
+    "apiOutputFileInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "文件名或文件夹名"
+        },
+        "path": {
+          "type": "string",
+          "title": "相对路径（相对于output目录）"
+        },
+        "isDirectory": {
+          "type": "boolean",
+          "title": "是否为目录"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64",
+          "title": "文件大小（字节），目录为0"
+        },
+        "modifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "修改时间"
+        }
+      },
+      "title": "文件信息"
+    },
+    "apiPassportStatusQueryRequest": {
+      "type": "object",
+      "properties": {
+        "visaCaseNumber": {
+          "type": "string",
+          "title": "签证案例号，例如: GUZ2023510073"
+        },
+        "passportNumber": {
+          "type": "string",
+          "title": "护照号，例如: EE8258725"
+        },
+        "surname": {
+          "type": "string",
+          "title": "姓氏，例如: XU"
+        },
+        "visaType": {
+          "type": "string",
+          "title": "签证类型，默认为 IV"
+        },
+        "showBrowser": {
+          "type": "boolean",
+          "title": "是否显示浏览器界面，默认隐藏"
+        }
+      },
+      "title": "护照状态查询请求"
+    },
+    "apiPassportStatusQueryResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiPassportStatusQueryResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "护照状态查询响应"
+    },
+    "apiPassportStatusQueryResponseResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "captchaRecognized": {
+          "type": "string",
+          "title": "识别的验证码"
+        },
+        "finalUrl": {
+          "type": "string",
+          "title": "最终URL"
+        },
+        "pageTitle": {
+          "type": "string",
+          "title": "页面标题"
+        },
+        "htmlFile": {
+          "type": "string",
+          "title": "HTML文件路径"
+        },
+        "screenshot": {
+          "type": "string",
+          "title": "截图路径"
+        },
+        "outputDir": {
+          "type": "string",
+          "title": "输出目录"
+        },
+        "queryResult": {
+          "type": "string",
+          "title": "查询结果消息"
+        },
+        "hasData": {
+          "type": "boolean",
+          "title": "是否有数据"
+        },
+        "resultData": {
+          "type": "string",
+          "title": "结果数据"
+        },
+        "errorMessage": {
+          "type": "string",
+          "title": "错误消息（仅代码错误）"
+        }
+      }
+    },
+    "apiRecommendationLetter": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "int64",
+          "title": "主键ID"
+        },
+        "recommenderName": {
+          "type": "string",
+          "title": "推荐人姓名"
+        },
+        "birthDate": {
+          "type": "string",
+          "title": "推荐人生日"
+        },
+        "workUnit": {
+          "type": "string",
+          "title": "推荐人工作单位"
+        },
+        "position": {
+          "type": "string",
+          "title": "推荐人职位"
+        },
+        "onlineIntroduction": {
+          "type": "string",
+          "title": "在线介绍链接"
+        },
+        "field": {
+          "type": "string",
+          "title": "推荐人专业领域"
+        },
+        "industry": {
+          "type": "string",
+          "title": "推荐人所在行业"
+        },
+        "relationship": {
+          "type": "string",
+          "title": "与申请人关系"
+        },
+        "sharedExperience": {
+          "type": "string",
+          "title": "共同经历"
+        },
+        "recommendationStyle": {
+          "type": "string",
+          "title": "推荐信风格"
+        },
+        "letterContent": {
+          "type": "string",
+          "title": "推荐信内容"
+        },
+        "createTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time",
+          "title": "更新时间"
+        }
+      },
+      "title": "推荐信"
+    },
+    "apiRecommendationLetterSimple": {
+      "type": "object",
+      "properties": {
+        "recommenderName": {
+          "type": "string",
+          "title": "推荐人姓名"
+        },
+        "workUnit": {
+          "type": "string",
+          "title": "推荐人工作单位"
+        },
+        "position": {
+          "type": "string",
+          "title": "推荐人职位"
+        },
+        "field": {
+          "type": "string",
+          "title": "推荐人专业领域"
+        },
+        "relationship": {
+          "type": "string",
+          "title": "与申请人关系"
+        },
+        "letterContent": {
+          "type": "string",
+          "title": "推荐信内容"
+        }
+      },
+      "title": "简化版推荐信（用于生成申请材料请求）"
+    },
+    "apiRecommenderInfo": {
+      "type": "object",
+      "properties": {
+        "recommenderName": {
+          "type": "string",
+          "title": "推荐人姓名"
+        },
+        "birthDate": {
+          "type": "string",
+          "title": "推荐人生日"
+        },
+        "workUnit": {
+          "type": "string",
+          "title": "推荐人工作单位"
+        },
+        "position": {
+          "type": "string",
+          "title": "推荐人职位"
+        },
+        "onlineIntroduction": {
+          "type": "string",
+          "title": "在线介绍链接"
+        },
+        "field": {
+          "type": "string",
+          "title": "推荐人专业领域"
+        },
+        "industry": {
+          "type": "string",
+          "title": "推荐人所在行业"
+        },
+        "relationship": {
+          "type": "string",
+          "title": "与申请人关系"
+        },
+        "sharedExperience": {
+          "type": "string",
+          "title": "共同经历"
+        },
+        "recommendationStyle": {
+          "type": "string",
+          "title": "推荐信风格"
+        }
+      },
+      "title": "推荐人信息"
+    },
+    "apiRequiredFileItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "文件项ID"
+        },
+        "label": {
+          "type": "string",
+          "title": "文件项标签，如\"奖项证书 / 奖杯照片\""
+        },
+        "description": {
+          "type": "string",
+          "title": "详细描述"
+        },
+        "isRequired": {
+          "type": "boolean",
+          "title": "是否必须"
+        },
+        "isUploaded": {
+          "type": "boolean",
+          "title": "是否已上传"
+        },
+        "category": {
+          "type": "string",
+          "title": "类别：certificate, media, letter, other"
+        }
+      },
+      "title": "需要收集的文件项"
+    },
+    "apiSaveAwardChatMessagesRequest": {
+      "type": "object",
+      "properties": {
+        "awardId": {
+          "type": "string",
+          "title": "奖项ID"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiAwardChatMessage"
+          },
+          "title": "要追加的消息列表"
+        }
+      },
+      "title": "保存奖项聊天消息请求（批量追加模式）"
+    },
+    "apiSaveAwardChatMessagesResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiSaveAwardChatMessagesResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "保存奖项聊天消息响应"
+    },
+    "apiSaveAwardChatMessagesResponseResult": {
+      "type": "object",
+      "properties": {
+        "savedCount": {
+          "type": "integer",
+          "format": "int32",
+          "title": "成功保存的消息数量"
+        },
+        "savedIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "成功保存的消息ID列表"
+        }
+      }
+    },
+    "apiSaveBasicInfoDraftRequest": {
+      "type": "object",
+      "properties": {
+        "basicInfo": {
+          "$ref": "#/definitions/apiExtendedBasicInfo",
+          "title": "基本信息草稿"
+        },
+        "caseId": {
+          "type": "string",
+          "title": "案件ID（可选）"
+        }
+      },
+      "title": "保存基本信息草稿请求"
+    },
+    "apiSaveBasicInfoDraftResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiSaveBasicInfoDraftResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "保存基本信息草稿响应"
+    },
+    "apiSaveBasicInfoDraftResponseResult": {
+      "type": "object",
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "title": "案件ID"
+        },
+        "savedAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "保存时间"
+        }
+      }
+    },
+    "apiSaveBasicInfoRequest": {
+      "type": "object",
+      "properties": {
+        "basicInfo": {
+          "$ref": "#/definitions/apiExtendedBasicInfo",
+          "title": "基本信息"
+        },
+        "caseId": {
+          "type": "string",
+          "title": "案件ID（可选，如果提供则更新，否则创建新案件）"
+        }
+      },
+      "title": "保存基本信息请求"
+    },
+    "apiSaveBasicInfoResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiSaveBasicInfoResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "保存基本信息响应"
+    },
+    "apiSaveBasicInfoResponseResult": {
+      "type": "object",
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "title": "案件ID"
+        },
+        "basicInfo": {
+          "$ref": "#/definitions/apiExtendedBasicInfo",
+          "title": "保存的基本信息"
+        }
+      }
+    },
+    "apiSearchAwardMaterialsRequest": {
+      "type": "object",
+      "properties": {
+        "awardId": {
+          "type": "string",
+          "title": "奖项ID"
+        },
+        "searchQuery": {
+          "type": "string",
+          "title": "搜索查询（可选，如果不提供则基于奖项信息自动生成）"
+        }
+      },
+      "title": "检索奖项补充材料请求"
+    },
+    "apiSearchAwardMaterialsResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiSearchAwardMaterialsResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "检索奖项补充材料响应"
+    },
+    "apiSearchAwardMaterialsResponseResult": {
+      "type": "object",
+      "properties": {
+        "searchResults": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiSearchResult"
+          },
+          "title": "搜索结果"
+        },
+        "retrievedFiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiAwardFileInfo"
+          },
+          "title": "检索到的文件列表"
+        },
+        "mergedResult": {
+          "type": "string",
+          "title": "合并后的结果"
+        }
+      }
+    },
+    "apiSearchResult": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string",
+          "title": "数据来源"
+        },
+        "title": {
+          "type": "string",
+          "title": "标题"
+        },
+        "url": {
+          "type": "string",
+          "title": "链接"
+        },
+        "content": {
+          "type": "string",
+          "title": "内容"
+        },
+        "relevanceScore": {
+          "type": "number",
+          "format": "float",
+          "title": "相关性得分"
+        }
+      },
+      "title": "搜索结果"
+    },
+    "apiSubmitTaskRequest": {
+      "type": "object",
+      "properties": {
+        "getBackgroundInfoRequest": {
+          "$ref": "#/definitions/apiGetBackgroundInfoRequest",
+          "title": "获取申请人背景信息"
+        },
+        "getRecommendLetterRequest": {
+          "$ref": "#/definitions/apiGetRecommendLetterRequest",
+          "title": "获取推荐信列表"
+        },
+        "generateApplicationMaterialsRequest": {
+          "$ref": "#/definitions/apiGenerateApplicationMaterialsRequest",
+          "title": "生成申请材料"
+        },
+        "evaluateCaseRequest": {
+          "$ref": "#/definitions/apiEvaluateCaseRequest",
+          "title": "案件评测"
+        },
+        "callbackUrl": {
+          "type": "string",
+          "title": "回调地址"
+        }
+      },
+      "title": "异步任务请求"
+    },
+    "apiSubmitTaskResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiSubmitTaskResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "异步任务响应"
+    },
+    "apiSubmitTaskResponseResult": {
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "type": "string",
+          "title": "任务ID"
+        }
+      }
+    },
+    "apiTask": {
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "type": "string",
+          "title": "任务ID"
+        },
+        "status": {
+          "type": "string",
+          "title": "任务状态: PENDING, RUNNING, COMPLETED, FAILED"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "更新时间"
+        },
+        "errorMessage": {
+          "type": "string",
+          "title": "错误信息"
+        },
+        "progress": {
+          "type": "number",
+          "format": "double",
+          "title": "任务进度 0-100"
+        },
+        "getBackgroundInfoResponse": {
+          "$ref": "#/definitions/apiGetBackgroundInfoResponse"
+        },
+        "getRecommendLetterResponse": {
+          "$ref": "#/definitions/apiGetRecommendLetterResponse"
+        },
+        "generateApplicationMaterialsResponse": {
+          "$ref": "#/definitions/apiGenerateApplicationMaterialsResponse"
+        },
+        "evaluateCaseResponse": {
+          "$ref": "#/definitions/apiEvaluateCaseResponse"
+        }
+      },
+      "title": "异步任务响应"
+    },
+    "apiTaskCancelRequest": {
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "type": "string",
+          "title": "任务ID"
+        }
+      },
+      "title": "任务取消请求"
+    },
+    "apiTaskCancelResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        }
+      },
+      "title": "任务取消响应"
+    },
+    "apiTaskQueryRequest": {
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "type": "string",
+          "title": "任务ID"
+        }
+      },
+      "title": "任务查询请求"
+    },
+    "apiTaskQueryResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiTaskQueryResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "任务查询响应"
+    },
+    "apiTaskQueryResponseResult": {
+      "type": "object",
+      "properties": {
+        "task": {
+          "$ref": "#/definitions/apiTask",
+          "title": "任务"
+        }
+      }
+    },
+    "apiUnlockAwardRequest": {
+      "type": "object",
+      "properties": {
+        "awardId": {
+          "type": "string",
+          "title": "奖项ID"
+        }
+      },
+      "title": "解锁奖项请求"
+    },
+    "apiUnlockAwardResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiUnlockAwardResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "解锁奖项响应"
+    },
+    "apiUnlockAwardResponseResult": {
+      "type": "object",
+      "properties": {
+        "award": {
+          "$ref": "#/definitions/apiAwardInfo",
+          "title": "解锁后的奖项"
+        }
+      }
+    },
+    "apiUpdateAwardRequest": {
+      "type": "object",
+      "properties": {
+        "awardId": {
+          "type": "string",
+          "title": "奖项ID"
+        },
+        "title": {
+          "type": "string",
+          "title": "奖项名称（可选）"
+        },
+        "year": {
+          "type": "string",
+          "title": "获奖年份（可选）"
+        },
+        "level": {
+          "type": "string",
+          "title": "级别（可选）"
+        }
+      },
+      "title": "更新奖项请求"
+    },
+    "apiUpdateAwardResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiUpdateAwardResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "更新奖项响应"
+    },
+    "apiUpdateAwardResponseResult": {
+      "type": "object",
+      "properties": {
+        "award": {
+          "$ref": "#/definitions/apiAwardInfo",
+          "title": "更新后的奖项"
+        }
+      }
+    },
+    "apiUploadAwardFileRequest": {
+      "type": "object",
+      "properties": {
+        "awardId": {
+          "type": "string",
+          "title": "奖项ID"
+        },
+        "fileContent": {
+          "type": "string",
+          "format": "byte",
+          "title": "文件内容（base64编码或直接字节）"
+        },
+        "fileName": {
+          "type": "string",
+          "title": "文件名"
+        },
+        "fileType": {
+          "type": "string",
+          "title": "文件MIME类型"
+        }
+      },
+      "title": "上传奖项文件请求"
+    },
+    "apiUploadAwardFileResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiUploadAwardFileResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "上传奖项文件响应"
+    },
+    "apiUploadAwardFileResponseResult": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "$ref": "#/definitions/apiAwardFileInfo",
+          "title": "上传的文件信息"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
