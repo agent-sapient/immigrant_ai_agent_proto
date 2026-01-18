@@ -1666,40 +1666,129 @@
     "apiExtendedBasicInfo": {
       "type": "object",
       "properties": {
-        "basicInfo": {
-          "$ref": "#/definitions/apiBasicInfo",
-          "title": "基本信息"
-        },
-        "idCard": {
+        "id": {
           "type": "string",
-          "title": "身份证号"
+          "format": "int64",
+          "description": "主键ID",
+          "title": "原 BasicInfo 字段"
         },
-        "idCardStartDate": {
+        "code": {
+          "type": "string",
+          "title": "案件编码"
+        },
+        "name": {
+          "type": "string",
+          "title": "申请人姓名"
+        },
+        "name_to_ai": {
+          "type": "boolean",
+          "title": "姓名是否传送给AI分析"
+        },
+        "birth_date": {
+          "type": "string",
+          "title": "出生日期"
+        },
+        "birth_date_to_ai": {
+          "type": "boolean",
+          "title": "出生日期是否传送给AI分析"
+        },
+        "work_unit": {
+          "type": "string",
+          "title": "工作单位"
+        },
+        "work_unit_to_ai": {
+          "type": "boolean",
+          "title": "工作单位是否传送给AI分析"
+        },
+        "position": {
+          "type": "string",
+          "title": "职位"
+        },
+        "position_to_ai": {
+          "type": "boolean",
+          "title": "职位是否传送给AI分析"
+        },
+        "industry": {
+          "type": "string",
+          "title": "行业"
+        },
+        "industry_to_ai": {
+          "type": "boolean",
+          "title": "行业是否传送给AI分析"
+        },
+        "immigration_type": {
+          "type": "string",
+          "title": "移民类型"
+        },
+        "immigration_type_to_ai": {
+          "type": "boolean",
+          "title": "移民类型是否传送给AI分析"
+        },
+        "field": {
+          "type": "string",
+          "title": "专业领域"
+        },
+        "field_to_ai": {
+          "type": "boolean",
+          "title": "专业领域是否传送给AI分析"
+        },
+        "education": {
+          "type": "string",
+          "title": "教育背景"
+        },
+        "education_to_ai": {
+          "type": "boolean",
+          "title": "教育背景是否传送给AI分析"
+        },
+        "major": {
+          "type": "string",
+          "title": "专业"
+        },
+        "major_to_ai": {
+          "type": "boolean",
+          "title": "专业是否传送给AI分析"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "创建时间"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "更新时间"
+        },
+        "id_card": {
+          "type": "string",
+          "description": "身份证号",
+          "title": "扩展字段"
+        },
+        "id_card_start_date": {
           "type": "string",
           "title": "身份证有效期开始日期"
         },
-        "idCardExpiry": {
+        "id_card_expiry": {
           "type": "string",
           "title": "身份证有效期结束日期"
         },
-        "passportNumber": {
+        "passport_number": {
           "type": "string",
           "title": "护照号"
         },
-        "passportStartDate": {
+        "passport_start_date": {
           "type": "string",
           "title": "护照有效期开始日期"
         },
-        "passportExpiry": {
+        "passport_expiry": {
           "type": "string",
           "title": "护照有效期结束日期"
         },
-        "immigrationTypeOther": {
+        "immigration_type_other": {
           "type": "string",
           "title": "其他移民类型说明"
         }
       },
-      "title": "扩展的基本信息（包含身份证、护照等）"
+      "title": "扩展的基本信息（扁平结构，包含所有字段）"
     },
     "apiFileInfo": {
       "type": "object",

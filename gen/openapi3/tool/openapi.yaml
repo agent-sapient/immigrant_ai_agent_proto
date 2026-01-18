@@ -1133,23 +1133,69 @@ components:
         ExtendedBasicInfo:
             type: object
             properties:
-                basicInfo:
-                    $ref: '#/components/schemas/BasicInfo'
-                idCard:
+                id:
                     type: string
-                idCardStartDate:
+                    description: 原 BasicInfo 字段
+                code:
                     type: string
-                idCardExpiry:
+                name:
                     type: string
-                passportNumber:
+                name_to_ai:
+                    type: boolean
+                birth_date:
                     type: string
-                passportStartDate:
+                birth_date_to_ai:
+                    type: boolean
+                work_unit:
                     type: string
-                passportExpiry:
+                work_unit_to_ai:
+                    type: boolean
+                position:
                     type: string
-                immigrationTypeOther:
+                position_to_ai:
+                    type: boolean
+                industry:
                     type: string
-            description: 扩展的基本信息（包含身份证、护照等）
+                industry_to_ai:
+                    type: boolean
+                immigration_type:
+                    type: string
+                immigration_type_to_ai:
+                    type: boolean
+                field:
+                    type: string
+                field_to_ai:
+                    type: boolean
+                education:
+                    type: string
+                education_to_ai:
+                    type: boolean
+                major:
+                    type: string
+                major_to_ai:
+                    type: boolean
+                created_at:
+                    type: string
+                    format: date-time
+                updated_at:
+                    type: string
+                    format: date-time
+                id_card:
+                    type: string
+                    description: 扩展字段
+                id_card_start_date:
+                    type: string
+                id_card_expiry:
+                    type: string
+                passport_number:
+                    type: string
+                passport_start_date:
+                    type: string
+                passport_expiry:
+                    type: string
+                immigration_type_other:
+                    type: string
+            description: 扩展的基本信息（扁平结构，包含所有字段）
         FileInfo:
             type: object
             properties:

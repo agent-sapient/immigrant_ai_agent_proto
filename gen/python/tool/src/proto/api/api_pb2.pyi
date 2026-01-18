@@ -769,7 +769,28 @@ class GeneratePlanResponse(_message.Message):
 
 class ExtendedBasicInfo(_message.Message):
     __slots__ = ()
-    BASIC_INFO_FIELD_NUMBER: _ClassVar[int]
+    ID_FIELD_NUMBER: _ClassVar[int]
+    CODE_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    NAME_TO_AI_FIELD_NUMBER: _ClassVar[int]
+    BIRTH_DATE_FIELD_NUMBER: _ClassVar[int]
+    BIRTH_DATE_TO_AI_FIELD_NUMBER: _ClassVar[int]
+    WORK_UNIT_FIELD_NUMBER: _ClassVar[int]
+    WORK_UNIT_TO_AI_FIELD_NUMBER: _ClassVar[int]
+    POSITION_FIELD_NUMBER: _ClassVar[int]
+    POSITION_TO_AI_FIELD_NUMBER: _ClassVar[int]
+    INDUSTRY_FIELD_NUMBER: _ClassVar[int]
+    INDUSTRY_TO_AI_FIELD_NUMBER: _ClassVar[int]
+    IMMIGRATION_TYPE_FIELD_NUMBER: _ClassVar[int]
+    IMMIGRATION_TYPE_TO_AI_FIELD_NUMBER: _ClassVar[int]
+    FIELD_FIELD_NUMBER: _ClassVar[int]
+    FIELD_TO_AI_FIELD_NUMBER: _ClassVar[int]
+    EDUCATION_FIELD_NUMBER: _ClassVar[int]
+    EDUCATION_TO_AI_FIELD_NUMBER: _ClassVar[int]
+    MAJOR_FIELD_NUMBER: _ClassVar[int]
+    MAJOR_TO_AI_FIELD_NUMBER: _ClassVar[int]
+    CREATED_AT_FIELD_NUMBER: _ClassVar[int]
+    UPDATED_AT_FIELD_NUMBER: _ClassVar[int]
     ID_CARD_FIELD_NUMBER: _ClassVar[int]
     ID_CARD_START_DATE_FIELD_NUMBER: _ClassVar[int]
     ID_CARD_EXPIRY_FIELD_NUMBER: _ClassVar[int]
@@ -777,7 +798,28 @@ class ExtendedBasicInfo(_message.Message):
     PASSPORT_START_DATE_FIELD_NUMBER: _ClassVar[int]
     PASSPORT_EXPIRY_FIELD_NUMBER: _ClassVar[int]
     IMMIGRATION_TYPE_OTHER_FIELD_NUMBER: _ClassVar[int]
-    basic_info: BasicInfo
+    id: int
+    code: str
+    name: str
+    name_to_ai: bool
+    birth_date: str
+    birth_date_to_ai: bool
+    work_unit: str
+    work_unit_to_ai: bool
+    position: str
+    position_to_ai: bool
+    industry: str
+    industry_to_ai: bool
+    immigration_type: str
+    immigration_type_to_ai: bool
+    field: str
+    field_to_ai: bool
+    education: str
+    education_to_ai: bool
+    major: str
+    major_to_ai: bool
+    created_at: _timestamp_pb2.Timestamp
+    updated_at: _timestamp_pb2.Timestamp
     id_card: str
     id_card_start_date: str
     id_card_expiry: str
@@ -785,7 +827,7 @@ class ExtendedBasicInfo(_message.Message):
     passport_start_date: str
     passport_expiry: str
     immigration_type_other: str
-    def __init__(self, basic_info: _Optional[_Union[BasicInfo, _Mapping]] = ..., id_card: _Optional[str] = ..., id_card_start_date: _Optional[str] = ..., id_card_expiry: _Optional[str] = ..., passport_number: _Optional[str] = ..., passport_start_date: _Optional[str] = ..., passport_expiry: _Optional[str] = ..., immigration_type_other: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[int] = ..., code: _Optional[str] = ..., name: _Optional[str] = ..., name_to_ai: _Optional[bool] = ..., birth_date: _Optional[str] = ..., birth_date_to_ai: _Optional[bool] = ..., work_unit: _Optional[str] = ..., work_unit_to_ai: _Optional[bool] = ..., position: _Optional[str] = ..., position_to_ai: _Optional[bool] = ..., industry: _Optional[str] = ..., industry_to_ai: _Optional[bool] = ..., immigration_type: _Optional[str] = ..., immigration_type_to_ai: _Optional[bool] = ..., field: _Optional[str] = ..., field_to_ai: _Optional[bool] = ..., education: _Optional[str] = ..., education_to_ai: _Optional[bool] = ..., major: _Optional[str] = ..., major_to_ai: _Optional[bool] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., updated_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., id_card: _Optional[str] = ..., id_card_start_date: _Optional[str] = ..., id_card_expiry: _Optional[str] = ..., passport_number: _Optional[str] = ..., passport_start_date: _Optional[str] = ..., passport_expiry: _Optional[str] = ..., immigration_type_other: _Optional[str] = ...) -> None: ...
 
 class SaveBasicInfoRequest(_message.Message):
     __slots__ = ()

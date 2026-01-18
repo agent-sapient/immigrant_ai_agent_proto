@@ -467,16 +467,39 @@ message GeneratePlanResponse {
 
 // ========== 基本信息管理 ==========
 
-// 扩展的基本信息（包含身份证、护照等）
+// 扩展的基本信息（扁平结构，包含所有字段）
 message ExtendedBasicInfo {
-  BasicInfo basic_info = 1 [json_name = "basicInfo"]; // 基本信息
-  string id_card = 2 [json_name = "idCard"]; // 身份证号
-  string id_card_start_date = 3 [json_name = "idCardStartDate"]; // 身份证有效期开始日期
-  string id_card_expiry = 4 [json_name = "idCardExpiry"]; // 身份证有效期结束日期
-  string passport_number = 5 [json_name = "passportNumber"]; // 护照号
-  string passport_start_date = 6 [json_name = "passportStartDate"]; // 护照有效期开始日期
-  string passport_expiry = 7 [json_name = "passportExpiry"]; // 护照有效期结束日期
-  string immigration_type_other = 8 [json_name = "immigrationTypeOther"]; // 其他移民类型说明
+  // 原 BasicInfo 字段
+  int64 id = 1 [json_name = "id"]; // 主键ID
+  string code = 2 [json_name = "code"]; // 案件编码
+  string name = 3 [json_name = "name"]; // 申请人姓名
+  bool name_to_ai = 4 [json_name = "name_to_ai"]; // 姓名是否传送给AI分析
+  string birth_date = 5 [json_name = "birth_date"]; // 出生日期
+  bool birth_date_to_ai = 6 [json_name = "birth_date_to_ai"]; // 出生日期是否传送给AI分析
+  string work_unit = 7 [json_name = "work_unit"]; // 工作单位
+  bool work_unit_to_ai = 8 [json_name = "work_unit_to_ai"]; // 工作单位是否传送给AI分析
+  string position = 9 [json_name = "position"]; // 职位
+  bool position_to_ai = 10 [json_name = "position_to_ai"]; // 职位是否传送给AI分析
+  string industry = 11 [json_name = "industry"]; // 行业
+  bool industry_to_ai = 12 [json_name = "industry_to_ai"]; // 行业是否传送给AI分析
+  string immigration_type = 13 [json_name = "immigration_type"]; // 移民类型
+  bool immigration_type_to_ai = 14 [json_name = "immigration_type_to_ai"]; // 移民类型是否传送给AI分析
+  string field = 15 [json_name = "field"]; // 专业领域
+  bool field_to_ai = 16 [json_name = "field_to_ai"]; // 专业领域是否传送给AI分析
+  string education = 17 [json_name = "education"]; // 教育背景
+  bool education_to_ai = 18 [json_name = "education_to_ai"]; // 教育背景是否传送给AI分析
+  string major = 19 [json_name = "major"]; // 专业
+  bool major_to_ai = 20 [json_name = "major_to_ai"]; // 专业是否传送给AI分析
+  google.protobuf.Timestamp created_at = 21 [json_name = "created_at"]; // 创建时间
+  google.protobuf.Timestamp updated_at = 22 [json_name = "updated_at"]; // 更新时间
+  // 扩展字段
+  string id_card = 23 [json_name = "id_card"]; // 身份证号
+  string id_card_start_date = 24 [json_name = "id_card_start_date"]; // 身份证有效期开始日期
+  string id_card_expiry = 25 [json_name = "id_card_expiry"]; // 身份证有效期结束日期
+  string passport_number = 26 [json_name = "passport_number"]; // 护照号
+  string passport_start_date = 27 [json_name = "passport_start_date"]; // 护照有效期开始日期
+  string passport_expiry = 28 [json_name = "passport_expiry"]; // 护照有效期结束日期
+  string immigration_type_other = 29 [json_name = "immigration_type_other"]; // 其他移民类型说明
 }
 
 // 保存基本信息请求
