@@ -720,23 +720,6 @@ message ListAwardFilesResponse {
   Result result = 3 [json_name = "result"]; // 结果
 }
 
-// 分析奖项文件完整性请求
-message AnalyzeAwardFilesRequest {
-  string award_id = 1 [json_name = "awardId"]; // 奖项ID
-}
-
-// 分析奖项文件完整性响应
-message AnalyzeAwardFilesResponse {
-  message Result {
-    bool is_complete = 1 [json_name = "isComplete"]; // 是否完整
-    repeated string missing_items = 2 [json_name = "missingItems"]; // 缺失的项目列表
-    string analysis_message = 3 [json_name = "analysisMessage"]; // 分析消息
-  }
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"]; // 结果
-}
-
 // 检索奖项补充材料请求
 message SearchAwardMaterialsRequest {
   string award_id = 1 [json_name = "awardId"]; // 奖项ID
@@ -776,6 +759,10 @@ message GetAwardRequiredFilesResponse {
     repeated RequiredFileItem required_files = 1 [json_name = "requiredFiles"]; // 所需文件列表
     string ai_suggestion = 2 [json_name = "aiSuggestion"]; // AI建议说明（第一条消息内容）
     string checklist_prompt = 3 [json_name = "checklistPrompt"]; // 文件清单提示语（第二条消息内容）
+    // 分析结果字段（原 AnalyzeAwardFilesResponse）
+    bool is_complete = 4 [json_name = "isComplete"]; // 必需文件是否完整
+    repeated string missing_items = 5 [json_name = "missingItems"]; // 缺失的必需项目列表
+    string analysis_message = 6 [json_name = "analysisMessage"]; // 分析消息
   }
   bool success = 1 [json_name = "success"]; // 是否成功
   string message = 2 [json_name = "message"]; // 响应消息
@@ -1090,14 +1077,6 @@ service ImmigrantAIAgent {
   rpc ListAwardFiles(ListAwardFilesRequest) returns (ListAwardFilesResponse) {
     option (google.api.http) = {
       post: "/api/award/listFiles"
-      body: "*"
-    };
-  }
-
-  // 分析奖项文件完整性:AI分析奖项文件是否完整
-  rpc AnalyzeAwardFiles(AnalyzeAwardFilesRequest) returns (AnalyzeAwardFilesResponse) {
-    option (google.api.http) = {
-      post: "/api/award/analyzeFiles"
       body: "*"
     };
   }
