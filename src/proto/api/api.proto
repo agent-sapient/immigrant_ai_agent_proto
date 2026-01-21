@@ -672,6 +672,7 @@ message AwardFileInfo {
   string category = 7 [json_name = "category"]; // 文件类别：certificate(证书)、media(媒体报道)、letter(推荐信)、other(其他)
   string status = 8 [json_name = "status"]; // 状态：uploading(上传中)、complete(完成)、error(错误)
   int32 upload_progress = 9 [json_name = "uploadProgress"]; // 上传进度 0-100
+  string description = 11 [json_name = "description"]; // AI 生成的文件内容描述
   google.protobuf.Timestamp created_at = 10 [json_name = "createdAt"]; // 创建时间
 }
 
