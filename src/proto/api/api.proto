@@ -669,7 +669,7 @@ message AwardFileInfo {
   string size = 4 [json_name = "size"]; // 文件大小（字符串格式，如 "1.2 MB"）
   string type = 5 [json_name = "type"]; // 文件MIME类型
   string url = 6 [json_name = "url"]; // 文件URL
-  string category = 7 [json_name = "category"]; // 文件类别：certificate(证书)、media(媒体报道)、letter(推荐信)、other(其他)
+  string category = 7 [json_name = "category"]; // 文件类别：certificate(证书)、introduction(奖项介绍)、criteria(评选标准)、process(评选流程)、organizer(主办单位)、winners(历届获奖人)、judges(评委会成员)、media_reports(媒体报道)、media_profiles(媒体简介)
   string status = 8 [json_name = "status"]; // 状态：uploading(上传中)、complete(完成)、error(错误)
   int32 upload_progress = 9 [json_name = "uploadProgress"]; // 上传进度 0-100
   string description = 11 [json_name = "description"]; // AI 生成的文件内容描述
