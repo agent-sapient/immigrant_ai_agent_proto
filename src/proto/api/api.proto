@@ -1,12 +1,13 @@
 syntax = "proto3";
 
 package api;
-// 添加go_package选项
-option go_package = "github.com/agent-sapient/immigrant_ai_agent_go/api;api";
 
 // 引入 Google API 注解包，用于定义 HTTP 映射
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+
+// 添加go_package选项
+option go_package = "github.com/agent-sapient/immigrant_ai_agent_go/api;api";
 
 // 基本信息
 message BasicInfo {
@@ -78,6 +79,7 @@ message RecommenderInfo {
   string relationship = 8 [json_name = "relationship"]; // 与申请人关系
   string shared_experience = 9 [json_name = "sharedExperience"]; // 共同经历
   string recommendation_style = 10 [json_name = "recommendationStyle"]; // 推荐信风格
+  string contact = 11 [json_name = "contact"]; // 联系方式
 }
 
 // 推荐信
@@ -114,6 +116,7 @@ message GetRecommendLetterRequest {
   BackgroundInfo background_info = 2 [json_name = "backgroundInfo"]; // 背景信息
   repeated RecommenderInfo recommender_infos = 3 [json_name = "recommenderInfos"]; // 推荐人信息
 }
+
 // 推荐信列表响应
 message GetRecommendLetterResponse {
   message Result {
@@ -122,7 +125,7 @@ message GetRecommendLetterResponse {
   }
   bool success = 1 [json_name = "success"]; // 是否成功
   string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"];// 结果
+  Result result = 3 [json_name = "result"]; // 结果
 }
 
 // 生成申请材料请求
@@ -132,6 +135,7 @@ message GenerateApplicationMaterialsRequest {
   repeated RecommendationLetterSimple recommendation_letters = 3 [json_name = "recommendationLetters"]; // 推荐信列表
   repeated FileInfo file_list = 4 [json_name = "fileList"]; // 文件列表
 }
+
 // 生成申请材料响应
 message GenerateApplicationMaterialsResponse {
   message Result {
@@ -141,7 +145,7 @@ message GenerateApplicationMaterialsResponse {
   }
   bool success = 1 [json_name = "success"]; // 是否成功
   string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"];// 结果
+  Result result = 3 [json_name = "result"]; // 结果
 }
 
 // 案件评测请求
@@ -158,7 +162,7 @@ message EvaluateCaseResponse {
   }
   bool success = 1 [json_name = "success"]; // 是否成功
   string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"];// 结果
+  Result result = 3 [json_name = "result"]; // 结果
 }
 
 // 获取申请人背景信息请求
@@ -176,11 +180,7 @@ message GetBackgroundInfoResponse {
   bool success = 1 [json_name = "success"]; // 是否成功
   string message = 2 [json_name = "message"]; // 响应消息
   Result result = 3 [json_name = "result"];
-
 }
-
-
-
 
 // 异步任务请求
 message SubmitTaskRequest {
@@ -200,8 +200,9 @@ message SubmitTaskResponse {
   }
   bool success = 1 [json_name = "success"]; // 是否成功
   string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 10 [json_name = "result"];// 结果
+  Result result = 10 [json_name = "result"]; // 结果
 }
+
 // 异步任务响应
 message Task {
   string task_id = 1 [json_name = "taskId"]; // 任务ID
@@ -226,11 +227,11 @@ message TaskQueryRequest {
 // 任务查询响应
 message TaskQueryResponse {
   message Result {
-    Task task = 1 [json_name = "task"];// 任务
+    Task task = 1 [json_name = "task"]; // 任务
   }
   bool success = 1 [json_name = "success"]; // 是否成功
   string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 10 [json_name = "result"];// 结果
+  Result result = 10 [json_name = "result"]; // 结果
 }
 
 // 任务取消请求
@@ -462,7 +463,7 @@ message GeneratePlanResponse {
   bool success = 1 [json_name = "success"]; // 是否成功
   string message = 2 [json_name = "message"]; // 响应消息
   Result result = 3 [json_name = "result"]; // 结果
-  Result result_en = 4 [json_name="result_en"]; // 英文结果
+  Result result_en = 4 [json_name = "result_en"]; // 英文结果
 }
 
 // ========== 基本信息管理 ==========
@@ -913,7 +914,7 @@ service ImmigrantAIAgent {
       body: "*"
     };
   }
-  
+
   // 提交异步任务
   rpc SubmitTask(SubmitTaskRequest) returns (SubmitTaskResponse) {
     option (google.api.http) = {
@@ -1123,5 +1124,4 @@ service ImmigrantAIAgent {
       body: "*"
     };
   }
-
 }
