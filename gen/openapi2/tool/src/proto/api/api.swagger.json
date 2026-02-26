@@ -16,39 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/api/award/analyzeFiles": {
-      "post": {
-        "summary": "分析奖项文件完整性:AI分析奖项文件是否完整",
-        "operationId": "ImmigrantAIAgent_AnalyzeAwardFiles",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiAnalyzeAwardFilesResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/apiAnalyzeAwardFilesRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ImmigrantAIAgent"
-        ]
-      }
-    },
     "/api/award/create": {
       "post": {
         "summary": "创建奖项:为案件创建一个新的奖项",
@@ -1041,54 +1008,6 @@
     }
   },
   "definitions": {
-    "apiAnalyzeAwardFilesRequest": {
-      "type": "object",
-      "properties": {
-        "awardId": {
-          "type": "string",
-          "title": "奖项ID"
-        }
-      },
-      "title": "分析奖项文件完整性请求"
-    },
-    "apiAnalyzeAwardFilesResponse": {
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean",
-          "title": "是否成功"
-        },
-        "message": {
-          "type": "string",
-          "title": "响应消息"
-        },
-        "result": {
-          "$ref": "#/definitions/apiAnalyzeAwardFilesResponseResult",
-          "title": "结果"
-        }
-      },
-      "title": "分析奖项文件完整性响应"
-    },
-    "apiAnalyzeAwardFilesResponseResult": {
-      "type": "object",
-      "properties": {
-        "isComplete": {
-          "type": "boolean",
-          "title": "是否完整"
-        },
-        "missingItems": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "缺失的项目列表"
-        },
-        "analysisMessage": {
-          "type": "string",
-          "title": "分析消息"
-        }
-      }
-    },
     "apiAwardChatMessage": {
       "type": "object",
       "properties": {
@@ -1141,7 +1060,7 @@
         },
         "category": {
           "type": "string",
-          "title": "文件类别：certificate(证书)、media(媒体报道)、letter(推荐信)、other(其他)"
+          "title": "文件类别：certificate(证书)、introduction(奖项介绍)、criteria(评选标准)、process(评选流程)、organizer(主办单位)、winners(历届获奖人)、judges(评委会成员)、media_reports(媒体报道)、media_profiles(媒体简介)"
         },
         "status": {
           "type": "string",
@@ -1151,6 +1070,10 @@
           "type": "integer",
           "format": "int32",
           "title": "上传进度 0-100"
+        },
+        "description": {
+          "type": "string",
+          "title": "AI 生成的文件内容描述"
         },
         "createdAt": {
           "type": "string",
@@ -2535,6 +2458,22 @@
         "checklistPrompt": {
           "type": "string",
           "title": "文件清单提示语（第二条消息内容）"
+        },
+        "isComplete": {
+          "type": "boolean",
+          "description": "必需文件是否完整",
+          "title": "分析结果字段（原 AnalyzeAwardFilesResponse）"
+        },
+        "missingItems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "缺失的必需项目列表"
+        },
+        "analysisMessage": {
+          "type": "string",
+          "title": "分析消息"
         }
       }
     },
@@ -3176,6 +3115,10 @@
         "recommendationStyle": {
           "type": "string",
           "title": "推荐信风格"
+        },
+        "contact": {
+          "type": "string",
+          "title": "联系方式"
         }
       },
       "title": "推荐人信息"

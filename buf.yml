@@ -2,4 +2,4 @@ version: v1
 deps:
   - buf.build/googleapis/googleapis
   - buf.build/grpc-ecosystem/protoc-gen-swagger
-  - buf.build/brainke/openapiv3
+  # - buf.build/brainke/openapiv3

@@ -140,11 +140,6 @@ class ImmigrantAIAgentStub(object):
                 request_serializer=src_dot_proto_dot_api_dot_api__pb2.ListAwardFilesRequest.SerializeToString,
                 response_deserializer=src_dot_proto_dot_api_dot_api__pb2.ListAwardFilesResponse.FromString,
                 _registered_method=True)
-        self.AnalyzeAwardFiles = channel.unary_unary(
-                '/api.ImmigrantAIAgent/AnalyzeAwardFiles',
-                request_serializer=src_dot_proto_dot_api_dot_api__pb2.AnalyzeAwardFilesRequest.SerializeToString,
-                response_deserializer=src_dot_proto_dot_api_dot_api__pb2.AnalyzeAwardFilesResponse.FromString,
-                _registered_method=True)
         self.SearchAwardMaterials = channel.unary_unary(
                 '/api.ImmigrantAIAgent/SearchAwardMaterials',
                 request_serializer=src_dot_proto_dot_api_dot_api__pb2.SearchAwardMaterialsRequest.SerializeToString,
@@ -359,13 +354,6 @@ class ImmigrantAIAgentServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def AnalyzeAwardFiles(self, request, context):
-        """分析奖项文件完整性:AI分析奖项文件是否完整
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def SearchAwardMaterials(self, request, context):
         """检索奖项补充材料:使用AI检索互联网上的补充材料
         """
@@ -530,11 +518,6 @@ def add_ImmigrantAIAgentServicer_to_server(servicer, server):
                     servicer.ListAwardFiles,
                     request_deserializer=src_dot_proto_dot_api_dot_api__pb2.ListAwardFilesRequest.FromString,
                     response_serializer=src_dot_proto_dot_api_dot_api__pb2.ListAwardFilesResponse.SerializeToString,
-            ),
-            'AnalyzeAwardFiles': grpc.unary_unary_rpc_method_handler(
-                    servicer.AnalyzeAwardFiles,
-                    request_deserializer=src_dot_proto_dot_api_dot_api__pb2.AnalyzeAwardFilesRequest.FromString,
-                    response_serializer=src_dot_proto_dot_api_dot_api__pb2.AnalyzeAwardFilesResponse.SerializeToString,
             ),
             'SearchAwardMaterials': grpc.unary_unary_rpc_method_handler(
                     servicer.SearchAwardMaterials,
@@ -1238,33 +1221,6 @@ class ImmigrantAIAgent(object):
             '/api.ImmigrantAIAgent/ListAwardFiles',
             src_dot_proto_dot_api_dot_api__pb2.ListAwardFilesRequest.SerializeToString,
             src_dot_proto_dot_api_dot_api__pb2.ListAwardFilesResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def AnalyzeAwardFiles(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/api.ImmigrantAIAgent/AnalyzeAwardFiles',
-            src_dot_proto_dot_api_dot_api__pb2.AnalyzeAwardFilesRequest.SerializeToString,
-            src_dot_proto_dot_api_dot_api__pb2.AnalyzeAwardFilesResponse.FromString,
             options,
             channel_credentials,
             insecure,

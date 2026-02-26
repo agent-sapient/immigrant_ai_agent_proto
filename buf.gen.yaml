@@ -4,10 +4,8 @@ managed:
 plugins:
   - plugin: buf.build/grpc-ecosystem/openapiv2:v2.27.3
     out: gen/openapi2/tool
-    opt:
-  - plugin: buf.build/community/google-gnostic-openapi:v0.7.1
-    out: gen/openapi3/tool
-    opt:
+  # - plugin: buf.build/community/google-gnostic-openapi:v0.7.1
+  #   out: gen/openapi3/tool
   - plugin: buf.build/grpc/python:v1.76.0
     out: gen/python/tool
   - plugin: buf.build/protocolbuffers/pyi:v33.2

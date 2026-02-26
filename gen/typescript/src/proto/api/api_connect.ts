@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { AnalyzeAwardFilesRequest, AnalyzeAwardFilesResponse, CreateAwardRequest, CreateAwardResponse, CreateCaseRequest, CreateCaseResponse, DeleteAwardChatMessagesRequest, DeleteAwardChatMessagesResponse, DeleteAwardFileRequest, DeleteAwardFileResponse, DeleteAwardRequest, DeleteAwardResponse, DownloadOutputFileRequest, DownloadOutputFileResponse, EvaluateCaseRequest, EvaluateCaseResponse, GenerateApplicationMaterialsRequest, GenerateApplicationMaterialsResponse, GeneratePlanRequest, GeneratePlanResponse, GetAwardChatMessagesRequest, GetAwardChatMessagesResponse, GetAwardRequiredFilesRequest, GetAwardRequiredFilesResponse, GetBackgroundInfoRequest, GetBackgroundInfoResponse, GetBasicInfoRequest, GetBasicInfoResponse, GetCaseRequest, GetCaseResponse, GetRecommendLetterRequest, GetRecommendLetterResponse, ListAwardFilesRequest, ListAwardFilesResponse, ListAwardsRequest, ListAwardsResponse, ListOutputFilesRequest, ListOutputFilesResponse, LockAwardRequest, LockAwardResponse, PassportStatusQueryRequest, PassportStatusQueryResponse, SaveAwardChatMessagesRequest, SaveAwardChatMessagesResponse, SaveBasicInfoDraftRequest, SaveBasicInfoDraftResponse, SaveBasicInfoRequest, SaveBasicInfoResponse, SearchAwardMaterialsRequest, SearchAwardMaterialsResponse, SubmitTaskRequest, SubmitTaskResponse, TaskCancelRequest, TaskCancelResponse, TaskQueryRequest, TaskQueryResponse, UnlockAwardRequest, UnlockAwardResponse, UpdateAwardRequest, UpdateAwardResponse, UploadAwardFileRequest, UploadAwardFileResponse } from "./api_pb.js";
+import { CreateAwardRequest, CreateAwardResponse, CreateCaseRequest, CreateCaseResponse, DeleteAwardChatMessagesRequest, DeleteAwardChatMessagesResponse, DeleteAwardFileRequest, DeleteAwardFileResponse, DeleteAwardRequest, DeleteAwardResponse, DownloadOutputFileRequest, DownloadOutputFileResponse, EvaluateCaseRequest, EvaluateCaseResponse, GenerateApplicationMaterialsRequest, GenerateApplicationMaterialsResponse, GeneratePlanRequest, GeneratePlanResponse, GetAwardChatMessagesRequest, GetAwardChatMessagesResponse, GetAwardRequiredFilesRequest, GetAwardRequiredFilesResponse, GetBackgroundInfoRequest, GetBackgroundInfoResponse, GetBasicInfoRequest, GetBasicInfoResponse, GetCaseRequest, GetCaseResponse, GetRecommendLetterRequest, GetRecommendLetterResponse, ListAwardFilesRequest, ListAwardFilesResponse, ListAwardsRequest, ListAwardsResponse, ListOutputFilesRequest, ListOutputFilesResponse, LockAwardRequest, LockAwardResponse, PassportStatusQueryRequest, PassportStatusQueryResponse, SaveAwardChatMessagesRequest, SaveAwardChatMessagesResponse, SaveBasicInfoDraftRequest, SaveBasicInfoDraftResponse, SaveBasicInfoRequest, SaveBasicInfoResponse, SearchAwardMaterialsRequest, SearchAwardMaterialsResponse, SubmitTaskRequest, SubmitTaskResponse, TaskCancelRequest, TaskCancelResponse, TaskQueryRequest, TaskQueryResponse, UnlockAwardRequest, UnlockAwardResponse, UpdateAwardRequest, UpdateAwardResponse, UploadAwardFileRequest, UploadAwardFileResponse } from "./api_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -287,17 +287,6 @@ export const ImmigrantAIAgent = {
       name: "ListAwardFiles",
       I: ListAwardFilesRequest,
       O: ListAwardFilesResponse,
-      kind: MethodKind.Unary,
-    },
-    /**
-     * 分析奖项文件完整性:AI分析奖项文件是否完整
-     *
-     * @generated from rpc api.ImmigrantAIAgent.AnalyzeAwardFiles
-     */
-    analyzeAwardFiles: {
-      name: "AnalyzeAwardFiles",
-      I: AnalyzeAwardFilesRequest,
-      O: AnalyzeAwardFilesResponse,
       kind: MethodKind.Unary,
     },
     /**

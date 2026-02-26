@@ -126,6 +126,7 @@ class RecommenderInfo(_message.Message):
     RELATIONSHIP_FIELD_NUMBER: _ClassVar[int]
     SHARED_EXPERIENCE_FIELD_NUMBER: _ClassVar[int]
     RECOMMENDATION_STYLE_FIELD_NUMBER: _ClassVar[int]
+    CONTACT_FIELD_NUMBER: _ClassVar[int]
     recommender_name: str
     birth_date: str
     work_unit: str
@@ -136,7 +137,8 @@ class RecommenderInfo(_message.Message):
     relationship: str
     shared_experience: str
     recommendation_style: str
-    def __init__(self, recommender_name: _Optional[str] = ..., birth_date: _Optional[str] = ..., work_unit: _Optional[str] = ..., position: _Optional[str] = ..., online_introduction: _Optional[str] = ..., field: _Optional[str] = ..., industry: _Optional[str] = ..., relationship: _Optional[str] = ..., shared_experience: _Optional[str] = ..., recommendation_style: _Optional[str] = ...) -> None: ...
+    contact: str
+    def __init__(self, recommender_name: _Optional[str] = ..., birth_date: _Optional[str] = ..., work_unit: _Optional[str] = ..., position: _Optional[str] = ..., online_introduction: _Optional[str] = ..., field: _Optional[str] = ..., industry: _Optional[str] = ..., relationship: _Optional[str] = ..., shared_experience: _Optional[str] = ..., recommendation_style: _Optional[str] = ..., contact: _Optional[str] = ...) -> None: ...
 
 class RecommendationLetter(_message.Message):
     __slots__ = ()
@@ -1066,6 +1068,7 @@ class AwardFileInfo(_message.Message):
     CATEGORY_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     UPLOAD_PROGRESS_FIELD_NUMBER: _ClassVar[int]
+    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     id: str
     award_id: str
@@ -1076,8 +1079,9 @@ class AwardFileInfo(_message.Message):
     category: str
     status: str
     upload_progress: int
+    description: str
     created_at: _timestamp_pb2.Timestamp
-    def __init__(self, id: _Optional[str] = ..., award_id: _Optional[str] = ..., name: _Optional[str] = ..., size: _Optional[str] = ..., type: _Optional[str] = ..., url: _Optional[str] = ..., category: _Optional[str] = ..., status: _Optional[str] = ..., upload_progress: _Optional[int] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., award_id: _Optional[str] = ..., name: _Optional[str] = ..., size: _Optional[str] = ..., type: _Optional[str] = ..., url: _Optional[str] = ..., category: _Optional[str] = ..., status: _Optional[str] = ..., upload_progress: _Optional[int] = ..., description: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class UploadAwardFileRequest(_message.Message):
     __slots__ = ()
@@ -1143,31 +1147,6 @@ class ListAwardFilesResponse(_message.Message):
     result: ListAwardFilesResponse.Result
     def __init__(self, success: _Optional[bool] = ..., message: _Optional[str] = ..., result: _Optional[_Union[ListAwardFilesResponse.Result, _Mapping]] = ...) -> None: ...
 
-class AnalyzeAwardFilesRequest(_message.Message):
-    __slots__ = ()
-    AWARD_ID_FIELD_NUMBER: _ClassVar[int]
-    award_id: str
-    def __init__(self, award_id: _Optional[str] = ...) -> None: ...
-
-class AnalyzeAwardFilesResponse(_message.Message):
-    __slots__ = ()
-    class Result(_message.Message):
-        __slots__ = ()
-        IS_COMPLETE_FIELD_NUMBER: _ClassVar[int]
-        MISSING_ITEMS_FIELD_NUMBER: _ClassVar[int]
-        ANALYSIS_MESSAGE_FIELD_NUMBER: _ClassVar[int]
-        is_complete: bool
-        missing_items: _containers.RepeatedScalarFieldContainer[str]
-        analysis_message: str
-        def __init__(self, is_complete: _Optional[bool] = ..., missing_items: _Optional[_Iterable[str]] = ..., analysis_message: _Optional[str] = ...) -> None: ...
-    SUCCESS_FIELD_NUMBER: _ClassVar[int]
-    MESSAGE_FIELD_NUMBER: _ClassVar[int]
-    RESULT_FIELD_NUMBER: _ClassVar[int]
-    success: bool
-    message: str
-    result: AnalyzeAwardFilesResponse.Result
-    def __init__(self, success: _Optional[bool] = ..., message: _Optional[str] = ..., result: _Optional[_Union[AnalyzeAwardFilesResponse.Result, _Mapping]] = ...) -> None: ...
-
 class SearchAwardMaterialsRequest(_message.Message):
     __slots__ = ()
     AWARD_ID_FIELD_NUMBER: _ClassVar[int]
@@ -1224,10 +1203,16 @@ class GetAwardRequiredFilesResponse(_message.Message):
         REQUIRED_FILES_FIELD_NUMBER: _ClassVar[int]
         AI_SUGGESTION_FIELD_NUMBER: _ClassVar[int]
         CHECKLIST_PROMPT_FIELD_NUMBER: _ClassVar[int]
+        IS_COMPLETE_FIELD_NUMBER: _ClassVar[int]
+        MISSING_ITEMS_FIELD_NUMBER: _ClassVar[int]
+        ANALYSIS_MESSAGE_FIELD_NUMBER: _ClassVar[int]
         required_files: _containers.RepeatedCompositeFieldContainer[RequiredFileItem]
         ai_suggestion: str
         checklist_prompt: str
-        def __init__(self, required_files: _Optional[_Iterable[_Union[RequiredFileItem, _Mapping]]] = ..., ai_suggestion: _Optional[str] = ..., checklist_prompt: _Optional[str] = ...) -> None: ...
+        is_complete: bool
+        missing_items: _containers.RepeatedScalarFieldContainer[str]
+        analysis_message: str
+        def __init__(self, required_files: _Optional[_Iterable[_Union[RequiredFileItem, _Mapping]]] = ..., ai_suggestion: _Optional[str] = ..., checklist_prompt: _Optional[str] = ..., is_complete: _Optional[bool] = ..., missing_items: _Optional[_Iterable[str]] = ..., analysis_message: _Optional[str] = ...) -> None: ...
     SUCCESS_FIELD_NUMBER: _ClassVar[int]
     MESSAGE_FIELD_NUMBER: _ClassVar[int]
     RESULT_FIELD_NUMBER: _ClassVar[int]
