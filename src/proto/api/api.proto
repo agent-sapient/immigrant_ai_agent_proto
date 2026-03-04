@@ -468,6 +468,15 @@ message GeneratePlanResponse {
 
 // ========== 基本信息管理 ==========
 
+// 签证历史记录
+message VisaHistoryRecord {
+  string visa_type = 1 [json_name = "visaType"]; // 签证类型
+  string issue_date = 2 [json_name = "issueDate"]; // 签发日期 yyyy-MM-dd
+  string expiry_date = 3 [json_name = "expiryDate"]; // 到期日期 yyyy-MM-dd
+  string work_unit = 4 [json_name = "workUnit"]; // 工作单位（B1/B2专用）
+  string position = 5 [json_name = "position"]; // 职位（B1/B2专用）
+}
+
 // 扩展的基本信息（扁平结构，包含所有字段）
 message ExtendedBasicInfo {
   // 原 BasicInfo 字段
@@ -501,6 +510,8 @@ message ExtendedBasicInfo {
   string passport_start_date = 27 [json_name = "passport_start_date"]; // 护照有效期开始日期
   string passport_expiry = 28 [json_name = "passport_expiry"]; // 护照有效期结束日期
   string immigration_type_other = 29 [json_name = "immigration_type_other"]; // 其他移民类型说明
+  repeated VisaHistoryRecord visa_history = 30 [json_name = "visa_history"]; // 签证历史记录
+  string resume_file_url = 31 [json_name = "resume_file_url"]; // 简历文件URL
 }
 
 // 保存基本信息请求
