@@ -552,6 +552,25 @@ message SaveBasicInfoDraftResponse {
   Result result = 3 [json_name = "result"]; // 结果
 }
 
+// 上传简历文件请求
+message UploadResumeFileRequest {
+  string case_id = 1 [json_name = "caseId"]; // 案件ID
+  string file_name = 2 [json_name = "fileName"]; // 文件名
+  bytes file_content = 3 [json_name = "fileContent"]; // 文件内容（base64编码或直接字节）
+  string file_type = 4 [json_name = "fileType"]; // 文件MIME类型
+}
+
+// 上传简历文件响应
+message UploadResumeFileResponse {
+  message Result {
+    string file_url = 1 [json_name = "fileUrl"]; // 文件URL
+    string file_name = 2 [json_name = "fileName"]; // 文件名
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
 // ========== 奖项管理 ==========
 
 // 奖项信息
@@ -964,6 +983,13 @@ service ImmigrantAIAgent {
   }
 
   // ========== 基本信息管理 ==========
+  // 上传简历文件:上传简历文件
+  rpc UploadResumeFile(UploadResumeFileRequest) returns (UploadResumeFileResponse) {
+    option (google.api.http) = {
+      post: "/api/case/uploadResumeFile"
+      body: "*"
+    };
+  }
 
   // 保存基本信息:保存或更新申请人的基本信息
   rpc SaveBasicInfo(SaveBasicInfoRequest) returns (SaveBasicInfoResponse) {
