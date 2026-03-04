@@ -577,6 +577,39 @@
         ]
       }
     },
+    "/api/case/module_guide": {
+      "post": {
+        "summary": "获取模块引导文案:根据案件基本信息生成个性化的模块引导文案",
+        "operationId": "ImmigrantAIAgent_GetModuleGuide",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetModuleGuideResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiGetModuleGuideRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
     "/api/case/saveBasicInfo": {
       "post": {
         "summary": "保存基本信息:保存或更新申请人的基本信息",
@@ -635,6 +668,39 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/apiSaveBasicInfoDraftRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ImmigrantAIAgent"
+        ]
+      }
+    },
+    "/api/case/uploadResumeFile": {
+      "post": {
+        "summary": "========== 基本信息管理 ==========\n上传简历文件:上传简历文件",
+        "operationId": "ImmigrantAIAgent_UploadResumeFile",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiUploadResumeFileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiUploadResumeFileRequest"
             }
           }
         ],
@@ -833,39 +899,6 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/apiGeneratePlanRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ImmigrantAIAgent"
-        ]
-      }
-    },
-    "/api/pre-review/getBackgroundInfo": {
-      "post": {
-        "summary": "获取申请人背景信息:使用agent实现全网搜索",
-        "operationId": "ImmigrantAIAgent_GetBackgroundInfo",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetBackgroundInfoResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/apiGetBackgroundInfoRequest"
             }
           }
         ],
@@ -1709,6 +1742,18 @@
         "immigration_type_other": {
           "type": "string",
           "title": "其他移民类型说明"
+        },
+        "visa_history": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiVisaHistoryRecord"
+          },
+          "title": "签证历史记录"
+        },
+        "resume_file_url": {
+          "type": "string",
+          "title": "简历文件URL"
         }
       },
       "title": "扩展的基本信息（扁平结构，包含所有字段）"
@@ -2477,50 +2522,6 @@
         }
       }
     },
-    "apiGetBackgroundInfoRequest": {
-      "type": "object",
-      "properties": {
-        "basicInfo": {
-          "$ref": "#/definitions/apiBasicInfo",
-          "title": "基本信息"
-        },
-        "fileList": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/apiFileInfo"
-          },
-          "title": "文件列表"
-        }
-      },
-      "title": "获取申请人背景信息请求"
-    },
-    "apiGetBackgroundInfoResponse": {
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean",
-          "title": "是否成功"
-        },
-        "message": {
-          "type": "string",
-          "title": "响应消息"
-        },
-        "result": {
-          "$ref": "#/definitions/apiGetBackgroundInfoResponseResult"
-        }
-      },
-      "title": "获取申请人背景信息响应"
-    },
-    "apiGetBackgroundInfoResponseResult": {
-      "type": "object",
-      "properties": {
-        "backgroundInfo": {
-          "$ref": "#/definitions/apiBackgroundInfo",
-          "title": "申请人背景信息"
-        }
-      }
-    },
     "apiGetBasicInfoRequest": {
       "type": "object",
       "properties": {
@@ -2614,6 +2615,51 @@
           "type": "string",
           "format": "date-time",
           "title": "更新时间"
+        }
+      }
+    },
+    "apiGetModuleGuideRequest": {
+      "type": "object",
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "title": "案件ID"
+        },
+        "module": {
+          "type": "string",
+          "title": "模块标识: award, membership, media_coverage, judging, original_contribution, article, exhibition, key_role, high_income, commercial_success"
+        }
+      },
+      "title": "获取模块引导文案请求"
+    },
+    "apiGetModuleGuideResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiGetModuleGuideResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "获取模块引导文案响应"
+    },
+    "apiGetModuleGuideResponseResult": {
+      "type": "object",
+      "properties": {
+        "guideText": {
+          "type": "string",
+          "title": "引导文案内容"
+        },
+        "fromCache": {
+          "type": "boolean",
+          "title": "是否来自缓存"
         }
       }
     },
@@ -3384,10 +3430,6 @@
     "apiSubmitTaskRequest": {
       "type": "object",
       "properties": {
-        "getBackgroundInfoRequest": {
-          "$ref": "#/definitions/apiGetBackgroundInfoRequest",
-          "title": "获取申请人背景信息"
-        },
         "getRecommendLetterRequest": {
           "$ref": "#/definitions/apiGetRecommendLetterRequest",
           "title": "获取推荐信列表"
@@ -3463,9 +3505,6 @@
           "type": "number",
           "format": "double",
           "title": "任务进度 0-100"
-        },
-        "getBackgroundInfoResponse": {
-          "$ref": "#/definitions/apiGetBackgroundInfoResponse"
         },
         "getRecommendLetterResponse": {
           "$ref": "#/definitions/apiGetRecommendLetterResponse"
@@ -3675,6 +3714,86 @@
           "title": "上传的文件信息"
         }
       }
+    },
+    "apiUploadResumeFileRequest": {
+      "type": "object",
+      "properties": {
+        "caseId": {
+          "type": "string",
+          "title": "案件ID"
+        },
+        "fileName": {
+          "type": "string",
+          "title": "文件名"
+        },
+        "fileContent": {
+          "type": "string",
+          "format": "byte",
+          "title": "文件内容（base64编码或直接字节）"
+        },
+        "fileType": {
+          "type": "string",
+          "title": "文件MIME类型"
+        }
+      },
+      "title": "上传简历文件请求"
+    },
+    "apiUploadResumeFileResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "title": "是否成功"
+        },
+        "message": {
+          "type": "string",
+          "title": "响应消息"
+        },
+        "result": {
+          "$ref": "#/definitions/apiUploadResumeFileResponseResult",
+          "title": "结果"
+        }
+      },
+      "title": "上传简历文件响应"
+    },
+    "apiUploadResumeFileResponseResult": {
+      "type": "object",
+      "properties": {
+        "fileUrl": {
+          "type": "string",
+          "title": "文件URL"
+        },
+        "fileName": {
+          "type": "string",
+          "title": "文件名"
+        }
+      }
+    },
+    "apiVisaHistoryRecord": {
+      "type": "object",
+      "properties": {
+        "visaType": {
+          "type": "string",
+          "title": "签证类型"
+        },
+        "issueDate": {
+          "type": "string",
+          "title": "签发日期 yyyy-MM-dd"
+        },
+        "expiryDate": {
+          "type": "string",
+          "title": "到期日期 yyyy-MM-dd"
+        },
+        "workUnit": {
+          "type": "string",
+          "title": "工作单位（B1/B2专用）"
+        },
+        "position": {
+          "type": "string",
+          "title": "职位（B1/B2专用）"
+        }
+      },
+      "title": "签证历史记录"
     },
     "protobufAny": {
       "type": "object",

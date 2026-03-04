@@ -271,42 +271,17 @@ class EvaluateCaseResponse(_message.Message):
     result: EvaluateCaseResponse.Result
     def __init__(self, success: _Optional[bool] = ..., message: _Optional[str] = ..., result: _Optional[_Union[EvaluateCaseResponse.Result, _Mapping]] = ...) -> None: ...
 
-class GetBackgroundInfoRequest(_message.Message):
-    __slots__ = ()
-    BASIC_INFO_FIELD_NUMBER: _ClassVar[int]
-    FILE_LIST_FIELD_NUMBER: _ClassVar[int]
-    basic_info: BasicInfo
-    file_list: _containers.RepeatedCompositeFieldContainer[FileInfo]
-    def __init__(self, basic_info: _Optional[_Union[BasicInfo, _Mapping]] = ..., file_list: _Optional[_Iterable[_Union[FileInfo, _Mapping]]] = ...) -> None: ...
-
-class GetBackgroundInfoResponse(_message.Message):
-    __slots__ = ()
-    class Result(_message.Message):
-        __slots__ = ()
-        BACKGROUND_INFO_FIELD_NUMBER: _ClassVar[int]
-        background_info: BackgroundInfo
-        def __init__(self, background_info: _Optional[_Union[BackgroundInfo, _Mapping]] = ...) -> None: ...
-    SUCCESS_FIELD_NUMBER: _ClassVar[int]
-    MESSAGE_FIELD_NUMBER: _ClassVar[int]
-    RESULT_FIELD_NUMBER: _ClassVar[int]
-    success: bool
-    message: str
-    result: GetBackgroundInfoResponse.Result
-    def __init__(self, success: _Optional[bool] = ..., message: _Optional[str] = ..., result: _Optional[_Union[GetBackgroundInfoResponse.Result, _Mapping]] = ...) -> None: ...
-
 class SubmitTaskRequest(_message.Message):
     __slots__ = ()
-    GET_BACKGROUND_INFO_REQUEST_FIELD_NUMBER: _ClassVar[int]
     GET_RECOMMEND_LETTER_REQUEST_FIELD_NUMBER: _ClassVar[int]
     GENERATE_APPLICATION_MATERIALS_REQUEST_FIELD_NUMBER: _ClassVar[int]
     EVALUATE_CASE_REQUEST_FIELD_NUMBER: _ClassVar[int]
     CALLBACK_URL_FIELD_NUMBER: _ClassVar[int]
-    get_background_info_request: GetBackgroundInfoRequest
     get_recommend_letter_request: GetRecommendLetterRequest
     generate_application_materials_request: GenerateApplicationMaterialsRequest
     evaluate_case_request: EvaluateCaseRequest
     callback_url: str
-    def __init__(self, get_background_info_request: _Optional[_Union[GetBackgroundInfoRequest, _Mapping]] = ..., get_recommend_letter_request: _Optional[_Union[GetRecommendLetterRequest, _Mapping]] = ..., generate_application_materials_request: _Optional[_Union[GenerateApplicationMaterialsRequest, _Mapping]] = ..., evaluate_case_request: _Optional[_Union[EvaluateCaseRequest, _Mapping]] = ..., callback_url: _Optional[str] = ...) -> None: ...
+    def __init__(self, get_recommend_letter_request: _Optional[_Union[GetRecommendLetterRequest, _Mapping]] = ..., generate_application_materials_request: _Optional[_Union[GenerateApplicationMaterialsRequest, _Mapping]] = ..., evaluate_case_request: _Optional[_Union[EvaluateCaseRequest, _Mapping]] = ..., callback_url: _Optional[str] = ...) -> None: ...
 
 class SubmitTaskResponse(_message.Message):
     __slots__ = ()
@@ -331,7 +306,6 @@ class Task(_message.Message):
     UPDATED_AT_FIELD_NUMBER: _ClassVar[int]
     ERROR_MESSAGE_FIELD_NUMBER: _ClassVar[int]
     PROGRESS_FIELD_NUMBER: _ClassVar[int]
-    GET_BACKGROUND_INFO_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     GET_RECOMMEND_LETTER_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     GENERATE_APPLICATION_MATERIALS_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     EVALUATE_CASE_RESPONSE_FIELD_NUMBER: _ClassVar[int]
@@ -341,11 +315,10 @@ class Task(_message.Message):
     updated_at: _timestamp_pb2.Timestamp
     error_message: str
     progress: float
-    get_background_info_response: GetBackgroundInfoResponse
     get_recommend_letter_response: GetRecommendLetterResponse
     generate_application_materials_response: GenerateApplicationMaterialsResponse
     evaluate_case_response: EvaluateCaseResponse
-    def __init__(self, task_id: _Optional[str] = ..., status: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., updated_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., error_message: _Optional[str] = ..., progress: _Optional[float] = ..., get_background_info_response: _Optional[_Union[GetBackgroundInfoResponse, _Mapping]] = ..., get_recommend_letter_response: _Optional[_Union[GetRecommendLetterResponse, _Mapping]] = ..., generate_application_materials_response: _Optional[_Union[GenerateApplicationMaterialsResponse, _Mapping]] = ..., evaluate_case_response: _Optional[_Union[EvaluateCaseResponse, _Mapping]] = ...) -> None: ...
+    def __init__(self, task_id: _Optional[str] = ..., status: _Optional[str] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., updated_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., error_message: _Optional[str] = ..., progress: _Optional[float] = ..., get_recommend_letter_response: _Optional[_Union[GetRecommendLetterResponse, _Mapping]] = ..., generate_application_materials_response: _Optional[_Union[GenerateApplicationMaterialsResponse, _Mapping]] = ..., evaluate_case_response: _Optional[_Union[EvaluateCaseResponse, _Mapping]] = ...) -> None: ...
 
 class TaskQueryRequest(_message.Message):
     __slots__ = ()
@@ -769,6 +742,20 @@ class GeneratePlanResponse(_message.Message):
     result_en: GeneratePlanResponse.Result
     def __init__(self, success: _Optional[bool] = ..., message: _Optional[str] = ..., result: _Optional[_Union[GeneratePlanResponse.Result, _Mapping]] = ..., result_en: _Optional[_Union[GeneratePlanResponse.Result, _Mapping]] = ...) -> None: ...
 
+class VisaHistoryRecord(_message.Message):
+    __slots__ = ()
+    VISA_TYPE_FIELD_NUMBER: _ClassVar[int]
+    ISSUE_DATE_FIELD_NUMBER: _ClassVar[int]
+    EXPIRY_DATE_FIELD_NUMBER: _ClassVar[int]
+    WORK_UNIT_FIELD_NUMBER: _ClassVar[int]
+    POSITION_FIELD_NUMBER: _ClassVar[int]
+    visa_type: str
+    issue_date: str
+    expiry_date: str
+    work_unit: str
+    position: str
+    def __init__(self, visa_type: _Optional[str] = ..., issue_date: _Optional[str] = ..., expiry_date: _Optional[str] = ..., work_unit: _Optional[str] = ..., position: _Optional[str] = ...) -> None: ...
+
 class ExtendedBasicInfo(_message.Message):
     __slots__ = ()
     ID_FIELD_NUMBER: _ClassVar[int]
@@ -800,6 +787,8 @@ class ExtendedBasicInfo(_message.Message):
     PASSPORT_START_DATE_FIELD_NUMBER: _ClassVar[int]
     PASSPORT_EXPIRY_FIELD_NUMBER: _ClassVar[int]
     IMMIGRATION_TYPE_OTHER_FIELD_NUMBER: _ClassVar[int]
+    VISA_HISTORY_FIELD_NUMBER: _ClassVar[int]
+    RESUME_FILE_URL_FIELD_NUMBER: _ClassVar[int]
     id: int
     code: str
     name: str
@@ -829,7 +818,9 @@ class ExtendedBasicInfo(_message.Message):
     passport_start_date: str
     passport_expiry: str
     immigration_type_other: str
-    def __init__(self, id: _Optional[int] = ..., code: _Optional[str] = ..., name: _Optional[str] = ..., name_to_ai: _Optional[bool] = ..., birth_date: _Optional[str] = ..., birth_date_to_ai: _Optional[bool] = ..., work_unit: _Optional[str] = ..., work_unit_to_ai: _Optional[bool] = ..., position: _Optional[str] = ..., position_to_ai: _Optional[bool] = ..., industry: _Optional[str] = ..., industry_to_ai: _Optional[bool] = ..., immigration_type: _Optional[str] = ..., immigration_type_to_ai: _Optional[bool] = ..., field: _Optional[str] = ..., field_to_ai: _Optional[bool] = ..., education: _Optional[str] = ..., education_to_ai: _Optional[bool] = ..., major: _Optional[str] = ..., major_to_ai: _Optional[bool] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., updated_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., id_card: _Optional[str] = ..., id_card_start_date: _Optional[str] = ..., id_card_expiry: _Optional[str] = ..., passport_number: _Optional[str] = ..., passport_start_date: _Optional[str] = ..., passport_expiry: _Optional[str] = ..., immigration_type_other: _Optional[str] = ...) -> None: ...
+    visa_history: _containers.RepeatedCompositeFieldContainer[VisaHistoryRecord]
+    resume_file_url: str
+    def __init__(self, id: _Optional[int] = ..., code: _Optional[str] = ..., name: _Optional[str] = ..., name_to_ai: _Optional[bool] = ..., birth_date: _Optional[str] = ..., birth_date_to_ai: _Optional[bool] = ..., work_unit: _Optional[str] = ..., work_unit_to_ai: _Optional[bool] = ..., position: _Optional[str] = ..., position_to_ai: _Optional[bool] = ..., industry: _Optional[str] = ..., industry_to_ai: _Optional[bool] = ..., immigration_type: _Optional[str] = ..., immigration_type_to_ai: _Optional[bool] = ..., field: _Optional[str] = ..., field_to_ai: _Optional[bool] = ..., education: _Optional[str] = ..., education_to_ai: _Optional[bool] = ..., major: _Optional[str] = ..., major_to_ai: _Optional[bool] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., updated_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., id_card: _Optional[str] = ..., id_card_start_date: _Optional[str] = ..., id_card_expiry: _Optional[str] = ..., passport_number: _Optional[str] = ..., passport_start_date: _Optional[str] = ..., passport_expiry: _Optional[str] = ..., immigration_type_other: _Optional[str] = ..., visa_history: _Optional[_Iterable[_Union[VisaHistoryRecord, _Mapping]]] = ..., resume_file_url: _Optional[str] = ...) -> None: ...
 
 class SaveBasicInfoRequest(_message.Message):
     __slots__ = ()
@@ -901,6 +892,35 @@ class SaveBasicInfoDraftResponse(_message.Message):
     message: str
     result: SaveBasicInfoDraftResponse.Result
     def __init__(self, success: _Optional[bool] = ..., message: _Optional[str] = ..., result: _Optional[_Union[SaveBasicInfoDraftResponse.Result, _Mapping]] = ...) -> None: ...
+
+class UploadResumeFileRequest(_message.Message):
+    __slots__ = ()
+    CASE_ID_FIELD_NUMBER: _ClassVar[int]
+    FILE_NAME_FIELD_NUMBER: _ClassVar[int]
+    FILE_CONTENT_FIELD_NUMBER: _ClassVar[int]
+    FILE_TYPE_FIELD_NUMBER: _ClassVar[int]
+    case_id: str
+    file_name: str
+    file_content: bytes
+    file_type: str
+    def __init__(self, case_id: _Optional[str] = ..., file_name: _Optional[str] = ..., file_content: _Optional[bytes] = ..., file_type: _Optional[str] = ...) -> None: ...
+
+class UploadResumeFileResponse(_message.Message):
+    __slots__ = ()
+    class Result(_message.Message):
+        __slots__ = ()
+        FILE_URL_FIELD_NUMBER: _ClassVar[int]
+        FILE_NAME_FIELD_NUMBER: _ClassVar[int]
+        file_url: str
+        file_name: str
+        def __init__(self, file_url: _Optional[str] = ..., file_name: _Optional[str] = ...) -> None: ...
+    SUCCESS_FIELD_NUMBER: _ClassVar[int]
+    MESSAGE_FIELD_NUMBER: _ClassVar[int]
+    RESULT_FIELD_NUMBER: _ClassVar[int]
+    success: bool
+    message: str
+    result: UploadResumeFileResponse.Result
+    def __init__(self, success: _Optional[bool] = ..., message: _Optional[str] = ..., result: _Optional[_Union[UploadResumeFileResponse.Result, _Mapping]] = ...) -> None: ...
 
 class AwardInfo(_message.Message):
     __slots__ = ()
@@ -1317,6 +1337,31 @@ class DeleteAwardChatMessagesResponse(_message.Message):
     message: str
     result: DeleteAwardChatMessagesResponse.Result
     def __init__(self, success: _Optional[bool] = ..., message: _Optional[str] = ..., result: _Optional[_Union[DeleteAwardChatMessagesResponse.Result, _Mapping]] = ...) -> None: ...
+
+class GetModuleGuideRequest(_message.Message):
+    __slots__ = ()
+    CASE_ID_FIELD_NUMBER: _ClassVar[int]
+    MODULE_FIELD_NUMBER: _ClassVar[int]
+    case_id: str
+    module: str
+    def __init__(self, case_id: _Optional[str] = ..., module: _Optional[str] = ...) -> None: ...
+
+class GetModuleGuideResponse(_message.Message):
+    __slots__ = ()
+    class Result(_message.Message):
+        __slots__ = ()
+        GUIDE_TEXT_FIELD_NUMBER: _ClassVar[int]
+        FROM_CACHE_FIELD_NUMBER: _ClassVar[int]
+        guide_text: str
+        from_cache: bool
+        def __init__(self, guide_text: _Optional[str] = ..., from_cache: _Optional[bool] = ...) -> None: ...
+    SUCCESS_FIELD_NUMBER: _ClassVar[int]
+    MESSAGE_FIELD_NUMBER: _ClassVar[int]
+    RESULT_FIELD_NUMBER: _ClassVar[int]
+    success: bool
+    message: str
+    result: GetModuleGuideResponse.Result
+    def __init__(self, success: _Optional[bool] = ..., message: _Optional[str] = ..., result: _Optional[_Union[GetModuleGuideResponse.Result, _Mapping]] = ...) -> None: ...
 
 class CreateCaseRequest(_message.Message):
     __slots__ = ()

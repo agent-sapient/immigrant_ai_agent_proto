@@ -20,11 +20,6 @@ class ImmigrantAIAgentStub(object):
                 request_serializer=src_dot_proto_dot_api_dot_api__pb2.GeneratePlanRequest.SerializeToString,
                 response_deserializer=src_dot_proto_dot_api_dot_api__pb2.GeneratePlanResponse.FromString,
                 _registered_method=True)
-        self.GetBackgroundInfo = channel.unary_unary(
-                '/api.ImmigrantAIAgent/GetBackgroundInfo',
-                request_serializer=src_dot_proto_dot_api_dot_api__pb2.GetBackgroundInfoRequest.SerializeToString,
-                response_deserializer=src_dot_proto_dot_api_dot_api__pb2.GetBackgroundInfoResponse.FromString,
-                _registered_method=True)
         self.GetRecommendLetter = channel.unary_unary(
                 '/api.ImmigrantAIAgent/GetRecommendLetter',
                 request_serializer=src_dot_proto_dot_api_dot_api__pb2.GetRecommendLetterRequest.SerializeToString,
@@ -69,6 +64,11 @@ class ImmigrantAIAgentStub(object):
                 '/api.ImmigrantAIAgent/DownloadOutputFile',
                 request_serializer=src_dot_proto_dot_api_dot_api__pb2.DownloadOutputFileRequest.SerializeToString,
                 response_deserializer=src_dot_proto_dot_api_dot_api__pb2.DownloadOutputFileResponse.FromString,
+                _registered_method=True)
+        self.UploadResumeFile = channel.unary_unary(
+                '/api.ImmigrantAIAgent/UploadResumeFile',
+                request_serializer=src_dot_proto_dot_api_dot_api__pb2.UploadResumeFileRequest.SerializeToString,
+                response_deserializer=src_dot_proto_dot_api_dot_api__pb2.UploadResumeFileResponse.FromString,
                 _registered_method=True)
         self.SaveBasicInfo = channel.unary_unary(
                 '/api.ImmigrantAIAgent/SaveBasicInfo',
@@ -165,6 +165,11 @@ class ImmigrantAIAgentStub(object):
                 request_serializer=src_dot_proto_dot_api_dot_api__pb2.DeleteAwardChatMessagesRequest.SerializeToString,
                 response_deserializer=src_dot_proto_dot_api_dot_api__pb2.DeleteAwardChatMessagesResponse.FromString,
                 _registered_method=True)
+        self.GetModuleGuide = channel.unary_unary(
+                '/api.ImmigrantAIAgent/GetModuleGuide',
+                request_serializer=src_dot_proto_dot_api_dot_api__pb2.GetModuleGuideRequest.SerializeToString,
+                response_deserializer=src_dot_proto_dot_api_dot_api__pb2.GetModuleGuideResponse.FromString,
+                _registered_method=True)
 
 
 class ImmigrantAIAgentServicer(object):
@@ -173,13 +178,6 @@ class ImmigrantAIAgentServicer(object):
 
     def GeneratePlan(self, request, context):
         """生成策划案:根据请求信息返回策划结果
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetBackgroundInfo(self, request, context):
-        """获取申请人背景信息:使用agent实现全网搜索
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -248,10 +246,16 @@ class ImmigrantAIAgentServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def SaveBasicInfo(self, request, context):
+    def UploadResumeFile(self, request, context):
         """========== 基本信息管理 ==========
+        上传简历文件:上传简历文件
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
-        保存基本信息:保存或更新申请人的基本信息
+    def SaveBasicInfo(self, request, context):
+        """保存基本信息:保存或更新申请人的基本信息
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -391,6 +395,15 @@ class ImmigrantAIAgentServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetModuleGuide(self, request, context):
+        """========== 模块引导文案管理 ==========
+
+        获取模块引导文案:根据案件基本信息生成个性化的模块引导文案
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ImmigrantAIAgentServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -398,11 +411,6 @@ def add_ImmigrantAIAgentServicer_to_server(servicer, server):
                     servicer.GeneratePlan,
                     request_deserializer=src_dot_proto_dot_api_dot_api__pb2.GeneratePlanRequest.FromString,
                     response_serializer=src_dot_proto_dot_api_dot_api__pb2.GeneratePlanResponse.SerializeToString,
-            ),
-            'GetBackgroundInfo': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetBackgroundInfo,
-                    request_deserializer=src_dot_proto_dot_api_dot_api__pb2.GetBackgroundInfoRequest.FromString,
-                    response_serializer=src_dot_proto_dot_api_dot_api__pb2.GetBackgroundInfoResponse.SerializeToString,
             ),
             'GetRecommendLetter': grpc.unary_unary_rpc_method_handler(
                     servicer.GetRecommendLetter,
@@ -448,6 +456,11 @@ def add_ImmigrantAIAgentServicer_to_server(servicer, server):
                     servicer.DownloadOutputFile,
                     request_deserializer=src_dot_proto_dot_api_dot_api__pb2.DownloadOutputFileRequest.FromString,
                     response_serializer=src_dot_proto_dot_api_dot_api__pb2.DownloadOutputFileResponse.SerializeToString,
+            ),
+            'UploadResumeFile': grpc.unary_unary_rpc_method_handler(
+                    servicer.UploadResumeFile,
+                    request_deserializer=src_dot_proto_dot_api_dot_api__pb2.UploadResumeFileRequest.FromString,
+                    response_serializer=src_dot_proto_dot_api_dot_api__pb2.UploadResumeFileResponse.SerializeToString,
             ),
             'SaveBasicInfo': grpc.unary_unary_rpc_method_handler(
                     servicer.SaveBasicInfo,
@@ -544,6 +557,11 @@ def add_ImmigrantAIAgentServicer_to_server(servicer, server):
                     request_deserializer=src_dot_proto_dot_api_dot_api__pb2.DeleteAwardChatMessagesRequest.FromString,
                     response_serializer=src_dot_proto_dot_api_dot_api__pb2.DeleteAwardChatMessagesResponse.SerializeToString,
             ),
+            'GetModuleGuide': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetModuleGuide,
+                    request_deserializer=src_dot_proto_dot_api_dot_api__pb2.GetModuleGuideRequest.FromString,
+                    response_serializer=src_dot_proto_dot_api_dot_api__pb2.GetModuleGuideResponse.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
             'api.ImmigrantAIAgent', rpc_method_handlers)
@@ -573,33 +591,6 @@ class ImmigrantAIAgent(object):
             '/api.ImmigrantAIAgent/GeneratePlan',
             src_dot_proto_dot_api_dot_api__pb2.GeneratePlanRequest.SerializeToString,
             src_dot_proto_dot_api_dot_api__pb2.GeneratePlanResponse.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
-
-    @staticmethod
-    def GetBackgroundInfo(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/api.ImmigrantAIAgent/GetBackgroundInfo',
-            src_dot_proto_dot_api_dot_api__pb2.GetBackgroundInfoRequest.SerializeToString,
-            src_dot_proto_dot_api_dot_api__pb2.GetBackgroundInfoResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -843,6 +834,33 @@ class ImmigrantAIAgent(object):
             '/api.ImmigrantAIAgent/DownloadOutputFile',
             src_dot_proto_dot_api_dot_api__pb2.DownloadOutputFileRequest.SerializeToString,
             src_dot_proto_dot_api_dot_api__pb2.DownloadOutputFileResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def UploadResumeFile(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/api.ImmigrantAIAgent/UploadResumeFile',
+            src_dot_proto_dot_api_dot_api__pb2.UploadResumeFileRequest.SerializeToString,
+            src_dot_proto_dot_api_dot_api__pb2.UploadResumeFileResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -1356,6 +1374,33 @@ class ImmigrantAIAgent(object):
             '/api.ImmigrantAIAgent/DeleteAwardChatMessages',
             src_dot_proto_dot_api_dot_api__pb2.DeleteAwardChatMessagesRequest.SerializeToString,
             src_dot_proto_dot_api_dot_api__pb2.DeleteAwardChatMessagesResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetModuleGuide(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/api.ImmigrantAIAgent/GetModuleGuide',
+            src_dot_proto_dot_api_dot_api__pb2.GetModuleGuideRequest.SerializeToString,
+            src_dot_proto_dot_api_dot_api__pb2.GetModuleGuideResponse.FromString,
             options,
             channel_credentials,
             insecure,

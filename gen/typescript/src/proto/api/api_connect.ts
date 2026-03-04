@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { CreateAwardRequest, CreateAwardResponse, CreateCaseRequest, CreateCaseResponse, DeleteAwardChatMessagesRequest, DeleteAwardChatMessagesResponse, DeleteAwardFileRequest, DeleteAwardFileResponse, DeleteAwardRequest, DeleteAwardResponse, DownloadOutputFileRequest, DownloadOutputFileResponse, EvaluateCaseRequest, EvaluateCaseResponse, GenerateApplicationMaterialsRequest, GenerateApplicationMaterialsResponse, GeneratePlanRequest, GeneratePlanResponse, GetAwardChatMessagesRequest, GetAwardChatMessagesResponse, GetAwardRequiredFilesRequest, GetAwardRequiredFilesResponse, GetBackgroundInfoRequest, GetBackgroundInfoResponse, GetBasicInfoRequest, GetBasicInfoResponse, GetCaseRequest, GetCaseResponse, GetRecommendLetterRequest, GetRecommendLetterResponse, ListAwardFilesRequest, ListAwardFilesResponse, ListAwardsRequest, ListAwardsResponse, ListOutputFilesRequest, ListOutputFilesResponse, LockAwardRequest, LockAwardResponse, PassportStatusQueryRequest, PassportStatusQueryResponse, SaveAwardChatMessagesRequest, SaveAwardChatMessagesResponse, SaveBasicInfoDraftRequest, SaveBasicInfoDraftResponse, SaveBasicInfoRequest, SaveBasicInfoResponse, SearchAwardMaterialsRequest, SearchAwardMaterialsResponse, SubmitTaskRequest, SubmitTaskResponse, TaskCancelRequest, TaskCancelResponse, TaskQueryRequest, TaskQueryResponse, UnlockAwardRequest, UnlockAwardResponse, UpdateAwardRequest, UpdateAwardResponse, UploadAwardFileRequest, UploadAwardFileResponse } from "./api_pb.js";
+import { CreateAwardRequest, CreateAwardResponse, CreateCaseRequest, CreateCaseResponse, DeleteAwardChatMessagesRequest, DeleteAwardChatMessagesResponse, DeleteAwardFileRequest, DeleteAwardFileResponse, DeleteAwardRequest, DeleteAwardResponse, DownloadOutputFileRequest, DownloadOutputFileResponse, EvaluateCaseRequest, EvaluateCaseResponse, GenerateApplicationMaterialsRequest, GenerateApplicationMaterialsResponse, GeneratePlanRequest, GeneratePlanResponse, GetAwardChatMessagesRequest, GetAwardChatMessagesResponse, GetAwardRequiredFilesRequest, GetAwardRequiredFilesResponse, GetBasicInfoRequest, GetBasicInfoResponse, GetCaseRequest, GetCaseResponse, GetModuleGuideRequest, GetModuleGuideResponse, GetRecommendLetterRequest, GetRecommendLetterResponse, ListAwardFilesRequest, ListAwardFilesResponse, ListAwardsRequest, ListAwardsResponse, ListOutputFilesRequest, ListOutputFilesResponse, LockAwardRequest, LockAwardResponse, PassportStatusQueryRequest, PassportStatusQueryResponse, SaveAwardChatMessagesRequest, SaveAwardChatMessagesResponse, SaveBasicInfoDraftRequest, SaveBasicInfoDraftResponse, SaveBasicInfoRequest, SaveBasicInfoResponse, SearchAwardMaterialsRequest, SearchAwardMaterialsResponse, SubmitTaskRequest, SubmitTaskResponse, TaskCancelRequest, TaskCancelResponse, TaskQueryRequest, TaskQueryResponse, UnlockAwardRequest, UnlockAwardResponse, UpdateAwardRequest, UpdateAwardResponse, UploadAwardFileRequest, UploadAwardFileResponse, UploadResumeFileRequest, UploadResumeFileResponse } from "./api_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -23,17 +23,6 @@ export const ImmigrantAIAgent = {
       name: "GeneratePlan",
       I: GeneratePlanRequest,
       O: GeneratePlanResponse,
-      kind: MethodKind.Unary,
-    },
-    /**
-     * 获取申请人背景信息:使用agent实现全网搜索
-     *
-     * @generated from rpc api.ImmigrantAIAgent.GetBackgroundInfo
-     */
-    getBackgroundInfo: {
-      name: "GetBackgroundInfo",
-      I: GetBackgroundInfoRequest,
-      O: GetBackgroundInfoResponse,
       kind: MethodKind.Unary,
     },
     /**
@@ -133,6 +122,18 @@ export const ImmigrantAIAgent = {
       name: "DownloadOutputFile",
       I: DownloadOutputFileRequest,
       O: DownloadOutputFileResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * ========== 基本信息管理 ==========
+     * 上传简历文件:上传简历文件
+     *
+     * @generated from rpc api.ImmigrantAIAgent.UploadResumeFile
+     */
+    uploadResumeFile: {
+      name: "UploadResumeFile",
+      I: UploadResumeFileRequest,
+      O: UploadResumeFileResponse,
       kind: MethodKind.Unary,
     },
     /**
@@ -342,6 +343,17 @@ export const ImmigrantAIAgent = {
       name: "DeleteAwardChatMessages",
       I: DeleteAwardChatMessagesRequest,
       O: DeleteAwardChatMessagesResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * 获取模块引导文案:根据案件基本信息生成个性化的模块引导文案
+     *
+     * @generated from rpc api.ImmigrantAIAgent.GetModuleGuide
+     */
+    getModuleGuide: {
+      name: "GetModuleGuide",
+      I: GetModuleGuideRequest,
+      O: GetModuleGuideResponse,
       kind: MethodKind.Unary,
     },
   }
