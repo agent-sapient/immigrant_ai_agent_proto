@@ -867,6 +867,25 @@ message DeleteAwardChatMessagesResponse {
   Result result = 3 [json_name = "result"]; // 结果
 }
 
+// ========== 模块引导文案管理 ==========
+
+// 获取模块引导文案请求
+message GetModuleGuideRequest {
+  string case_id = 1 [json_name = "caseId"]; // 案件ID
+  string module = 2 [json_name = "module"]; // 模块标识: award, membership, media_coverage, judging, original_contribution, article, exhibition, key_role, high_income, commercial_success
+}
+
+// 获取模块引导文案响应
+message GetModuleGuideResponse {
+  message Result {
+    string guide_text = 1 [json_name = "guideText"]; // 引导文案内容
+    bool from_cache = 2 [json_name = "fromCache"]; // 是否来自缓存
+  }
+  bool success = 1 [json_name = "success"]; // 是否成功
+  string message = 2 [json_name = "message"]; // 响应消息
+  Result result = 3 [json_name = "result"]; // 结果
+}
+
 // ========== 案件管理 ==========
 
 // 创建案件请求
@@ -1158,6 +1177,16 @@ service ImmigrantAIAgent {
   rpc DeleteAwardChatMessages(DeleteAwardChatMessagesRequest) returns (DeleteAwardChatMessagesResponse) {
     option (google.api.http) = {
       post: "/api/award/deleteChatMessages"
+      body: "*"
+    };
+  }
+
+  // ========== 模块引导文案管理 ==========
+
+  // 获取模块引导文案:根据案件基本信息生成个性化的模块引导文案
+  rpc GetModuleGuide(GetModuleGuideRequest) returns (GetModuleGuideResponse) {
+    option (google.api.http) = {
+      post: "/api/case/module_guide"
       body: "*"
     };
   }
