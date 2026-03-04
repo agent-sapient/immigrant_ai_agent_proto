@@ -165,27 +165,9 @@ message EvaluateCaseResponse {
   Result result = 3 [json_name = "result"]; // 结果
 }
 
-// 获取申请人背景信息请求
-message GetBackgroundInfoRequest {
-  BasicInfo basic_info = 1 [json_name = "basicInfo"]; // 基本信息
-  repeated FileInfo file_list = 2 [json_name = "fileList"]; // 文件列表
-}
-
-// 获取申请人背景信息响应
-message GetBackgroundInfoResponse {
-  message Result {
-    BackgroundInfo background_info = 3 [json_name = "backgroundInfo"]; // 申请人背景信息
-  }
-
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"];
-}
-
 // 异步任务请求
 message SubmitTaskRequest {
   oneof task_request {
-    GetBackgroundInfoRequest get_background_info_request = 1; // 获取申请人背景信息
     GetRecommendLetterRequest get_recommend_letter_request = 2; // 获取推荐信列表
     GenerateApplicationMaterialsRequest generate_application_materials_request = 3; // 生成申请材料
     EvaluateCaseRequest evaluate_case_request = 4; // 案件评测
@@ -212,7 +194,6 @@ message Task {
   string error_message = 9 [json_name = "errorMessage"]; // 错误信息
   double progress = 10 [json_name = "progress"]; // 任务进度 0-100
   oneof result {
-    GetBackgroundInfoResponse get_background_info_response = 30;
     GetRecommendLetterResponse get_recommend_letter_response = 40;
     GenerateApplicationMaterialsResponse generate_application_materials_response = 50;
     EvaluateCaseResponse evaluate_case_response = 60;
@@ -932,14 +913,6 @@ service ImmigrantAIAgent {
       body: "*"
     };
   }
-  // 获取申请人背景信息:使用agent实现全网搜索
-  rpc GetBackgroundInfo(GetBackgroundInfoRequest) returns (GetBackgroundInfoResponse) {
-    option (google.api.http) = {
-      post: "/api/pre-review/getBackgroundInfo"
-      body: "*"
-    };
-  }
-
   // 获取推荐信列表:使用ai生成推荐信
   rpc GetRecommendLetter(GetRecommendLetterRequest) returns (GetRecommendLetterResponse) {
     option (google.api.http) = {
