@@ -848,6 +848,276 @@ message DeleteAwardChatMessagesResponse {
   Result result = 3 [json_name = "result"]; // 结果
 }
 
+// ========== 会员/协会管理 ==========
+
+// 会员/协会信息
+message MembershipInfo {
+  string id = 1 [json_name = "id"]; // 会员ID
+  string case_id = 2 [json_name = "caseId"]; // 案件ID
+  string title = 3 [json_name = "title"]; // 协会名称
+  string role = 4 [json_name = "role"]; // 角色/职务
+  string year = 5 [json_name = "year"]; // 加入年份
+  string status = 6 [json_name = "status"]; // 状态：idle(待开始)、analyzing(检查中)、needs_revision(建议修改)、ready_to_search(待检索)、searching(检索中)、reviewing(待确认)、locked(已锁定)
+  google.protobuf.Timestamp created_at = 7 [json_name = "createdAt"]; // 创建时间
+  google.protobuf.Timestamp updated_at = 8 [json_name = "updatedAt"]; // 更新时间
+}
+
+// 会员文件信息
+message MembershipFileInfo {
+  string id = 1 [json_name = "id"]; // 文件ID
+  string membership_id = 2 [json_name = "membershipId"]; // 会员ID
+  string name = 3 [json_name = "name"]; // 文件名
+  string size = 4 [json_name = "size"]; // 文件大小
+  string type = 5 [json_name = "type"]; // 文件MIME类型
+  string url = 6 [json_name = "url"]; // 文件URL
+  string category = 7 [json_name = "category"]; // 文件类别
+  string status = 8 [json_name = "status"]; // 状态
+  int32 upload_progress = 9 [json_name = "uploadProgress"]; // 上传进度
+  string description = 10 [json_name = "description"]; // AI生成的文件描述
+  google.protobuf.Timestamp created_at = 11 [json_name = "createdAt"]; // 创建时间
+}
+
+// 会员聊天消息
+message MembershipChatMessage {
+  string id = 1 [json_name = "id"]; // 消息ID
+  string membership_id = 2 [json_name = "membershipId"]; // 会员ID
+  string content = 3 [json_name = "content"]; // 消息内容
+  google.protobuf.Timestamp created_at = 4 [json_name = "createdAt"]; // 创建时间
+}
+
+// 创建会员请求
+message CreateMembershipRequest {
+  string case_id = 1 [json_name = "caseId"]; // 案件ID
+  string title = 2 [json_name = "title"]; // 协会名称
+  string role = 3 [json_name = "role"]; // 角色/职务
+  string year = 4 [json_name = "year"]; // 加入年份
+}
+
+// 创建会员响应
+message CreateMembershipResponse {
+  message Result {
+    MembershipInfo membership = 1 [json_name = "membership"];
+  }
+  bool success = 1 [json_name = "success"];
+  string message = 2 [json_name = "message"];
+  Result result = 3 [json_name = "result"];
+}
+
+// 获取会员列表请求
+message ListMembershipsRequest {
+  string case_id = 1 [json_name = "caseId"];
+  string status = 2 [json_name = "status"];
+}
+
+// 获取会员列表响应
+message ListMembershipsResponse {
+  message Result {
+    repeated MembershipInfo memberships = 1 [json_name = "memberships"];
+    int32 total = 2 [json_name = "total"];
+  }
+  bool success = 1 [json_name = "success"];
+  string message = 2 [json_name = "message"];
+  Result result = 3 [json_name = "result"];
+}
+
+// 更新会员请求
+message UpdateMembershipRequest {
+  string membership_id = 1 [json_name = "membershipId"];
+  string title = 2 [json_name = "title"];
+  string role = 3 [json_name = "role"];
+  string year = 4 [json_name = "year"];
+}
+
+// 更新会员响应
+message UpdateMembershipResponse {
+  message Result {
+    MembershipInfo membership = 1 [json_name = "membership"];
+  }
+  bool success = 1 [json_name = "success"];
+  string message = 2 [json_name = "message"];
+  Result result = 3 [json_name = "result"];
+}
+
+// 删除会员请求
+message DeleteMembershipRequest {
+  string membership_id = 1 [json_name = "membershipId"];
+}
+
+// 删除会员响应
+message DeleteMembershipResponse {
+  bool success = 1 [json_name = "success"];
+  string message = 2 [json_name = "message"];
+}
+
+// 锁定会员请求
+message LockMembershipRequest {
+  string membership_id = 1 [json_name = "membershipId"];
+}
+
+// 锁定会员响应
+message LockMembershipResponse {
+  message Result {
+    MembershipInfo membership = 1 [json_name = "membership"];
+  }
+  bool success = 1 [json_name = "success"];
+  string message = 2 [json_name = "message"];
+  Result result = 3 [json_name = "result"];
+}
+
+// 解锁会员请求
+message UnlockMembershipRequest {
+  string membership_id = 1 [json_name = "membershipId"];
+}
+
+// 解锁会员响应
+message UnlockMembershipResponse {
+  message Result {
+    MembershipInfo membership = 1 [json_name = "membership"];
+  }
+  bool success = 1 [json_name = "success"];
+  string message = 2 [json_name = "message"];
+  Result result = 3 [json_name = "result"];
+}
+
+// 上传会员文件请求
+message UploadMembershipFileRequest {
+  string membership_id = 1 [json_name = "membershipId"];
+  bytes file_content = 2 [json_name = "fileContent"];
+  string file_name = 3 [json_name = "fileName"];
+  string file_type = 4 [json_name = "fileType"];
+}
+
+// 上传会员文件响应
+message UploadMembershipFileResponse {
+  message Result {
+    MembershipFileInfo file = 1 [json_name = "file"];
+  }
+  bool success = 1 [json_name = "success"];
+  string message = 2 [json_name = "message"];
+  Result result = 3 [json_name = "result"];
+}
+
+// 删除会员文件请求
+message DeleteMembershipFileRequest {
+  string file_id = 1 [json_name = "fileId"];
+}
+
+// 删除会员文件响应
+message DeleteMembershipFileResponse {
+  bool success = 1 [json_name = "success"];
+  string message = 2 [json_name = "message"];
+}
+
+// 列出会员文件请求
+message ListMembershipFilesRequest {
+  string membership_id = 1 [json_name = "membershipId"];
+}
+
+// 列出会员文件响应
+message ListMembershipFilesResponse {
+  message Result {
+    repeated MembershipFileInfo files = 1 [json_name = "files"];
+    int32 total = 2 [json_name = "total"];
+  }
+  bool success = 1 [json_name = "success"];
+  string message = 2 [json_name = "message"];
+  Result result = 3 [json_name = "result"];
+}
+
+// 检索会员补充材料请求
+message SearchMembershipMaterialsRequest {
+  string membership_id = 1 [json_name = "membershipId"];
+  string search_query = 2 [json_name = "searchQuery"];
+}
+
+// 检索会员补充材料响应
+message SearchMembershipMaterialsResponse {
+  message Result {
+    repeated SearchResult search_results = 1 [json_name = "searchResults"];
+    repeated MembershipFileInfo retrieved_files = 2 [json_name = "retrievedFiles"];
+    string merged_result = 3 [json_name = "mergedResult"];
+  }
+  bool success = 1 [json_name = "success"];
+  string message = 2 [json_name = "message"];
+  Result result = 3 [json_name = "result"];
+}
+
+// 获取会员所需文件列表请求
+message GetMembershipRequiredFilesRequest {
+  string membership_id = 1 [json_name = "membershipId"];
+}
+
+// 获取会员所需文件列表响应
+message GetMembershipRequiredFilesResponse {
+  message Result {
+    repeated RequiredFileItem required_files = 1 [json_name = "requiredFiles"];
+    string ai_suggestion = 2 [json_name = "aiSuggestion"];
+    string checklist_prompt = 3 [json_name = "checklistPrompt"];
+    bool is_complete = 4 [json_name = "isComplete"];
+    repeated string missing_items = 5 [json_name = "missingItems"];
+    string analysis_message = 6 [json_name = "analysisMessage"];
+  }
+  bool success = 1 [json_name = "success"];
+  string message = 2 [json_name = "message"];
+  Result result = 3 [json_name = "result"];
+}
+
+// 保存会员聊天消息请求
+message SaveMembershipChatMessagesRequest {
+  string membership_id = 1 [json_name = "membershipId"];
+  repeated MembershipChatMessage messages = 2 [json_name = "messages"];
+}
+
+// 保存会员聊天消息响应
+message SaveMembershipChatMessagesResponse {
+  message Result {
+    int32 saved_count = 1 [json_name = "savedCount"];
+    repeated string saved_ids = 2 [json_name = "savedIds"];
+  }
+  bool success = 1 [json_name = "success"];
+  string message = 2 [json_name = "message"];
+  Result result = 3 [json_name = "result"];
+}
+
+// 获取会员聊天消息请求
+message GetMembershipChatMessagesRequest {
+  string membership_id = 1 [json_name = "membershipId"];
+  int32 page = 2 [json_name = "page"];
+  int32 page_size = 3 [json_name = "pageSize"];
+  string cursor = 4 [json_name = "cursor"];
+}
+
+// 获取会员聊天消息响应
+message GetMembershipChatMessagesResponse {
+  message Result {
+    repeated MembershipChatMessage messages = 1 [json_name = "messages"];
+    int32 total = 2 [json_name = "total"];
+    int32 page = 3 [json_name = "page"];
+    int32 page_size = 4 [json_name = "pageSize"];
+    bool has_more = 5 [json_name = "hasMore"];
+    string next_cursor = 6 [json_name = "nextCursor"];
+  }
+  bool success = 1 [json_name = "success"];
+  string message = 2 [json_name = "message"];
+  Result result = 3 [json_name = "result"];
+}
+
+// 删除会员聊天消息请求
+message DeleteMembershipChatMessagesRequest {
+  string membership_id = 1 [json_name = "membershipId"];
+  repeated string message_ids = 2 [json_name = "messageIds"];
+}
+
+// 删除会员聊天消息响应
+message DeleteMembershipChatMessagesResponse {
+  message Result {
+    int32 deleted_count = 1 [json_name = "deletedCount"];
+  }
+  bool success = 1 [json_name = "success"];
+  string message = 2 [json_name = "message"];
+  Result result = 3 [json_name = "result"];
+}
+
 // ========== 模块引导文案管理 ==========
 
 // 获取模块引导文案请求
@@ -898,6 +1168,7 @@ message GetCaseResponse {
     repeated AwardInfo awards = 3 [json_name = "awards"]; // 奖项列表
     google.protobuf.Timestamp created_at = 4 [json_name = "createdAt"]; // 创建时间
     google.protobuf.Timestamp updated_at = 5 [json_name = "updatedAt"]; // 更新时间
+    repeated MembershipInfo memberships = 6 [json_name = "memberships"]; // 会员/协会列表
   }
   bool success = 1 [json_name = "success"]; // 是否成功
   string message = 2 [json_name = "message"]; // 响应消息
@@ -1150,6 +1421,124 @@ service ImmigrantAIAgent {
   rpc DeleteAwardChatMessages(DeleteAwardChatMessagesRequest) returns (DeleteAwardChatMessagesResponse) {
     option (google.api.http) = {
       post: "/api/award/deleteChatMessages"
+      body: "*"
+    };
+  }
+
+  // ========== 会员/协会管理 ==========
+
+  // 创建会员
+  rpc CreateMembership(CreateMembershipRequest) returns (CreateMembershipResponse) {
+    option (google.api.http) = {
+      post: "/api/membership/create"
+      body: "*"
+    };
+  }
+
+  // 获取会员列表
+  rpc ListMemberships(ListMembershipsRequest) returns (ListMembershipsResponse) {
+    option (google.api.http) = {
+      post: "/api/membership/list"
+      body: "*"
+    };
+  }
+
+  // 更新会员
+  rpc UpdateMembership(UpdateMembershipRequest) returns (UpdateMembershipResponse) {
+    option (google.api.http) = {
+      post: "/api/membership/update"
+      body: "*"
+    };
+  }
+
+  // 删除会员
+  rpc DeleteMembership(DeleteMembershipRequest) returns (DeleteMembershipResponse) {
+    option (google.api.http) = {
+      post: "/api/membership/delete"
+      body: "*"
+    };
+  }
+
+  // 锁定会员
+  rpc LockMembership(LockMembershipRequest) returns (LockMembershipResponse) {
+    option (google.api.http) = {
+      post: "/api/membership/lock"
+      body: "*"
+    };
+  }
+
+  // 解锁会员
+  rpc UnlockMembership(UnlockMembershipRequest) returns (UnlockMembershipResponse) {
+    option (google.api.http) = {
+      post: "/api/membership/unlock"
+      body: "*"
+    };
+  }
+
+  // ========== 会员文件管理 ==========
+
+  // 上传会员文件
+  rpc UploadMembershipFile(UploadMembershipFileRequest) returns (UploadMembershipFileResponse) {
+    option (google.api.http) = {
+      post: "/api/membership/uploadFile"
+      body: "*"
+    };
+  }
+
+  // 删除会员文件
+  rpc DeleteMembershipFile(DeleteMembershipFileRequest) returns (DeleteMembershipFileResponse) {
+    option (google.api.http) = {
+      post: "/api/membership/deleteFile"
+      body: "*"
+    };
+  }
+
+  // 列出会员文件
+  rpc ListMembershipFiles(ListMembershipFilesRequest) returns (ListMembershipFilesResponse) {
+    option (google.api.http) = {
+      post: "/api/membership/listFiles"
+      body: "*"
+    };
+  }
+
+  // 检索会员补充材料
+  rpc SearchMembershipMaterials(SearchMembershipMaterialsRequest) returns (SearchMembershipMaterialsResponse) {
+    option (google.api.http) = {
+      post: "/api/membership/searchMaterials"
+      body: "*"
+    };
+  }
+
+  // 获取会员所需文件列表
+  rpc GetMembershipRequiredFiles(GetMembershipRequiredFilesRequest) returns (GetMembershipRequiredFilesResponse) {
+    option (google.api.http) = {
+      post: "/api/membership/getRequiredFiles"
+      body: "*"
+    };
+  }
+
+  // ========== 会员聊天消息管理 ==========
+
+  // 保存会员聊天消息
+  rpc SaveMembershipChatMessages(SaveMembershipChatMessagesRequest) returns (SaveMembershipChatMessagesResponse) {
+    option (google.api.http) = {
+      post: "/api/membership/saveChatMessages"
+      body: "*"
+    };
+  }
+
+  // 获取会员聊天消息
+  rpc GetMembershipChatMessages(GetMembershipChatMessagesRequest) returns (GetMembershipChatMessagesResponse) {
+    option (google.api.http) = {
+      post: "/api/membership/getChatMessages"
+      body: "*"
+    };
+  }
+
+  // 删除会员聊天消息
+  rpc DeleteMembershipChatMessages(DeleteMembershipChatMessagesRequest) returns (DeleteMembershipChatMessagesResponse) {
+    option (google.api.http) = {
+      post: "/api/membership/deleteChatMessages"
       body: "*"
     };
   }
