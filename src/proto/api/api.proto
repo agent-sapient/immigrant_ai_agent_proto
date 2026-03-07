@@ -4,6 +4,7 @@ package api;
 
 // 引入 Google API 注解包，用于定义 HTTP 映射
 import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
 // 添加go_package选项
@@ -563,559 +564,263 @@ message UploadResumeFileResponse {
   Result result = 3 [json_name = "result"]; // 结果
 }
 
-// ========== 奖项管理 ==========
+// ==================== Evidence Module (unified) ====================
 
-// 奖项信息
-message AwardInfo {
-  string id = 1 [json_name = "id"]; // 奖项ID
-  string case_id = 2 [json_name = "caseId"]; // 案件ID
-  string title = 3 [json_name = "title"]; // 奖项名称
-  string year = 4 [json_name = "year"]; // 获奖年份
-  string level = 5 [json_name = "level"]; // 级别：international(国际级)、national(国家级)、provincial(省部级)、company(公司级)
-  string status = 6 [json_name = "status"]; // 状态：idle(待开始)、analyzing(检查中)、needs_revision(建议修改)、ready_to_search(待检索)、searching(检索中)、reviewing(待确认)、locked(已锁定)
-  google.protobuf.Timestamp created_at = 7 [json_name = "createdAt"]; // 创建时间
-  google.protobuf.Timestamp updated_at = 8 [json_name = "updatedAt"]; // 更新时间
+message EvidenceItemInfo {
+  string id = 1;
+  string case_id = 2;
+  string module_type = 3;
+  string title = 4;
+  string year = 5;
+  string status = 6;
+  google.protobuf.Struct extra_data = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
 }
 
-// 创建奖项请求
-message CreateAwardRequest {
-  string case_id = 1 [json_name = "caseId"]; // 案件ID
-  string title = 2 [json_name = "title"]; // 奖项名称
-  string year = 3 [json_name = "year"]; // 获奖年份（可选）
-  string level = 4 [json_name = "level"]; // 级别（可选）
+message EvidenceFileInfo {
+  string id = 1;
+  string item_id = 2;
+  string name = 3;
+  string size = 4;
+  string type = 5;
+  string url = 6;
+  string category = 7;
+  string status = 8;
+  int32 upload_progress = 9;
+  google.protobuf.Timestamp created_at = 10;
+  string description = 11;
 }
 
-// 创建奖项响应
-message CreateAwardResponse {
+message EvidenceChatMessage {
+  string id = 1;
+  string item_id = 2;
+  string content = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+
+// ---- Evidence Item CRUD ----
+
+message CreateEvidenceItemRequest {
+  string case_id = 1;
+  string module_type = 2;
+  string title = 3;
+  string year = 4;
+  google.protobuf.Struct extra_data = 5;
+}
+
+message CreateEvidenceItemResponse {
+  bool success = 1;
+  string message = 2;
   message Result {
-    AwardInfo award = 1 [json_name = "award"]; // 创建的奖项
+    EvidenceItemInfo item = 1;
   }
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"]; // 结果
+  Result result = 3;
 }
 
-// 获取奖项列表请求
-message ListAwardsRequest {
-  string case_id = 1 [json_name = "caseId"]; // 案件ID
-  string status = 2 [json_name = "status"]; // 状态筛选（可选）
+message ListEvidenceItemsRequest {
+  string case_id = 1;
+  string module_type = 2;
+  string status = 3;
 }
 
-// 获取奖项列表响应
-message ListAwardsResponse {
+message ListEvidenceItemsResponse {
+  bool success = 1;
+  string message = 2;
   message Result {
-    repeated AwardInfo awards = 1 [json_name = "awards"]; // 奖项列表
-    int32 total = 2 [json_name = "total"]; // 总数
+    int32 total = 1;
+    repeated EvidenceItemInfo items = 2;
   }
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"]; // 结果
+  Result result = 3;
 }
 
-// 更新奖项请求
-message UpdateAwardRequest {
-  string award_id = 1 [json_name = "awardId"]; // 奖项ID
-  string title = 2 [json_name = "title"]; // 奖项名称（可选）
-  string year = 3 [json_name = "year"]; // 获奖年份（可选）
-  string level = 4 [json_name = "level"]; // 级别（可选）
+message UpdateEvidenceItemRequest {
+  string item_id = 1;
+  string title = 2;
+  string year = 3;
+  google.protobuf.Struct extra_data = 4;
 }
 
-// 更新奖项响应
-message UpdateAwardResponse {
+message UpdateEvidenceItemResponse {
+  bool success = 1;
+  string message = 2;
   message Result {
-    AwardInfo award = 1 [json_name = "award"]; // 更新后的奖项
+    EvidenceItemInfo item = 1;
   }
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"]; // 结果
+  Result result = 3;
 }
 
-// 删除奖项请求
-message DeleteAwardRequest {
-  string award_id = 1 [json_name = "awardId"]; // 奖项ID
+message DeleteEvidenceItemRequest {
+  string item_id = 1;
 }
 
-// 删除奖项响应
-message DeleteAwardResponse {
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
+message DeleteEvidenceItemResponse {
+  bool success = 1;
+  string message = 2;
 }
 
-// 锁定奖项请求
-message LockAwardRequest {
-  string award_id = 1 [json_name = "awardId"]; // 奖项ID
+message LockEvidenceItemRequest {
+  string item_id = 1;
 }
 
-// 锁定奖项响应
-message LockAwardResponse {
+message LockEvidenceItemResponse {
+  bool success = 1;
+  string message = 2;
   message Result {
-    AwardInfo award = 1 [json_name = "award"]; // 锁定后的奖项
+    EvidenceItemInfo item = 1;
   }
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"]; // 结果
+  Result result = 3;
 }
 
-// 解锁奖项请求
-message UnlockAwardRequest {
-  string award_id = 1 [json_name = "awardId"]; // 奖项ID
+message UnlockEvidenceItemRequest {
+  string item_id = 1;
 }
 
-// 解锁奖项响应
-message UnlockAwardResponse {
+message UnlockEvidenceItemResponse {
+  bool success = 1;
+  string message = 2;
   message Result {
-    AwardInfo award = 1 [json_name = "award"]; // 解锁后的奖项
+    EvidenceItemInfo item = 1;
   }
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"]; // 结果
+  Result result = 3;
 }
 
-// ========== 奖项文件管理 ==========
+// ---- Evidence File operations ----
 
-// 奖项文件信息
-message AwardFileInfo {
-  string id = 1 [json_name = "id"]; // 文件ID
-  string award_id = 2 [json_name = "awardId"]; // 奖项ID
-  string name = 3 [json_name = "name"]; // 文件名
-  string size = 4 [json_name = "size"]; // 文件大小（字符串格式，如 "1.2 MB"）
-  string type = 5 [json_name = "type"]; // 文件MIME类型
-  string url = 6 [json_name = "url"]; // 文件URL
-  string category = 7 [json_name = "category"]; // 文件类别：certificate(证书)、introduction(奖项介绍)、criteria(评选标准)、process(评选流程)、organizer(主办单位)、winners(历届获奖人)、judges(评委会成员)、media_reports(媒体报道)、media_profiles(媒体简介)
-  string status = 8 [json_name = "status"]; // 状态：uploading(上传中)、complete(完成)、error(错误)
-  int32 upload_progress = 9 [json_name = "uploadProgress"]; // 上传进度 0-100
-  string description = 11 [json_name = "description"]; // AI 生成的文件内容描述
-  google.protobuf.Timestamp created_at = 10 [json_name = "createdAt"]; // 创建时间
+message UploadEvidenceFileRequest {
+  string item_id = 1;
+  string file_name = 2;
+  bytes file_content = 3;
+  string file_type = 4;
 }
 
-// 上传奖项文件请求
-message UploadAwardFileRequest {
-  string award_id = 1 [json_name = "awardId"]; // 奖项ID
-  bytes file_content = 2 [json_name = "fileContent"]; // 文件内容（base64编码或直接字节）
-  string file_name = 3 [json_name = "fileName"]; // 文件名
-  string file_type = 4 [json_name = "fileType"]; // 文件MIME类型
-}
-
-// 上传奖项文件响应
-message UploadAwardFileResponse {
+message UploadEvidenceFileResponse {
+  bool success = 1;
+  string message = 2;
   message Result {
-    AwardFileInfo file = 1 [json_name = "file"]; // 上传的文件信息
+    EvidenceFileInfo file = 1;
   }
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"]; // 结果
+  Result result = 3;
 }
 
-// 删除奖项文件请求
-message DeleteAwardFileRequest {
-  string file_id = 1 [json_name = "fileId"]; // 文件ID
+message DeleteEvidenceFileRequest {
+  string file_id = 1;
 }
 
-// 删除奖项文件响应
-message DeleteAwardFileResponse {
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
+message DeleteEvidenceFileResponse {
+  bool success = 1;
+  string message = 2;
 }
 
-// 列出奖项文件请求
-message ListAwardFilesRequest {
-  string award_id = 1 [json_name = "awardId"]; // 奖项ID
+message ListEvidenceFilesRequest {
+  string item_id = 1;
 }
 
-// 列出奖项文件响应
-message ListAwardFilesResponse {
+message ListEvidenceFilesResponse {
+  bool success = 1;
+  string message = 2;
   message Result {
-    repeated AwardFileInfo files = 1 [json_name = "files"]; // 文件列表
-    int32 total = 2 [json_name = "total"]; // 总数
+    int32 total = 1;
+    repeated EvidenceFileInfo files = 2;
   }
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"]; // 结果
+  Result result = 3;
 }
 
-// 检索奖项补充材料请求
-message SearchAwardMaterialsRequest {
-  string award_id = 1 [json_name = "awardId"]; // 奖项ID
-  string search_query = 2 [json_name = "searchQuery"]; // 搜索查询（可选，如果不提供则基于奖项信息自动生成）
+// ---- Evidence Search ----
+
+message SearchEvidenceMaterialsRequest {
+  string item_id = 1;
 }
 
-// 检索奖项补充材料响应
-message SearchAwardMaterialsResponse {
+message SearchEvidenceMaterialsResponse {
+  bool success = 1;
+  string message = 2;
   message Result {
-    repeated SearchResult search_results = 1 [json_name = "searchResults"]; // 搜索结果
-    repeated AwardFileInfo retrieved_files = 2 [json_name = "retrievedFiles"]; // 检索到的文件列表
-    string merged_result = 3 [json_name = "mergedResult"]; // 合并后的结果
+    string merged_result = 1;
+    repeated EvidenceFileInfo retrieved_files = 2;
   }
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"]; // 结果
+  Result result = 3;
 }
 
-// 需要收集的文件项
-message RequiredFileItem {
-  string id = 1 [json_name = "id"]; // 文件项ID
-  string label = 2 [json_name = "label"]; // 文件项标签，如"奖项证书 / 奖杯照片"
-  string description = 3 [json_name = "description"]; // 详细描述
-  bool is_required = 4 [json_name = "isRequired"]; // 是否必须
-  bool is_uploaded = 5 [json_name = "isUploaded"]; // 是否已上传
-  string category = 6 [json_name = "category"]; // 类别：certificate, media, letter, other
+// ---- Evidence Required Files ----
+
+message EvidenceRequiredFileItem {
+  string id = 1;
+  string label = 2;
+  string description = 3;
+  bool is_required = 4;
+  string category = 5;
+  bool is_uploaded = 6;
 }
 
-// 获取奖项所需文件列表请求
-message GetAwardRequiredFilesRequest {
-  string award_id = 1 [json_name = "awardId"]; // 奖项ID
+message GetEvidenceRequiredFilesRequest {
+  string item_id = 1;
 }
 
-// 获取奖项所需文件列表响应
-message GetAwardRequiredFilesResponse {
+message GetEvidenceRequiredFilesResponse {
+  bool success = 1;
+  string message = 2;
   message Result {
-    repeated RequiredFileItem required_files = 1 [json_name = "requiredFiles"]; // 所需文件列表
-    string ai_suggestion = 2 [json_name = "aiSuggestion"]; // AI建议说明（第一条消息内容）
-    string checklist_prompt = 3 [json_name = "checklistPrompt"]; // 文件清单提示语（第二条消息内容）
-    // 分析结果字段（原 AnalyzeAwardFilesResponse）
-    bool is_complete = 4 [json_name = "isComplete"]; // 必需文件是否完整
-    repeated string missing_items = 5 [json_name = "missingItems"]; // 缺失的必需项目列表
-    string analysis_message = 6 [json_name = "analysisMessage"]; // 分析消息
+    repeated EvidenceRequiredFileItem required_files = 1;
+    string ai_suggestion = 2;
+    string checklist_prompt = 3;
+    bool is_complete = 4;
+    repeated string missing_items = 5;
+    string analysis_message = 6;
   }
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"]; // 结果
+  Result result = 3;
 }
 
-// ========== 奖项聊天消息管理 ==========
+// ---- Evidence Chat Messages ----
 
-// 奖项聊天消息（格式由前端定义，后端只存储）
-message AwardChatMessage {
-  string id = 1 [json_name = "id"]; // 消息ID（由前端生成）
-  string award_id = 2 [json_name = "awardId"]; // 奖项ID
-  string content = 3 [json_name = "content"]; // 消息内容（JSON字符串，前端自定义格式）
-  google.protobuf.Timestamp created_at = 4 [json_name = "createdAt"]; // 创建时间
+message SaveEvidenceChatMessagesRequest {
+  string item_id = 1;
+  repeated EvidenceChatMessage messages = 2;
 }
 
-// 保存奖项聊天消息请求（批量追加模式）
-message SaveAwardChatMessagesRequest {
-  string award_id = 1 [json_name = "awardId"]; // 奖项ID
-  repeated AwardChatMessage messages = 2 [json_name = "messages"]; // 要追加的消息列表
-}
-
-// 保存奖项聊天消息响应
-message SaveAwardChatMessagesResponse {
+message SaveEvidenceChatMessagesResponse {
+  bool success = 1;
+  string message = 2;
   message Result {
-    int32 saved_count = 1 [json_name = "savedCount"]; // 成功保存的消息数量
-    repeated string saved_ids = 2 [json_name = "savedIds"]; // 成功保存的消息ID列表
+    int32 saved_count = 1;
+    repeated string saved_ids = 2;
   }
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"]; // 结果
+  Result result = 3;
 }
 
-// 获取奖项聊天消息请求（分页）
-message GetAwardChatMessagesRequest {
-  string award_id = 1 [json_name = "awardId"]; // 奖项ID
-  int32 page = 2 [json_name = "page"]; // 页码，从1开始，默认1
-  int32 page_size = 3 [json_name = "pageSize"]; // 每页数量，默认50，最大100
-  string cursor = 4 [json_name = "cursor"]; // 游标（可选，用于游标分页，传入上次返回的最后一条消息ID）
+message GetEvidenceChatMessagesRequest {
+  string item_id = 1;
+  int32 page = 2;
+  int32 page_size = 3;
+  string cursor = 4;
 }
 
-// 获取奖项聊天消息响应
-message GetAwardChatMessagesResponse {
+message GetEvidenceChatMessagesResponse {
+  bool success = 1;
+  string message = 2;
   message Result {
-    repeated AwardChatMessage messages = 1 [json_name = "messages"]; // 消息列表（按创建时间升序）
-    int32 total = 2 [json_name = "total"]; // 总消息数
-    int32 page = 3 [json_name = "page"]; // 当前页码
-    int32 page_size = 4 [json_name = "pageSize"]; // 每页数量
-    bool has_more = 5 [json_name = "hasMore"]; // 是否还有更多消息
-    string next_cursor = 6 [json_name = "nextCursor"]; // 下一页游标（最后一条消息的ID）
+    int32 total = 1;
+    int32 page = 2;
+    int32 page_size = 3;
+    bool has_more = 4;
+    string next_cursor = 5;
+    repeated EvidenceChatMessage messages = 6;
   }
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"]; // 结果
+  Result result = 3;
 }
 
-// 删除奖项聊天消息请求
-message DeleteAwardChatMessagesRequest {
-  string award_id = 1 [json_name = "awardId"]; // 奖项ID
-  repeated string message_ids = 2 [json_name = "messageIds"]; // 要删除的消息ID列表（为空则删除该奖项所有消息）
+message DeleteEvidenceChatMessagesRequest {
+  string item_id = 1;
+  repeated string message_ids = 2;
 }
 
-// 删除奖项聊天消息响应
-message DeleteAwardChatMessagesResponse {
+message DeleteEvidenceChatMessagesResponse {
+  bool success = 1;
+  string message = 2;
   message Result {
-    int32 deleted_count = 1 [json_name = "deletedCount"]; // 成功删除的消息数量
+    int32 deleted_count = 1;
   }
-  bool success = 1 [json_name = "success"]; // 是否成功
-  string message = 2 [json_name = "message"]; // 响应消息
-  Result result = 3 [json_name = "result"]; // 结果
-}
-
-// ========== 会员/协会管理 ==========
-
-// 会员/协会信息
-message MembershipInfo {
-  string id = 1 [json_name = "id"]; // 会员ID
-  string case_id = 2 [json_name = "caseId"]; // 案件ID
-  string title = 3 [json_name = "title"]; // 协会名称
-  string role = 4 [json_name = "role"]; // 角色/职务
-  string year = 5 [json_name = "year"]; // 加入年份
-  string status = 6 [json_name = "status"]; // 状态：idle(待开始)、analyzing(检查中)、needs_revision(建议修改)、ready_to_search(待检索)、searching(检索中)、reviewing(待确认)、locked(已锁定)
-  google.protobuf.Timestamp created_at = 7 [json_name = "createdAt"]; // 创建时间
-  google.protobuf.Timestamp updated_at = 8 [json_name = "updatedAt"]; // 更新时间
-}
-
-// 会员文件信息
-message MembershipFileInfo {
-  string id = 1 [json_name = "id"]; // 文件ID
-  string membership_id = 2 [json_name = "membershipId"]; // 会员ID
-  string name = 3 [json_name = "name"]; // 文件名
-  string size = 4 [json_name = "size"]; // 文件大小
-  string type = 5 [json_name = "type"]; // 文件MIME类型
-  string url = 6 [json_name = "url"]; // 文件URL
-  string category = 7 [json_name = "category"]; // 文件类别
-  string status = 8 [json_name = "status"]; // 状态
-  int32 upload_progress = 9 [json_name = "uploadProgress"]; // 上传进度
-  string description = 10 [json_name = "description"]; // AI生成的文件描述
-  google.protobuf.Timestamp created_at = 11 [json_name = "createdAt"]; // 创建时间
-}
-
-// 会员聊天消息
-message MembershipChatMessage {
-  string id = 1 [json_name = "id"]; // 消息ID
-  string membership_id = 2 [json_name = "membershipId"]; // 会员ID
-  string content = 3 [json_name = "content"]; // 消息内容
-  google.protobuf.Timestamp created_at = 4 [json_name = "createdAt"]; // 创建时间
-}
-
-// 创建会员请求
-message CreateMembershipRequest {
-  string case_id = 1 [json_name = "caseId"]; // 案件ID
-  string title = 2 [json_name = "title"]; // 协会名称
-  string role = 3 [json_name = "role"]; // 角色/职务
-  string year = 4 [json_name = "year"]; // 加入年份
-}
-
-// 创建会员响应
-message CreateMembershipResponse {
-  message Result {
-    MembershipInfo membership = 1 [json_name = "membership"];
-  }
-  bool success = 1 [json_name = "success"];
-  string message = 2 [json_name = "message"];
-  Result result = 3 [json_name = "result"];
-}
-
-// 获取会员列表请求
-message ListMembershipsRequest {
-  string case_id = 1 [json_name = "caseId"];
-  string status = 2 [json_name = "status"];
-}
-
-// 获取会员列表响应
-message ListMembershipsResponse {
-  message Result {
-    repeated MembershipInfo memberships = 1 [json_name = "memberships"];
-    int32 total = 2 [json_name = "total"];
-  }
-  bool success = 1 [json_name = "success"];
-  string message = 2 [json_name = "message"];
-  Result result = 3 [json_name = "result"];
-}
-
-// 更新会员请求
-message UpdateMembershipRequest {
-  string membership_id = 1 [json_name = "membershipId"];
-  string title = 2 [json_name = "title"];
-  string role = 3 [json_name = "role"];
-  string year = 4 [json_name = "year"];
-}
-
-// 更新会员响应
-message UpdateMembershipResponse {
-  message Result {
-    MembershipInfo membership = 1 [json_name = "membership"];
-  }
-  bool success = 1 [json_name = "success"];
-  string message = 2 [json_name = "message"];
-  Result result = 3 [json_name = "result"];
-}
-
-// 删除会员请求
-message DeleteMembershipRequest {
-  string membership_id = 1 [json_name = "membershipId"];
-}
-
-// 删除会员响应
-message DeleteMembershipResponse {
-  bool success = 1 [json_name = "success"];
-  string message = 2 [json_name = "message"];
-}
-
-// 锁定会员请求
-message LockMembershipRequest {
-  string membership_id = 1 [json_name = "membershipId"];
-}
-
-// 锁定会员响应
-message LockMembershipResponse {
-  message Result {
-    MembershipInfo membership = 1 [json_name = "membership"];
-  }
-  bool success = 1 [json_name = "success"];
-  string message = 2 [json_name = "message"];
-  Result result = 3 [json_name = "result"];
-}
-
-// 解锁会员请求
-message UnlockMembershipRequest {
-  string membership_id = 1 [json_name = "membershipId"];
-}
-
-// 解锁会员响应
-message UnlockMembershipResponse {
-  message Result {
-    MembershipInfo membership = 1 [json_name = "membership"];
-  }
-  bool success = 1 [json_name = "success"];
-  string message = 2 [json_name = "message"];
-  Result result = 3 [json_name = "result"];
-}
-
-// 上传会员文件请求
-message UploadMembershipFileRequest {
-  string membership_id = 1 [json_name = "membershipId"];
-  bytes file_content = 2 [json_name = "fileContent"];
-  string file_name = 3 [json_name = "fileName"];
-  string file_type = 4 [json_name = "fileType"];
-}
-
-// 上传会员文件响应
-message UploadMembershipFileResponse {
-  message Result {
-    MembershipFileInfo file = 1 [json_name = "file"];
-  }
-  bool success = 1 [json_name = "success"];
-  string message = 2 [json_name = "message"];
-  Result result = 3 [json_name = "result"];
-}
-
-// 删除会员文件请求
-message DeleteMembershipFileRequest {
-  string file_id = 1 [json_name = "fileId"];
-}
-
-// 删除会员文件响应
-message DeleteMembershipFileResponse {
-  bool success = 1 [json_name = "success"];
-  string message = 2 [json_name = "message"];
-}
-
-// 列出会员文件请求
-message ListMembershipFilesRequest {
-  string membership_id = 1 [json_name = "membershipId"];
-}
-
-// 列出会员文件响应
-message ListMembershipFilesResponse {
-  message Result {
-    repeated MembershipFileInfo files = 1 [json_name = "files"];
-    int32 total = 2 [json_name = "total"];
-  }
-  bool success = 1 [json_name = "success"];
-  string message = 2 [json_name = "message"];
-  Result result = 3 [json_name = "result"];
-}
-
-// 检索会员补充材料请求
-message SearchMembershipMaterialsRequest {
-  string membership_id = 1 [json_name = "membershipId"];
-  string search_query = 2 [json_name = "searchQuery"];
-}
-
-// 检索会员补充材料响应
-message SearchMembershipMaterialsResponse {
-  message Result {
-    repeated SearchResult search_results = 1 [json_name = "searchResults"];
-    repeated MembershipFileInfo retrieved_files = 2 [json_name = "retrievedFiles"];
-    string merged_result = 3 [json_name = "mergedResult"];
-  }
-  bool success = 1 [json_name = "success"];
-  string message = 2 [json_name = "message"];
-  Result result = 3 [json_name = "result"];
-}
-
-// 获取会员所需文件列表请求
-message GetMembershipRequiredFilesRequest {
-  string membership_id = 1 [json_name = "membershipId"];
-}
-
-// 获取会员所需文件列表响应
-message GetMembershipRequiredFilesResponse {
-  message Result {
-    repeated RequiredFileItem required_files = 1 [json_name = "requiredFiles"];
-    string ai_suggestion = 2 [json_name = "aiSuggestion"];
-    string checklist_prompt = 3 [json_name = "checklistPrompt"];
-    bool is_complete = 4 [json_name = "isComplete"];
-    repeated string missing_items = 5 [json_name = "missingItems"];
-    string analysis_message = 6 [json_name = "analysisMessage"];
-  }
-  bool success = 1 [json_name = "success"];
-  string message = 2 [json_name = "message"];
-  Result result = 3 [json_name = "result"];
-}
-
-// 保存会员聊天消息请求
-message SaveMembershipChatMessagesRequest {
-  string membership_id = 1 [json_name = "membershipId"];
-  repeated MembershipChatMessage messages = 2 [json_name = "messages"];
-}
-
-// 保存会员聊天消息响应
-message SaveMembershipChatMessagesResponse {
-  message Result {
-    int32 saved_count = 1 [json_name = "savedCount"];
-    repeated string saved_ids = 2 [json_name = "savedIds"];
-  }
-  bool success = 1 [json_name = "success"];
-  string message = 2 [json_name = "message"];
-  Result result = 3 [json_name = "result"];
-}
-
-// 获取会员聊天消息请求
-message GetMembershipChatMessagesRequest {
-  string membership_id = 1 [json_name = "membershipId"];
-  int32 page = 2 [json_name = "page"];
-  int32 page_size = 3 [json_name = "pageSize"];
-  string cursor = 4 [json_name = "cursor"];
-}
-
-// 获取会员聊天消息响应
-message GetMembershipChatMessagesResponse {
-  message Result {
-    repeated MembershipChatMessage messages = 1 [json_name = "messages"];
-    int32 total = 2 [json_name = "total"];
-    int32 page = 3 [json_name = "page"];
-    int32 page_size = 4 [json_name = "pageSize"];
-    bool has_more = 5 [json_name = "hasMore"];
-    string next_cursor = 6 [json_name = "nextCursor"];
-  }
-  bool success = 1 [json_name = "success"];
-  string message = 2 [json_name = "message"];
-  Result result = 3 [json_name = "result"];
-}
-
-// 删除会员聊天消息请求
-message DeleteMembershipChatMessagesRequest {
-  string membership_id = 1 [json_name = "membershipId"];
-  repeated string message_ids = 2 [json_name = "messageIds"];
-}
-
-// 删除会员聊天消息响应
-message DeleteMembershipChatMessagesResponse {
-  message Result {
-    int32 deleted_count = 1 [json_name = "deletedCount"];
-  }
-  bool success = 1 [json_name = "success"];
-  string message = 2 [json_name = "message"];
-  Result result = 3 [json_name = "result"];
+  Result result = 3;
 }
 
 // ========== 模块引导文案管理 ==========
@@ -1165,10 +870,9 @@ message GetCaseResponse {
   message Result {
     string case_id = 1 [json_name = "caseId"]; // 案件ID
     ExtendedBasicInfo basic_info = 2 [json_name = "basicInfo"]; // 基本信息
-    repeated AwardInfo awards = 3 [json_name = "awards"]; // 奖项列表
+    repeated EvidenceItemInfo evidence_items = 3 [json_name = "evidenceItems"]; // 证据项列表（含奖项、会员等模块）
     google.protobuf.Timestamp created_at = 4 [json_name = "createdAt"]; // 创建时间
     google.protobuf.Timestamp updated_at = 5 [json_name = "updatedAt"]; // 更新时间
-    repeated MembershipInfo memberships = 6 [json_name = "memberships"]; // 会员/协会列表
   }
   bool success = 1 [json_name = "success"]; // 是否成功
   string message = 2 [json_name = "message"]; // 响应消息
@@ -1307,240 +1011,48 @@ service ImmigrantAIAgent {
     };
   }
 
-  // ========== 奖项管理 ==========
-
-  // 创建奖项:为案件创建一个新的奖项
-  rpc CreateAward(CreateAwardRequest) returns (CreateAwardResponse) {
-    option (google.api.http) = {
-      post: "/api/award/create"
-      body: "*"
-    };
+  // ==================== Evidence Module ====================
+  rpc CreateEvidenceItem(CreateEvidenceItemRequest) returns (CreateEvidenceItemResponse) {
+    option (google.api.http) = { post: "/api/{module_type}/create" body: "*" };
   }
-
-  // 获取奖项列表:获取案件的所有奖项列表
-  rpc ListAwards(ListAwardsRequest) returns (ListAwardsResponse) {
-    option (google.api.http) = {
-      post: "/api/award/list"
-      body: "*"
-    };
+  rpc ListEvidenceItems(ListEvidenceItemsRequest) returns (ListEvidenceItemsResponse) {
+    option (google.api.http) = { post: "/api/{module_type}/list" body: "*" };
   }
-
-  // 更新奖项:更新奖项信息
-  rpc UpdateAward(UpdateAwardRequest) returns (UpdateAwardResponse) {
-    option (google.api.http) = {
-      post: "/api/award/update"
-      body: "*"
-    };
+  rpc UpdateEvidenceItem(UpdateEvidenceItemRequest) returns (UpdateEvidenceItemResponse) {
+    option (google.api.http) = { post: "/api/{module_type}/update" body: "*" };
   }
-
-  // 删除奖项:删除指定的奖项
-  rpc DeleteAward(DeleteAwardRequest) returns (DeleteAwardResponse) {
-    option (google.api.http) = {
-      post: "/api/award/delete"
-      body: "*"
-    };
+  rpc DeleteEvidenceItem(DeleteEvidenceItemRequest) returns (DeleteEvidenceItemResponse) {
+    option (google.api.http) = { post: "/api/{module_type}/delete" body: "*" };
   }
-
-  // 锁定奖项:锁定奖项，表示证据链已归档
-  rpc LockAward(LockAwardRequest) returns (LockAwardResponse) {
-    option (google.api.http) = {
-      post: "/api/award/lock"
-      body: "*"
-    };
+  rpc LockEvidenceItem(LockEvidenceItemRequest) returns (LockEvidenceItemResponse) {
+    option (google.api.http) = { post: "/api/{module_type}/lock" body: "*" };
   }
-
-  // 解锁奖项:解锁已锁定的奖项
-  rpc UnlockAward(UnlockAwardRequest) returns (UnlockAwardResponse) {
-    option (google.api.http) = {
-      post: "/api/award/unlock"
-      body: "*"
-    };
+  rpc UnlockEvidenceItem(UnlockEvidenceItemRequest) returns (UnlockEvidenceItemResponse) {
+    option (google.api.http) = { post: "/api/{module_type}/unlock" body: "*" };
   }
-
-  // ========== 奖项文件管理 ==========
-
-  // 上传奖项文件:上传奖项相关的文件
-  rpc UploadAwardFile(UploadAwardFileRequest) returns (UploadAwardFileResponse) {
-    option (google.api.http) = {
-      post: "/api/award/uploadFile"
-      body: "*"
-    };
+  rpc UploadEvidenceFile(UploadEvidenceFileRequest) returns (UploadEvidenceFileResponse) {
+    option (google.api.http) = { post: "/api/{module_type}/uploadFile" body: "*" };
   }
-
-  // 删除奖项文件:删除指定的奖项文件
-  rpc DeleteAwardFile(DeleteAwardFileRequest) returns (DeleteAwardFileResponse) {
-    option (google.api.http) = {
-      post: "/api/award/deleteFile"
-      body: "*"
-    };
+  rpc DeleteEvidenceFile(DeleteEvidenceFileRequest) returns (DeleteEvidenceFileResponse) {
+    option (google.api.http) = { post: "/api/{module_type}/deleteFile" body: "*" };
   }
-
-  // 列出奖项文件:获取奖项的所有文件列表
-  rpc ListAwardFiles(ListAwardFilesRequest) returns (ListAwardFilesResponse) {
-    option (google.api.http) = {
-      post: "/api/award/listFiles"
-      body: "*"
-    };
+  rpc ListEvidenceFiles(ListEvidenceFilesRequest) returns (ListEvidenceFilesResponse) {
+    option (google.api.http) = { post: "/api/{module_type}/listFiles" body: "*" };
   }
-
-  // 检索奖项补充材料:使用AI检索互联网上的补充材料
-  rpc SearchAwardMaterials(SearchAwardMaterialsRequest) returns (SearchAwardMaterialsResponse) {
-    option (google.api.http) = {
-      post: "/api/award/searchMaterials"
-      body: "*"
-    };
+  rpc SearchEvidenceMaterials(SearchEvidenceMaterialsRequest) returns (SearchEvidenceMaterialsResponse) {
+    option (google.api.http) = { post: "/api/{module_type}/searchMaterials" body: "*" };
   }
-
-  // 获取奖项所需文件列表:根据奖项信息返回需要收集的文件清单
-  rpc GetAwardRequiredFiles(GetAwardRequiredFilesRequest) returns (GetAwardRequiredFilesResponse) {
-    option (google.api.http) = {
-      post: "/api/award/getRequiredFiles"
-      body: "*"
-    };
+  rpc GetEvidenceRequiredFiles(GetEvidenceRequiredFilesRequest) returns (GetEvidenceRequiredFilesResponse) {
+    option (google.api.http) = { post: "/api/{module_type}/getRequiredFiles" body: "*" };
   }
-
-  // ========== 奖项聊天消息管理 ==========
-
-  // 保存奖项聊天消息:全量覆盖模式，保存奖项的所有聊天消息
-  rpc SaveAwardChatMessages(SaveAwardChatMessagesRequest) returns (SaveAwardChatMessagesResponse) {
-    option (google.api.http) = {
-      post: "/api/award/saveChatMessages"
-      body: "*"
-    };
+  rpc SaveEvidenceChatMessages(SaveEvidenceChatMessagesRequest) returns (SaveEvidenceChatMessagesResponse) {
+    option (google.api.http) = { post: "/api/{module_type}/saveChatMessages" body: "*" };
   }
-
-  // 获取奖项聊天消息:分页获取奖项的聊天消息
-  rpc GetAwardChatMessages(GetAwardChatMessagesRequest) returns (GetAwardChatMessagesResponse) {
-    option (google.api.http) = {
-      post: "/api/award/getChatMessages"
-      body: "*"
-    };
+  rpc GetEvidenceChatMessages(GetEvidenceChatMessagesRequest) returns (GetEvidenceChatMessagesResponse) {
+    option (google.api.http) = { post: "/api/{module_type}/getChatMessages" body: "*" };
   }
-
-  // 删除奖项聊天消息:删除指定的聊天消息
-  rpc DeleteAwardChatMessages(DeleteAwardChatMessagesRequest) returns (DeleteAwardChatMessagesResponse) {
-    option (google.api.http) = {
-      post: "/api/award/deleteChatMessages"
-      body: "*"
-    };
-  }
-
-  // ========== 会员/协会管理 ==========
-
-  // 创建会员
-  rpc CreateMembership(CreateMembershipRequest) returns (CreateMembershipResponse) {
-    option (google.api.http) = {
-      post: "/api/membership/create"
-      body: "*"
-    };
-  }
-
-  // 获取会员列表
-  rpc ListMemberships(ListMembershipsRequest) returns (ListMembershipsResponse) {
-    option (google.api.http) = {
-      post: "/api/membership/list"
-      body: "*"
-    };
-  }
-
-  // 更新会员
-  rpc UpdateMembership(UpdateMembershipRequest) returns (UpdateMembershipResponse) {
-    option (google.api.http) = {
-      post: "/api/membership/update"
-      body: "*"
-    };
-  }
-
-  // 删除会员
-  rpc DeleteMembership(DeleteMembershipRequest) returns (DeleteMembershipResponse) {
-    option (google.api.http) = {
-      post: "/api/membership/delete"
-      body: "*"
-    };
-  }
-
-  // 锁定会员
-  rpc LockMembership(LockMembershipRequest) returns (LockMembershipResponse) {
-    option (google.api.http) = {
-      post: "/api/membership/lock"
-      body: "*"
-    };
-  }
-
-  // 解锁会员
-  rpc UnlockMembership(UnlockMembershipRequest) returns (UnlockMembershipResponse) {
-    option (google.api.http) = {
-      post: "/api/membership/unlock"
-      body: "*"
-    };
-  }
-
-  // ========== 会员文件管理 ==========
-
-  // 上传会员文件
-  rpc UploadMembershipFile(UploadMembershipFileRequest) returns (UploadMembershipFileResponse) {
-    option (google.api.http) = {
-      post: "/api/membership/uploadFile"
-      body: "*"
-    };
-  }
-
-  // 删除会员文件
-  rpc DeleteMembershipFile(DeleteMembershipFileRequest) returns (DeleteMembershipFileResponse) {
-    option (google.api.http) = {
-      post: "/api/membership/deleteFile"
-      body: "*"
-    };
-  }
-
-  // 列出会员文件
-  rpc ListMembershipFiles(ListMembershipFilesRequest) returns (ListMembershipFilesResponse) {
-    option (google.api.http) = {
-      post: "/api/membership/listFiles"
-      body: "*"
-    };
-  }
-
-  // 检索会员补充材料
-  rpc SearchMembershipMaterials(SearchMembershipMaterialsRequest) returns (SearchMembershipMaterialsResponse) {
-    option (google.api.http) = {
-      post: "/api/membership/searchMaterials"
-      body: "*"
-    };
-  }
-
-  // 获取会员所需文件列表
-  rpc GetMembershipRequiredFiles(GetMembershipRequiredFilesRequest) returns (GetMembershipRequiredFilesResponse) {
-    option (google.api.http) = {
-      post: "/api/membership/getRequiredFiles"
-      body: "*"
-    };
-  }
-
-  // ========== 会员聊天消息管理 ==========
-
-  // 保存会员聊天消息
-  rpc SaveMembershipChatMessages(SaveMembershipChatMessagesRequest) returns (SaveMembershipChatMessagesResponse) {
-    option (google.api.http) = {
-      post: "/api/membership/saveChatMessages"
-      body: "*"
-    };
-  }
-
-  // 获取会员聊天消息
-  rpc GetMembershipChatMessages(GetMembershipChatMessagesRequest) returns (GetMembershipChatMessagesResponse) {
-    option (google.api.http) = {
-      post: "/api/membership/getChatMessages"
-      body: "*"
-    };
-  }
-
-  // 删除会员聊天消息
-  rpc DeleteMembershipChatMessages(DeleteMembershipChatMessagesRequest) returns (DeleteMembershipChatMessagesResponse) {
-    option (google.api.http) = {
-      post: "/api/membership/deleteChatMessages"
-      body: "*"
-    };
+  rpc DeleteEvidenceChatMessages(DeleteEvidenceChatMessagesRequest) returns (DeleteEvidenceChatMessagesResponse) {
+    option (google.api.http) = { post: "/api/{module_type}/deleteChatMessages" body: "*" };
   }
 
   // ========== 模块引导文案管理 ==========
