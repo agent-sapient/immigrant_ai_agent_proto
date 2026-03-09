@@ -891,7 +891,7 @@ service ImmigrantAIAgent {
   // 获取推荐信列表:使用ai生成推荐信
   rpc GetRecommendLetter(GetRecommendLetterRequest) returns (GetRecommendLetterResponse) {
     option (google.api.http) = {
-      post: "/api/pre-review/getRecommondLetter"
+      post: "/api/pre-review/getRecommendLetter"
       body: "*"
     };
   }
